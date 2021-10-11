@@ -221,7 +221,7 @@ class BuaGameInProgress {
     player1ID.playerAvatar = "assets/images/playeravatars/girl01.PNG";
     player2ID.playerName = "jane";
     player2ID.playerAvatar = "assets/images/playeravatars/girl02.PNG";
-    player3ID.playerName = "jan";
+    player3ID.playerName = "jay";
     player3ID.playerAvatar = "assets/images/playeravatars/girl03.PNG";
     /*
     _players = new List();
