@@ -236,42 +236,56 @@ class _BuaGameState extends State<buaGame> {
       child: GridView.count(
           crossAxisCount: numColumns,
           children: <Widget> [
-            FittedBox(
-              child:  Image(image: AssetImage('assets/images/buagame/crab.png')),
-              fit: BoxFit.fill,
-            ),
-            FittedBox(
-              child:  Image(image: AssetImage('assets/images/buagame/fish.png')),
-              fit: BoxFit.fill,
-            ),
-            FittedBox(
-              child:  Image(image: AssetImage('assets/images/buagame/prawn.png')),
-              fit: BoxFit.fill,
-            ),
-            FittedBox(
-              child:  Image(image: AssetImage('assets/images/buagame/tiger.png')),
-              fit: BoxFit.fill,
-            ),
-            FittedBox(
-              child:  Image(image: AssetImage('assets/images/buagame/rooster.png')),
-              fit: BoxFit.fill,
-            ),
-            FittedBox(
-              child:  Image(image: AssetImage('assets/images/buagame/gourd.png')),
-              fit: BoxFit.fill,
-            ),
-         //   Image(image: AssetImage('assets/images/buagame/crab.png')),
-         //   Image(image: AssetImage('assets/images/buagame/fish.png')),
-         //   Image(image: AssetImage('assets/images/buagame/prawn.png')),
-         //   Image(image: AssetImage('assets/images/buagame/tiger.png')),
-         //   Image(image: AssetImage('assets/images/buagame/rooster.png')),
-         //   Image(image: AssetImage('assets/images/buagame/gourd.png')),
+            buaImage('assets/images/buagame/crab.png'),
+            buaImage('assets/images/buagame/fish.png'),
+            buaImage('assets/images/buagame/prawn.png'),
+            buaImage('assets/images/buagame/tiger.png'),
+            buaImage('assets/images/buagame/rooster.png'),
+            buaImage('assets/images/buagame/gourd.png'),
           ]
 
       ),
           )
     );
   }
+
+  /*
+  Widget _buildBuaImageWithDropZone(Customer customer) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 6.0,
+        ),
+        child: DragTarget<Item>(
+          builder: (context, candidateItems, rejectedItems) {
+            return CustomerCart(
+              hasItems: customer.items.isNotEmpty,
+              highlighted: candidateItems.isNotEmpty,
+              customer: customer,
+            );
+          },
+          onAccept: (item) {
+            _itemDroppedOnCustomerCart(
+              item: item,
+              customer: customer,
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+   */
+
+
+  Widget buaImage(String imageName) {
+
+   return  FittedBox(
+      child:  Image(image: AssetImage(imageName)),
+      fit: BoxFit.fill,
+    );
+  }
+
 
   String getButtonText() {
     String tempText;

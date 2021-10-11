@@ -3,7 +3,7 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "775d9ab07d46dcd9117c702229819477",
+  "assets/AssetManifest.json": "2f7ca5162f467e5750db344363750ea1",
 "assets/assets/images/buagame/crab.png": "4692eb9941489dea256368f71c6b35c7",
 "assets/assets/images/buagame/fish.png": "e0b0d490978288ce2d6ed5f266f3ae06",
 "assets/assets/images/buagame/gourd.png": "74b9bb98445389a194c0efa386c50483",
@@ -20,6 +20,7 @@ const RESOURCES = {
 "assets/assets/images/playeravatars/girl01.PNG": "dd922f6e4888bd53324a24d49494923c",
 "assets/assets/images/playeravatars/girl02.PNG": "f60f69693df1645c57c6318f49490a88",
 "assets/assets/images/playeravatars/girl03.PNG": "1c82328e4d8274b1488ab7775f51b05d",
+"assets/assets/images/playeravatars/girl04.jpg": "9474a1a20a240b1f019709be1aac2799",
 "assets/assets/images/racegame/bull.gif": "f3728cc94347d5a59e1a81bf8d5c4a52",
 "assets/assets/images/racegame/bunny.gif": "b9a070fec1ecdd64b591575ac0419005",
 "assets/assets/images/racegame/elephant.gif": "ef3759f1e87c6278fe8f4c0dfb733536",
@@ -39,9 +40,9 @@ const RESOURCES = {
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "56f3a71323b3bcc28dd2ee83e9e2b9b2",
-"/": "56f3a71323b3bcc28dd2ee83e9e2b9b2",
-"main.dart.js": "9bee233e0a6763dfa4c6d08cf7bd90c7",
+"index.html": "518958ec0dabd898c9a0b28a96c3d943",
+"/": "518958ec0dabd898c9a0b28a96c3d943",
+"main.dart.js": "4a091dc99fc0e6764a6be674021100e7",
 "manifest.json": "680cfe490c08ec2af19077bc0fa7e302",
 "version.json": "18c860933121cdd7fc7a0eabb99a1605"
 };
