@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class PlayerInGame {
   String playerName = "default";
   String playerAvatar = "assets/images/playeravatars/blankPlayer.jpg";
+  int playerScore = 0;
   int answerChosen = -1;
   Color itemColor = Colors.redAccent;
   final Color colorUnselected = Colors.redAccent;
