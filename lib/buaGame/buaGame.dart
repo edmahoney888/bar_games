@@ -31,6 +31,40 @@ class Constants{
   ];
 }
 
+const List<Item> _items = [
+  Item(
+    name: 'joy',
+    score: 0,
+    uid: '1',
+    imageName: "assets/images/playeravatars/girl01.PNG",
+ //   imageProvider: NetworkImage('https://flutter'
+ //       '.dev/docs/cookbook/img-files/effects/split-check/Food1.jpg'),
+  ),
+  Item(
+    name: 'jane',
+    score: 0,
+    uid: '2',
+    imageName: "assets/images/playeravatars/girl02.PNG",
+ //   imageProvider: NetworkImage('https://flutter'
+ //       '.dev/docs/cookbook/img-files/effects/split-check/Food2.jpg'),
+  ),
+  Item(
+    name: 'julie',
+    score: 0,
+    uid: '3',
+    imageName: "assets/images/playeravatars/girl03.PNG",
+  //  imageProvider: NetworkImage('https://flutter'
+  //      '.dev/docs/cookbook/img-files/effects/split-check/Food3.jpg'),
+  ),
+  Item(
+    name: 'josie',
+    score: 0,
+    uid: '4',
+    imageName: "assets/images/playeravatars/girl04.jpg",
+    //  imageProvider: NetworkImage('https://flutter'
+    //      '.dev/docs/cookbook/img-files/effects/split-check/Food3.jpg'),
+  ),
+];
 
 class buaGame extends StatefulWidget {
   @override
@@ -282,13 +316,26 @@ class _BuaGameState extends State<buaGame> {
 
   Widget playerRow() {
 
-    return Row(
-      children: <Widget>[
-        Image.asset(theGame.getPlayerImage(1), fit: BoxFit.contain),
-        Image.asset(theGame.getPlayerImage(2), fit: BoxFit.contain),
-        Image.asset(theGame.getPlayerImage(3), fit: BoxFit.contain),
-        Image.asset(theGame.getPlayerImage(4), fit: BoxFit.contain),
-    ],
+    return Container(
+      //  width: 50.0,
+        height: 100.0,
+        child:
+        Row(
+          children: <Widget>[
+            _buildPlayer(
+              item: _items[0],
+            ),
+            _buildPlayer(
+              item: _items[1],
+            ),
+            _buildPlayer(
+              item: _items[2],
+            ),
+            _buildPlayer(
+              item: _items[3],
+            ),
+          ],
+        )
     );
   }
 
@@ -301,16 +348,160 @@ class _BuaGameState extends State<buaGame> {
         child:
           Column(
             children: <Widget>[
-              Image(image: AssetImage(theGame.getPlayerImage(1))),
-
-    //    Image.asset(theGame.getPlayerImage(1), fit: BoxFit.contain),
-              Image.asset(theGame.getPlayerImage(2), fit: BoxFit.contain),
-              Image.asset(theGame.getPlayerImage(3), fit: BoxFit.contain),
-              Image.asset(theGame.getPlayerImage(4), fit: BoxFit.contain),
+              _buildPlayer(
+            item: _items[0],
+          ),
+              _buildPlayer(
+                item: _items[1],
+              ),
+              _buildPlayer(
+                item: _items[2],
+              ),
+              _buildPlayer(
+                item: _items[3],
+              ),
             ],
           )
       );
   }
 
 
+}
+final GlobalKey _draggableKey = GlobalKey();
+
+Widget _buildPlayer({
+  required Item item,
+}) {
+  return LongPressDraggable<Item>(
+    data: item,
+    dragAnchorStrategy: pointerDragAnchorStrategy,
+    feedback: DraggingListItem(
+      dragKey: _draggableKey,
+      imageName: item.imageName,
+    ),
+    child: MenuListItem(
+      name: item.name,
+      score: item.score,
+      imageName: item.imageName,
+    ),
+  );
+}
+
+
+class MenuListItem extends StatelessWidget {
+  const MenuListItem({
+    Key? key,
+    this.name = '',
+    this.score = 0,
+    required this.imageName,
+    this.isDepressed = false,
+  }) : super(key: key);
+
+  final String name;
+  final int score;
+  final String imageName;
+  final bool isDepressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 12.0,
+      borderRadius: BorderRadius.circular(20),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12.0),
+              child: SizedBox(
+                width: 100,
+                height: 100,
+                child: Center(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 100),
+                    curve: Curves.easeInOut,
+                    height: isDepressed ? 95 : 100,
+                    width: isDepressed ? 95 : 100,
+                    child:  Image.asset(imageName, fit: BoxFit.contain),
+
+                  ),
+                ),
+              ),
+            ),
+
+         //   const SizedBox(width: 30.0),
+      /*
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  const SizedBox(height: 10.0),
+                  Text(
+                    score.toString(),
+                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            */
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class DraggingListItem extends StatelessWidget {
+  const DraggingListItem({
+    Key? key,
+    required this.dragKey,
+    required this.imageName,
+  }) : super(key: key);
+
+  final GlobalKey dragKey;
+  final String imageName;
+
+  @override
+  Widget build(BuildContext context) {
+    return FractionalTranslation(
+      translation: const Offset(-0.5, -0.5),
+      child: ClipRRect(
+        key: dragKey,
+        borderRadius: BorderRadius.circular(12.0),
+        child: SizedBox(
+          height: 100,
+          width: 100,
+          child: Opacity(
+            opacity: 0.85,
+            child: Image.asset(imageName, fit: BoxFit.contain),
+            ),
+          ),
+        ),
+      );
+  }
+}
+
+@immutable
+class Item {
+  const Item({
+    required this.score,
+    required this.name,
+    required this.uid,
+    required this.imageName,
+  });
+  final int score;
+  final String name;
+  final String uid;
+  final String imageName;
 }
