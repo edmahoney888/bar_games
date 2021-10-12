@@ -236,12 +236,12 @@ class _BuaGameState extends State<buaGame> {
       child: GridView.count(
           crossAxisCount: numColumns,
           children: <Widget> [
-            buaImage('assets/images/buagame/crab.png'),
-            buaImage('assets/images/buagame/fish.png'),
-            buaImage('assets/images/buagame/prawn.png'),
-            buaImage('assets/images/buagame/tiger.png'),
-            buaImage('assets/images/buagame/rooster.png'),
-            buaImage('assets/images/buagame/gourd.png'),
+            _buildBuaImageWithDropZone(0,'assets/images/buagame/crab.png'),
+            _buildBuaImageWithDropZone(1,'assets/images/buagame/fish.png'),
+            _buildBuaImageWithDropZone(2,'assets/images/buagame/prawn.png'),
+            _buildBuaImageWithDropZone(3,'assets/images/buagame/tiger.png'),
+            _buildBuaImageWithDropZone(4,'assets/images/buagame/rooster.png'),
+            _buildBuaImageWithDropZone(5,'assets/images/buagame/gourd.png'),
           ]
 
       ),
@@ -277,6 +277,29 @@ class _BuaGameState extends State<buaGame> {
 
    */
 
+  Widget _buildBuaImageWithDropZone(int id, String imageName) {
+    int buaId = id;
+
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 6.0,
+        ),
+        child: DragTarget<Item>(
+          builder: (context, candidateItems, rejectedItems) {
+            return buaImage(
+                imageName
+            );
+          },
+          onAccept: (item) {
+            theGame.setPlayerAnswer(buaId, int.parse(item.uid));
+            print("bua id->"+ buaId.toString());
+            print("item name->"+ item.name + ' item uid->' + item.uid);
+          },
+        ),
+      ),
+    );
+  }
 
   Widget buaImage(String imageName) {
 

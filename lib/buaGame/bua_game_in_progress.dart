@@ -192,7 +192,7 @@ class BuaGameInProgress {
   int correctAnswer(int theAnswer)
   {
     int tempAnswer = 0;
-    int tempAnswerVal = theAnswer - 1;
+    int tempAnswerVal = theAnswer;
 
     if (dice1 == tempAnswerVal)
       tempAnswer = 1;
@@ -474,29 +474,34 @@ class BuaGameInProgress {
 
 
   setPlayerAnswer(int answerNum, int playerNum) {
-    /*
+
+
     switch (playerNum) {
       case 1: {
         player1ID.setAnswer(answerNum);
+        print("======== setting player1 answer: " + answerNum.toString());
       }
       break;
       case 2: {
         player2ID.setAnswer(answerNum);
+        print("======== setting player2 answer: " + answerNum.toString());
       }
       break;
       case 3: {
         player3ID.setAnswer(answerNum);
+        print("======== setting player3 answer: " + answerNum.toString());
       }
       break;
       case 4: {
         player4ID.setAnswer(answerNum);
+        print("======== setting player4 answer: " + answerNum.toString());
       }
       break;
       default: {
       }
     }
 
-     */
+
   }
 
 
@@ -839,11 +844,44 @@ class BuaGameInProgress {
     dice2 = rollADice();
     dice3 = rollADice();
 
+    score();
+
     print("============= roll dice ============");
     print("d1: " + dice1.toString());
     print("d2: " + dice2.toString());
     print("d3: " + dice3.toString());
   }
+
+
+
+  score() {
+
+    //score player 1
+    int tempScore = 0;
+    print("============= score before ============");
+    print("player 1 score: " + player1ID.playerScore.toString());
+    print("player 2 score: " + player2ID.playerScore.toString());
+    print("player 3 score: " + player3ID.playerScore.toString());
+    print("player 4 score: " + player4ID.playerScore.toString());
+
+    tempScore = correctAnswer(player1ID.answerChosen);
+    player1ID.playerScore = player1ID.playerScore + tempScore;
+    tempScore = correctAnswer(player2ID.answerChosen);
+    player2ID.playerScore = player2ID.playerScore + tempScore;
+    tempScore = correctAnswer(player3ID.answerChosen);
+    player3ID.playerScore = player3ID.playerScore + tempScore;
+    tempScore = correctAnswer(player4ID.answerChosen);
+    player4ID.playerScore = player4ID.playerScore + tempScore;
+
+
+    print("============= score after ============");
+    print("player 1 score: " + player1ID.playerScore.toString());
+    print("player 2 score: " + player2ID.playerScore.toString());
+    print("player 3 score: " + player3ID.playerScore.toString());
+    print("player 4 score: " + player4ID.playerScore.toString());
+
+  }
+
 
   int rollADice() {
     final _random = new Random();
