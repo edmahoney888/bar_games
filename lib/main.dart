@@ -1,4 +1,5 @@
 import 'package:bar_games/buaGame/buaGame.dart';
+import 'package:bar_games/player_in_game.dart';
 import 'package:bar_games/raceGame.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +44,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String defaultName = "Default";
+  String defaultImage = 'assets/images/playeravatars/blankPlayer.jpg';
 
+  List<PlayerInGame> thePlayers = [];
+
+  /*
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -55,8 +61,27 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+   */
+
   @override
   Widget build(BuildContext context) {
+    if (thePlayers.length == 0)
+      {
+        PlayerInGame player1ID;
+        for(var i = 0; i < 4; i++){
+          // initialize the players list
+          player1ID = new PlayerInGame();
+          player1ID.playerName = defaultName;
+          player1ID.playerAvatar = defaultImage;
+          player1ID.playerScore = 0;
+          player1ID.uid = i.toString();
+          thePlayers.add(player1ID);
+        }
+
+        thePlayers[0].playerName = "joy";
+        thePlayers[0].playerAvatar = "assets/images/playeravatars/girl01.PNG";
+
+      }
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -121,7 +146,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => buaGame()),
+      MaterialPageRoute(builder: (context) => buaGame(playerList: thePlayers)
+      ),
     );
 
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../player_in_game.dart';
 import 'bua_game_in_progress.dart';
 
 class Constants{
@@ -31,52 +32,61 @@ class Constants{
   ];
 }
 
-const List<Item> _items = [
+//const List<Item> _items = [
+  /*
   Item(
     name: 'joy',
     score: 0,
     uid: '1',
     imageName: "assets/images/playeravatars/girl01.PNG",
- //   imageProvider: NetworkImage('https://flutter'
- //       '.dev/docs/cookbook/img-files/effects/split-check/Food1.jpg'),
+
   ),
   Item(
     name: 'jane',
     score: 0,
     uid: '2',
     imageName: "assets/images/playeravatars/girl02.PNG",
- //   imageProvider: NetworkImage('https://flutter'
- //       '.dev/docs/cookbook/img-files/effects/split-check/Food2.jpg'),
   ),
   Item(
     name: 'julie',
     score: 0,
     uid: '3',
     imageName: "assets/images/playeravatars/girl03.PNG",
-  //  imageProvider: NetworkImage('https://flutter'
-  //      '.dev/docs/cookbook/img-files/effects/split-check/Food3.jpg'),
   ),
   Item(
     name: 'josie',
     score: 0,
     uid: '4',
     imageName: "assets/images/playeravatars/girl04.jpg",
-    //  imageProvider: NetworkImage('https://flutter'
-    //      '.dev/docs/cookbook/img-files/effects/split-check/Food3.jpg'),
   ),
-];
+
+   */
+//];
 
 class buaGame extends StatefulWidget {
+  final List <PlayerInGame> playerList;
+
+  buaGame({required this.playerList}) : super();
+
   @override
-  _BuaGameState createState() => _BuaGameState();
+  _BuaGameState createState() => _BuaGameState(playerList);
 }
 
 class _BuaGameState extends State<buaGame> {
+  List <PlayerInGame> playerList;
+
+  _BuaGameState(this. playerList);  //constructor
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   BuaGameInProgress theGame = new BuaGameInProgress();
 
   @override
   Widget build(BuildContext context) {
+    if (theGame.getNumOfPlayers() == 0)
+      {
+        theGame.loadPlayers(playerList);
+      }
+    print("player pass->" + playerList[0].uid + " ->" + playerList[0].playerName);
     return Scaffold(
       key: scaffoldKey,
         appBar: AppBar(
@@ -85,8 +95,6 @@ class _BuaGameState extends State<buaGame> {
         ),
       body: body(context),
     );
-
- //   return _BuaGameWidget();
   }
 
   RollDice() {
@@ -260,7 +268,7 @@ class _BuaGameState extends State<buaGame> {
         padding: const EdgeInsets.symmetric(
           horizontal: 6.0,
         ),
-        child: DragTarget<Item>(
+        child: DragTarget<PlayerInGame>(
           builder: (context, candidateItems, rejectedItems) {
             return
               Container(
@@ -276,26 +284,26 @@ class _BuaGameState extends State<buaGame> {
                 ),
               );
           },
-          onAccept: (item) {
+          onAccept: (player) {
             setState(() {
-            theGame.setPlayerAnswer(buaId, int.parse(item.uid));
+            theGame.setPlayerAnswer(buaId, int.parse(player.uid));
             print("bua id->"+ buaId.toString());
-            print("item name->"+ item.name + ' item uid->' + item.uid);
+            print("item name->"+ player.playerName + ' item uid->' + player.uid);
             borderColor1 = Colors.black;
             });
           },
-          onWillAccept: (item) {
-            if (item != null) {
+          onWillAccept: (player) {
+            if (player != null) {
               print("bua id->"+ buaId.toString());
-              print("willAccept: " + item.uid.toString());
+              print("willAccept: " + player.uid.toString());
             }
             borderColor1 = Colors.blue;
             return true;
           },
-          onLeave: (item) {
-            if (item != null) {
+          onLeave: (player) {
+            if (player != null) {
               print("bua id->"+ buaId.toString());
-              print("onLeave: " + item.uid.toString());
+              print("onLeave: " + player.uid.toString());
             }
             borderColor1 = Colors.black;
             return;
@@ -328,8 +336,6 @@ class _BuaGameState extends State<buaGame> {
   }
 
   int getRoundState() {
-    // get state from parent
-
     return theGame.gameState;
   }
 
@@ -364,16 +370,16 @@ class _BuaGameState extends State<buaGame> {
         Row(
           children: <Widget>[
             _buildPlayer(
-              item: _items[0],
+              player: theGame.thePlayers[0],
             ),
             _buildPlayer(
-              item: _items[1],
+              player: theGame.thePlayers[1],
             ),
             _buildPlayer(
-              item: _items[2],
+              player: theGame.thePlayers[2],
             ),
             _buildPlayer(
-              item: _items[3],
+              player: theGame.thePlayers[3],
             ),
           ],
         )
@@ -390,16 +396,16 @@ class _BuaGameState extends State<buaGame> {
           Column(
             children: <Widget>[
               _buildPlayer(
-            item: _items[0],
+                player: theGame.thePlayers[0],
           ),
               _buildPlayer(
-                item: _items[1],
+                player: theGame.thePlayers[1],
               ),
               _buildPlayer(
-                item: _items[2],
+                player: theGame.thePlayers[2],
               ),
               _buildPlayer(
-                item: _items[3],
+                player: theGame.thePlayers[3],
               ),
             ],
           )
@@ -411,19 +417,19 @@ class _BuaGameState extends State<buaGame> {
 final GlobalKey _draggableKey = GlobalKey();
 
 Widget _buildPlayer({
-  required Item item,
+  required PlayerInGame player,
 }) {
-  return Draggable<Item>(
-    data: item,
+  return Draggable<PlayerInGame>(
+    data: player,
     dragAnchorStrategy: pointerDragAnchorStrategy,
     feedback: DraggingListItem(
       dragKey: _draggableKey,
-      imageName: item.imageName,
+      imageName: player.playerAvatar,
     ),
     child: MenuListItem(
-      name: item.name,
-      score: item.score,
-      imageName: item.imageName,
+      name: player.playerName,
+      score: player.playerScore,
+      imageName: player.playerAvatar,
     ),
   );
 }

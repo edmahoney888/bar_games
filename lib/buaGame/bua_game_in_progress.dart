@@ -8,11 +8,11 @@ import '../player_in_game.dart';
 class BuaGameInProgress {
   String defaultName = "Default Name";
   String defaultImage = 'assets/images/playeravatars/blankPlayer.jpg';
-//  List<PlayerInGame> thePlayers = new List();
-  PlayerInGame player1ID = new PlayerInGame();
-  PlayerInGame player2ID = new PlayerInGame();
-  PlayerInGame player3ID = new PlayerInGame();
-  PlayerInGame player4ID = new PlayerInGame();
+  List<PlayerInGame> thePlayers = [];
+//  PlayerInGame player1ID = new PlayerInGame();
+//  PlayerInGame player2ID = new PlayerInGame();
+ // PlayerInGame player3ID = new PlayerInGame();
+//  PlayerInGame player4ID = new PlayerInGame();
 
   int gameState = 0;
 
@@ -43,7 +43,7 @@ class BuaGameInProgress {
   BuaGameInProgress()
   {
  //   _players = new List(1);
-    _loadPlayers();
+    //_loadPlayers();
     _loadGames();
     _loadRounds();
   }
@@ -89,6 +89,7 @@ class BuaGameInProgress {
 
   setupPlayers()
   {
+    /*
     PlayerInGame tempPlayer;
 
     player1ID.playerName = defaultName;
@@ -99,6 +100,8 @@ class BuaGameInProgress {
     player3ID.playerAvatar = defaultImage;
     player4ID.playerName = defaultName;
     player4ID.playerAvatar = defaultImage;
+
+     */
 
 /*
     if (_players != null) {
@@ -189,6 +192,11 @@ class BuaGameInProgress {
     return tempAnswer;
   }
 
+  int getNumOfPlayers()
+  {
+    return thePlayers.length;
+  }
+
   int correctAnswer(int theAnswer)
   {
     int tempAnswer = 0;
@@ -209,20 +217,24 @@ class BuaGameInProgress {
 
   resetAnswers()
   {
-//    _answers = null;
+  //  player1ID.setAnswer(0);
+  //  player2ID.setAnswer(0);
+  //  player3ID.setAnswer(0);
+  //  player4ID.setAnswer(0);
   }
 
 
-  _loadPlayers() async {
+  loadPlayers(List<PlayerInGame> thePlayers)  {
+    this.thePlayers = thePlayers;
 
-    setupPlayers();   //loads default players
+  //  setupPlayers();   //loads default players
 
-    player1ID.playerName = "joy";
-    player1ID.playerAvatar = "assets/images/playeravatars/girl01.PNG";
-    player2ID.playerName = "jane";
-    player2ID.playerAvatar = "assets/images/playeravatars/girl02.PNG";
-    player3ID.playerName = "jay";
-    player3ID.playerAvatar = "assets/images/playeravatars/girl03.PNG";
+   // player1ID.playerName = "joy";
+  //  player1ID.playerAvatar = "assets/images/playeravatars/girl01.PNG";
+   // player2ID.playerName = "jane";
+  //  player2ID.playerAvatar = "assets/images/playeravatars/girl02.PNG";
+   // player3ID.playerName = "jay";
+   // player3ID.playerAvatar = "assets/images/playeravatars/girl03.PNG";
     /*
     _players = new List();
 
@@ -357,7 +369,10 @@ class BuaGameInProgress {
   String getPlayerImage(int playerNum) {
     String tempImage = "";
 
-    switch (playerNum) {
+    tempImage = thePlayers[playerNum].playerAvatar;
+
+   // switch (playerNum) {
+      /*
       case 1: {
         if (player1ID.hasPlayer() )
         {
@@ -389,7 +404,9 @@ class BuaGameInProgress {
       default: {
         tempImage = "";
       }
-    }
+
+       */
+   // }
     return tempImage;
   }
 
@@ -397,6 +414,9 @@ class BuaGameInProgress {
   String getPlayerName(int playerNum) {
     String tempName = "";
 
+    tempName = thePlayers[playerNum].playerName;
+
+    /*
     switch (playerNum) {
       case 1: {
 
@@ -426,6 +446,8 @@ class BuaGameInProgress {
         tempName = "";
       }
     }
+
+     */
     return tempName;
   }
 
@@ -475,7 +497,8 @@ class BuaGameInProgress {
 
   setPlayerAnswer(int answerNum, int playerNum) {
 
-
+    thePlayers[playerNum].answerChosen = answerNum;
+/*
     switch (playerNum) {
       case 1: {
         player1ID.setAnswer(answerNum);
@@ -500,6 +523,8 @@ class BuaGameInProgress {
       default: {
       }
     }
+
+ */
 
 
   }
@@ -859,11 +884,25 @@ class BuaGameInProgress {
     //score player 1
     int tempScore = 0;
     print("============= score before ============");
+    print("player 1 score: " + thePlayers[0].playerScore.toString());
+    print("player 2 score: " + thePlayers[1].playerScore.toString());
+    print("player 3 score: " + thePlayers[2].playerScore.toString());
+    print("player 4 score: " + thePlayers[3].playerScore.toString());
+    /*
     print("player 1 score: " + player1ID.playerScore.toString());
     print("player 2 score: " + player2ID.playerScore.toString());
     print("player 3 score: " + player3ID.playerScore.toString());
     print("player 4 score: " + player4ID.playerScore.toString());
-
+*/
+    tempScore = correctAnswer(thePlayers[0].answerChosen);
+    thePlayers[0].playerScore = thePlayers[0].playerScore + tempScore;
+    tempScore = correctAnswer(thePlayers[1].answerChosen);
+    thePlayers[1].playerScore = thePlayers[1].playerScore + tempScore;
+    tempScore = correctAnswer(thePlayers[2].answerChosen);
+    thePlayers[2].playerScore = thePlayers[2].playerScore + tempScore;
+    tempScore = correctAnswer(thePlayers[3].answerChosen);
+    thePlayers[3].playerScore = thePlayers[3].playerScore + tempScore;
+    /*
     tempScore = correctAnswer(player1ID.answerChosen);
     player1ID.playerScore = player1ID.playerScore + tempScore;
     tempScore = correctAnswer(player2ID.answerChosen);
@@ -873,12 +912,21 @@ class BuaGameInProgress {
     tempScore = correctAnswer(player4ID.answerChosen);
     player4ID.playerScore = player4ID.playerScore + tempScore;
 
+     */
 
+/*
     print("============= score after ============");
     print("player 1 score: " + player1ID.playerScore.toString());
     print("player 2 score: " + player2ID.playerScore.toString());
     print("player 3 score: " + player3ID.playerScore.toString());
     print("player 4 score: " + player4ID.playerScore.toString());
+
+     */
+    print("============= score after ============");
+    print("player 1 score: " + thePlayers[0].playerScore.toString());
+    print("player 2 score: " + thePlayers[1].playerScore.toString());
+    print("player 3 score: " + thePlayers[2].playerScore.toString());
+    print("player 4 score: " + thePlayers[3].playerScore.toString());
 
   }
 
