@@ -249,36 +249,11 @@ class _BuaGameState extends State<buaGame> {
     );
   }
 
-  /*
-  Widget _buildBuaImageWithDropZone(Customer customer) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 6.0,
-        ),
-        child: DragTarget<Item>(
-          builder: (context, candidateItems, rejectedItems) {
-            return CustomerCart(
-              hasItems: customer.items.isNotEmpty,
-              highlighted: candidateItems.isNotEmpty,
-              customer: customer,
-            );
-          },
-          onAccept: (item) {
-            _itemDroppedOnCustomerCart(
-              item: item,
-              customer: customer,
-            );
-          },
-        ),
-      ),
-    );
-  }
 
-   */
 
   Widget _buildBuaImageWithDropZone(int id, String imageName) {
     int buaId = id;
+    Color borderColor1  = Colors.black;
 
     return Expanded(
       child: Padding(
@@ -287,14 +262,43 @@ class _BuaGameState extends State<buaGame> {
         ),
         child: DragTarget<Item>(
           builder: (context, candidateItems, rejectedItems) {
-            return buaImage(
-                imageName
-            );
+            return
+              Container(
+                decoration: new BoxDecoration(
+                  border:  new Border.all(color: borderColor1, width: 20),
+                  color: theGame.getAnswerColor(1),
+                ),
+                child: SizedBox(
+                  child:
+                  buaImage(
+                      imageName
+                  ),
+                ),
+              );
           },
           onAccept: (item) {
+            setState(() {
             theGame.setPlayerAnswer(buaId, int.parse(item.uid));
             print("bua id->"+ buaId.toString());
             print("item name->"+ item.name + ' item uid->' + item.uid);
+            borderColor1 = Colors.black;
+            });
+          },
+          onWillAccept: (item) {
+            if (item != null) {
+              print("bua id->"+ buaId.toString());
+              print("willAccept: " + item.uid.toString());
+            }
+            borderColor1 = Colors.blue;
+            return true;
+          },
+          onLeave: (item) {
+            if (item != null) {
+              print("bua id->"+ buaId.toString());
+              print("onLeave: " + item.uid.toString());
+            }
+            borderColor1 = Colors.black;
+            return;
           },
         ),
       ),
@@ -409,7 +413,7 @@ final GlobalKey _draggableKey = GlobalKey();
 Widget _buildPlayer({
   required Item item,
 }) {
-  return LongPressDraggable<Item>(
+  return Draggable<Item>(
     data: item,
     dragAnchorStrategy: pointerDragAnchorStrategy,
     feedback: DraggingListItem(
