@@ -93,6 +93,7 @@ class _BuaGameState extends State<buaGame> {
         title: Text('Bar Games: Bua Game'
         ''),
         ),
+
       body: body(context),
     );
   }
