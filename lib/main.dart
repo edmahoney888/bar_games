@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 gotoBuaGameActivity(context);
               },
-              child: const Text('Bua Game'),
+              child: const Text('Fish-Crab-Prawn Game'),
             ),
             const SizedBox(height: 30),
             TextButton(
