@@ -1304,8 +1304,8 @@ androidx.core.app.ActivityCompat$RequestPermissionsRequestCodeValidator
 androidx.lifecycle.ViewModelProvider$Factory
 androidx.core.R$attr
 androidx.annotation.ColorRes
-kotlin.contracts.InvocationKind
 androidx.core.content.res.GrowingArrayUtils
+kotlin.contracts.InvocationKind
 kotlin.jvm.internal.ArrayIterator
 io.flutter.embedding.engine.FlutterEngineConnectionRegistry$FlutterEngineActivityPluginBinding:
     public android.app.Activity getActivity()
@@ -1500,8 +1500,8 @@ io.flutter.plugin.platform.PlatformViewRegistryImpl:
     public boolean registerViewFactory(java.lang.String,io.flutter.plugin.platform.PlatformViewFactory)
 androidx.core.app.ServiceCompat$StopForegroundFlags
 androidx.loader.R$style
-kotlin.UIntArray$Iterator
 kotlin.collections.ArraysKt
+kotlin.UIntArray$Iterator
 io.flutter.util.ViewUtils:
     public void <init>()
 androidx.core.net.ConnectivityManagerCompat
@@ -2608,8 +2608,8 @@ androidx.customview.widget.ExploreByTouchHelper$1
 androidx.core.graphics.PathSegment
 androidx.core.app.SharedElementCallback
 androidx.core.graphics.drawable.IconCompat$IconType
-kotlin.io.AccessDeniedException
 kotlin.UnsignedKt
+kotlin.io.AccessDeniedException
 android.support.v4.os.IResultReceiver
 androidx.core.graphics.drawable.RoundedBitmapDrawable
 kotlin.SafePublicationLazyImpl
