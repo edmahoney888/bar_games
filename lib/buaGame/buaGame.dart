@@ -130,10 +130,8 @@ class _BuaGameState extends State<buaGame> {
             playerRow(),
             buaTiles(2),
             Row(
+                mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                diceWidget(1),
-                diceWidget(2),
-                diceWidget(3),
                 Center(
                   child: ElevatedButton(
                     onPressed: ()
@@ -164,6 +162,10 @@ class _BuaGameState extends State<buaGame> {
                     child: Text(getButtonText()),
                   ),
                 ),
+                diceWidget(1),
+                diceWidget(2),
+                diceWidget(3),
+
                 Center(
                   child: ElevatedButton(
                     onPressed: ()
@@ -389,6 +391,7 @@ class _BuaGameState extends State<buaGame> {
         height: 100.0,
         child:
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _buildPlayer(
               player: theGame.thePlayers[0],
@@ -477,9 +480,7 @@ class MenuListItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
+        child:
             ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
               child: SizedBox(
@@ -522,8 +523,7 @@ class MenuListItem extends StatelessWidget {
               ),
             ),
             */
-          ],
-        ),
+
       ),
     );
   }
