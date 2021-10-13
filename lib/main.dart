@@ -1,4 +1,5 @@
 import 'package:bar_games/buaGame/buaGame.dart';
+import 'package:bar_games/playerDetail.dart';
 import 'package:bar_games/player_in_game.dart';
 import 'package:bar_games/raceGame.dart';
 import 'package:flutter/material.dart';
@@ -78,8 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
           thePlayers.add(player1ID);
         }
 
-        thePlayers[0].playerName = "joy";
-        thePlayers[0].playerAvatar = "assets/images/playeravatars/girl01.PNG";
+ //       thePlayers[0].playerName = "joy";
+ //       thePlayers[0].playerAvatar = "assets/images/playeravatars/girl01.PNG";
 
       }
     // This method is rerun every time setState is called, for instance as done
@@ -175,6 +176,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 
+  gotoPlayerDetailActivity(BuildContext context, int playerNum) async {
+
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => playerDetail(thePlayer: thePlayers[playerNum],)
+      ),
+    );
+
+    // update player list with data from result
+    setState(() {
+      thePlayers[playerNum] = result;
+    });
+
+  }
+
 
   Widget playerWidget(int playerNum) {
 
@@ -185,7 +201,10 @@ class _MyHomePageState extends State<MyHomePage> {
           child:
           Column(
             children: <Widget>[
-              Image.asset(thePlayers[playerNum].playerAvatar, fit: BoxFit.contain),
+              GestureDetector(
+                onTap: () => gotoPlayerDetailActivity(context, playerNum),
+                child:Image.asset(thePlayers[playerNum].playerAvatar, fit: BoxFit.contain),
+              ),
               Text(
                 thePlayers[playerNum].playerName,
                 style: Theme.of(context).textTheme.subtitle1?.copyWith(
