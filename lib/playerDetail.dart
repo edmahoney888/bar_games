@@ -4,14 +4,11 @@ import 'package:flutter/material.dart';
 
 class Constants{
 
-
   static const String FirstAvatar = 'assets/images/playeravatars/blankPlayer.jpg';
   static const String SecondAvatar = 'assets/images/playeravatars/girl01.PNG';
   static const String ThirdAvatar = 'assets/images/playeravatars/girl02.PNG';
   static const String FourthAvatar = 'assets/images/playeravatars/girl03.PNG';
   static const String FifthAvatar = 'assets/images/playeravatars/girl04.jpg';
-
-
 
   static const List<String> avatarImages = <String>[
     FirstAvatar,
@@ -20,8 +17,6 @@ class Constants{
     FourthAvatar,
     FifthAvatar,
   ];
-
-
 }
 
 class playerDetail extends StatefulWidget {
@@ -97,11 +92,9 @@ class _playerDetailState extends State<playerDetail> {
   }
 
   Widget playerWidget() {
-  //  int tempAvatarIndex = 0;
 
     return Container(
       width: 100.0,
-      //       height: 50.0,
 
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -120,26 +113,7 @@ class _playerDetailState extends State<playerDetail> {
 
                   child:Image.asset(thePlayer.playerAvatar, fit: BoxFit.contain),
                 ),
-                //Image.asset(thePlayer.playerAvatar, fit: BoxFit.contain),
               ),
-
-              /*
-              ElevatedButton(
-                onPressed: () {
-                  print("next button pressed");
-                  setState(() {
-                    tempAvatarIndex = Constants.avatarImages.indexOf(thePlayer.playerAvatar);
-                    if (tempAvatarIndex == Constants.avatarImages.length - 1 )
-                      tempAvatarIndex = 0;
-                    else
-                      tempAvatarIndex++;
-                    thePlayer.playerAvatar = Constants.avatarImages[tempAvatarIndex];
-
-                  });
-                },
-                child: Text("Next"),
-              ),
-              */
             ],
           ),
           Text("PlayerName: "),

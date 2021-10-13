@@ -1304,8 +1304,8 @@ androidx.core.app.ActivityCompat$RequestPermissionsRequestCodeValidator
 androidx.lifecycle.ViewModelProvider$Factory
 androidx.core.R$attr
 androidx.annotation.ColorRes
-androidx.core.content.res.GrowingArrayUtils
 kotlin.contracts.InvocationKind
+androidx.core.content.res.GrowingArrayUtils
 kotlin.jvm.internal.ArrayIterator
 io.flutter.embedding.engine.FlutterEngineConnectionRegistry$FlutterEngineActivityPluginBinding:
     public android.app.Activity getActivity()
@@ -2608,8 +2608,8 @@ androidx.customview.widget.ExploreByTouchHelper$1
 androidx.core.graphics.PathSegment
 androidx.core.app.SharedElementCallback
 androidx.core.graphics.drawable.IconCompat$IconType
-kotlin.UnsignedKt
 kotlin.io.AccessDeniedException
+kotlin.UnsignedKt
 android.support.v4.os.IResultReceiver
 androidx.core.graphics.drawable.RoundedBitmapDrawable
 kotlin.SafePublicationLazyImpl
