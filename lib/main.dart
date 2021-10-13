@@ -114,6 +114,15 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                playerWidget(0),
+                playerWidget(1),
+                playerWidget(2),
+                playerWidget(3),
+              ]
+            ),
 
             const SizedBox(height: 30),
             TextButton(
@@ -142,13 +151,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  gotoBuaGameActivity(BuildContext context){
+  gotoBuaGameActivity(BuildContext context) async {
 
-    Navigator.push(
+    final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => buaGame(playerList: thePlayers)
       ),
     );
+
+    // update player list with data from result
+    setState(() {
+      thePlayers = result;
+    });
 
   }
 
@@ -160,4 +174,36 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
   }
+
+
+  Widget playerWidget(int playerNum) {
+
+    return
+      Container(
+          width: 100.0,
+          //       height: 50.0,
+          child:
+          Column(
+            children: <Widget>[
+              Image.asset(thePlayers[playerNum].playerAvatar, fit: BoxFit.contain),
+              Text(
+                thePlayers[playerNum].playerName,
+                style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  fontSize: 18.0,
+                ),
+              ),
+              const SizedBox(height: 10.0),
+              Text(
+                thePlayers[playerNum].playerScore.toString(),
+                style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.0,
+                ),
+              ),
+            ],
+          )
+      );
+  }
+
+
 }

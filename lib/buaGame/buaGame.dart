@@ -164,6 +164,16 @@ class _BuaGameState extends State<buaGame> {
                     child: Text(getButtonText()),
                   ),
                 ),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: ()
+                    {
+                      Navigator.pop(context, theGame.thePlayers);
+                    }
+                    ,
+                    child: Text("Quit"),
+                  ),
+                ),
               ]
           ),
           ]
@@ -209,6 +219,16 @@ class _BuaGameState extends State<buaGame> {
                     }
                     ,
                     child: Text(getButtonText()),
+                  ),
+                ),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: ()
+                    {
+                      Navigator.pop(context, theGame.thePlayers);
+                    }
+                    ,
+                    child: Text("Quit"),
                   ),
                 ),
               ]
@@ -413,8 +433,8 @@ class _BuaGameState extends State<buaGame> {
       );
   }
 
-
 }
+
 final GlobalKey _draggableKey = GlobalKey();
 
 Widget _buildPlayer({
