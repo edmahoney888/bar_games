@@ -448,7 +448,7 @@ Widget _buildPlayer({
       dragKey: _draggableKey,
       imageName: player.playerAvatar,
     ),
-    child: MenuListItem(
+    child: PlayerAvatar(
       name: player.playerName,
       score: player.playerScore,
       imageName: player.playerAvatar,
@@ -457,8 +457,8 @@ Widget _buildPlayer({
 }
 
 
-class MenuListItem extends StatelessWidget {
-  const MenuListItem({
+class PlayerAvatar extends StatelessWidget {
+  const PlayerAvatar({
     Key? key,
     this.name = '',
     this.score = 0,
@@ -477,22 +477,32 @@ class MenuListItem extends StatelessWidget {
       elevation: 12.0,
       borderRadius: BorderRadius.circular(20),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(5.0),
         child:
             ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
               child: SizedBox(
                 width: 100,
-                height: 100,
+                height: 130,
                 child: Center(
-                  child: AnimatedContainer(
+                  child: Column(
+                      children: <Widget>[
+                  AnimatedContainer(
                     duration: const Duration(milliseconds: 100),
                     curve: Curves.easeInOut,
-                    height: isDepressed ? 95 : 100,
+                    height: isDepressed ? 65 : 70,
                     width: isDepressed ? 95 : 100,
                     child:  Image.asset(imageName, fit: BoxFit.contain),
 
                   ),
+                        Row(
+                            children: <Widget>[
+                        Text(name + ": "),
+                        Text(score.toString()),
+                        ]
+                        ),
+                  ]
+                ),
                 ),
               ),
             ),
