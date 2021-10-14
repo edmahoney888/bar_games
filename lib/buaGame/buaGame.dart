@@ -261,9 +261,7 @@ class _BuaGameState extends State<buaGame> {
     if (borderColor6 == null)
       borderColor6 = Colors.black;
 
-    return Container(
-      child:
-          Expanded(
+    return Expanded(
       child: GridView.count(
           crossAxisCount: numColumns,
           children: <Widget> [
@@ -276,7 +274,7 @@ class _BuaGameState extends State<buaGame> {
           ]
 
       ),
-          )
+
     );
   }
 
@@ -286,7 +284,7 @@ class _BuaGameState extends State<buaGame> {
     int buaId = id;
     Color borderColor1  = Colors.black;
 
-    return Expanded(
+    return Container(
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 6.0,
