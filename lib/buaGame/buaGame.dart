@@ -129,55 +129,7 @@ class _BuaGameState extends State<buaGame> {
           children: <Widget>[
             playerRow(),
             buaTilesPT(2),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Center(
-                  child: ElevatedButton(
-                    onPressed: ()
-                    {
-
-                      switch (getRoundState()) {
-                        case 0:
-                          {
-                            setState((){
-                              theGame.rollDice();
-                              theGame.gameState = 1;
-                            });
-                          }
-                          break;
-                        case 1:
-                          {
-                            setState((){
-                              theGame.resetState();
-                            });
-                          }
-                          break;
-                        default:
-                          {}
-                      }
-
-                    }
-                    ,
-                    child: Text(getButtonText()),
-                  ),
-                ),
-                diceWidget(1),
-                diceWidget(2),
-                diceWidget(3),
-
-                Center(
-                  child: ElevatedButton(
-                    onPressed: ()
-                    {
-                      Navigator.pop(context, theGame.thePlayers);
-                    }
-                    ,
-                    child: Text("Quit"),
-                  ),
-                ),
-              ]
-          ),
+            diceRow(),
           ]
       );
   }
@@ -188,58 +140,13 @@ class _BuaGameState extends State<buaGame> {
         children: <Widget>[
           playerCol(),
           buaTilesLS(3),
-          Column(
-              children: <Widget>[
-                diceWidget(1),
-                diceWidget(2),
-                diceWidget(3),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: ()
-                      {
-
-                        switch (getRoundState()) {
-                          case 0:
-                            {
-                            setState((){
-                            theGame.rollDice();
-                            theGame.gameState = 1;
-                            });
-                            }
-                            break;
-                          case 1:
-                            {
-                            setState((){
-                            theGame.resetState();
-                            });
-                            }
-                            break;
-                          default:
-                            {}
-                        }
-
-                    }
-                    ,
-                    child: Text(getButtonText()),
-                  ),
-                ),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: ()
-                    {
-                      Navigator.pop(context, theGame.thePlayers);
-                    }
-                    ,
-                    child: Text("Quit"),
-                  ),
-                ),
-              ]
-          ),
+          diceCol(),
         ]
     );
 
   }
 
+  /*
   Widget buaTiles(int numColumns) {
     Color borderColor1= Colors.black;
     Color borderColor2= Colors.black;
@@ -278,6 +185,8 @@ class _BuaGameState extends State<buaGame> {
     );
   }
 
+   */
+
 
   Widget buaTilesLS(int numColumns) {
     Color borderColor1= Colors.black;
@@ -301,10 +210,14 @@ class _BuaGameState extends State<buaGame> {
       borderColor6 = Colors.black;
 
     return Expanded(
+        flex: 1,
         child: Column (
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget> [
-          Row(
+
+            Expanded(
+            flex: 1,
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget> [
               _buildBuaImageWithDropZone(0,'assets/images/buagame/crab.png'),
@@ -312,7 +225,10 @@ class _BuaGameState extends State<buaGame> {
               _buildBuaImageWithDropZone(2,'assets/images/buagame/prawn.png'),
               ]
             )  ,
-          Row(
+            ),
+      Expanded(
+          flex: 1,
+          child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
                 _buildBuaImageWithDropZone(3,'assets/images/buagame/tiger.png'),
@@ -320,6 +236,7 @@ class _BuaGameState extends State<buaGame> {
                 _buildBuaImageWithDropZone(5,'assets/images/buagame/gourd.png'),
               ]
             ),
+      ),
         ]
     ),
     );
@@ -348,30 +265,40 @@ class _BuaGameState extends State<buaGame> {
       borderColor6 = Colors.black;
 
     return Expanded(
+      flex: 1,
         child: Column (
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget> [
-          Row(
+            Expanded(
+            flex: 1,
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
                 _buildBuaImageWithDropZone(0,'assets/images/buagame/crab.png'),
                 _buildBuaImageWithDropZone(1,'assets/images/buagame/fish.png'),
               ]
-          )  ,
-          Row(
+          ),
+            ),
+      Expanded(
+          flex: 1,
+          child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
                 _buildBuaImageWithDropZone(2,'assets/images/buagame/prawn.png'),
                 _buildBuaImageWithDropZone(3,'assets/images/buagame/tiger.png'),
               ]
           ),
-          Row(
+      ),
+      Expanded(
+          flex: 1,
+          child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
                 _buildBuaImageWithDropZone(4,'assets/images/buagame/rooster.png'),
                 _buildBuaImageWithDropZone(5,'assets/images/buagame/gourd.png'),
               ]
           ),
+      ),
         ]
     ),
     );
@@ -384,7 +311,8 @@ class _BuaGameState extends State<buaGame> {
     int buaId = id;
     Color borderColor1  = Colors.black;
 
-    return Container(
+    return Expanded(
+      flex: 1,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 6.0,
@@ -434,14 +362,14 @@ class _BuaGameState extends State<buaGame> {
 
   Widget buaImage(String imageName) {
 
-    return  Image(image: AssetImage(imageName));
-    /*
-   return  FittedBox(
+    //return  Image(image: AssetImage(imageName));
+
+   return  Expanded(
+     flex: 1,
       child:  Image(image: AssetImage(imageName)),
-      fit: BoxFit.fill,
     );
 
-     */
+
   }
 
 
@@ -510,6 +438,61 @@ class _BuaGameState extends State<buaGame> {
     );
   }
 
+  Widget diceRow() {
+
+    return
+      Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Center(
+              child: ElevatedButton(
+                onPressed: ()
+                {
+
+                  switch (getRoundState()) {
+                    case 0:
+                      {
+                        setState((){
+                          theGame.rollDice();
+                          theGame.gameState = 1;
+                        });
+                      }
+                      break;
+                    case 1:
+                      {
+                        setState((){
+                          theGame.resetState();
+                        });
+                      }
+                      break;
+                    default:
+                      {}
+                  }
+
+                }
+                ,
+                child: Text(getButtonText()),
+              ),
+            ),
+            diceWidget(1),
+            diceWidget(2),
+            diceWidget(3),
+
+            Center(
+              child: ElevatedButton(
+                onPressed: ()
+                {
+                  Navigator.pop(context, theGame.thePlayers);
+                }
+                ,
+                child: Text("Quit"),
+              ),
+            ),
+          ]
+      );
+  }
+
+
   Widget playerCol() {
 
     return
@@ -535,6 +518,60 @@ class _BuaGameState extends State<buaGame> {
           )
       );
   }
+
+
+  Widget diceCol() {
+
+    return
+      Column(
+          children: <Widget>[
+            diceWidget(1),
+            diceWidget(2),
+            diceWidget(3),
+            Center(
+              child: ElevatedButton(
+                onPressed: ()
+                {
+
+                  switch (getRoundState()) {
+                    case 0:
+                      {
+                        setState((){
+                          theGame.rollDice();
+                          theGame.gameState = 1;
+                        });
+                      }
+                      break;
+                    case 1:
+                      {
+                        setState((){
+                          theGame.resetState();
+                        });
+                      }
+                      break;
+                    default:
+                      {}
+                  }
+
+                }
+                ,
+                child: Text(getButtonText()),
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: ()
+                {
+                  Navigator.pop(context, theGame.thePlayers);
+                }
+                ,
+                child: Text("Quit"),
+              ),
+            ),
+          ]
+      );
+  }
+
 
 }
 
