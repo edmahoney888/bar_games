@@ -128,7 +128,7 @@ class _BuaGameState extends State<buaGame> {
       Column(
           children: <Widget>[
             playerRow(),
-            buaTiles(2),
+            buaTilesPT(2),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -187,7 +187,7 @@ class _BuaGameState extends State<buaGame> {
     return Row(
         children: <Widget>[
           playerCol(),
-          buaTiles(3),
+          buaTilesLS(3),
           Column(
               children: <Widget>[
                 diceWidget(1),
@@ -279,6 +279,106 @@ class _BuaGameState extends State<buaGame> {
   }
 
 
+  Widget buaTilesLS(int numColumns) {
+    Color borderColor1= Colors.black;
+    Color borderColor2= Colors.black;
+    Color borderColor3= Colors.black;
+    Color borderColor4= Colors.black;
+    Color borderColor5= Colors.black;
+    Color borderColor6= Colors.black;
+
+    if (borderColor1 == null)
+      borderColor1 = Colors.black;
+    if (borderColor2 == null)
+      borderColor2 = Colors.black;
+    if (borderColor3 == null)
+      borderColor3 = Colors.black;
+    if (borderColor4 == null)
+      borderColor4 = Colors.black;
+    if (borderColor5 == null)
+      borderColor5 = Colors.black;
+    if (borderColor6 == null)
+      borderColor6 = Colors.black;
+
+    return Expanded(
+        child: Column (
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget> [
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget> [
+              _buildBuaImageWithDropZone(0,'assets/images/buagame/crab.png'),
+              _buildBuaImageWithDropZone(1,'assets/images/buagame/fish.png'),
+              _buildBuaImageWithDropZone(2,'assets/images/buagame/prawn.png'),
+              ]
+            )  ,
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget> [
+                _buildBuaImageWithDropZone(3,'assets/images/buagame/tiger.png'),
+                _buildBuaImageWithDropZone(4,'assets/images/buagame/rooster.png'),
+                _buildBuaImageWithDropZone(5,'assets/images/buagame/gourd.png'),
+              ]
+            ),
+        ]
+    ),
+    );
+  }
+
+
+  Widget buaTilesPT(int numColumns) {
+    Color borderColor1= Colors.black;
+    Color borderColor2= Colors.black;
+    Color borderColor3= Colors.black;
+    Color borderColor4= Colors.black;
+    Color borderColor5= Colors.black;
+    Color borderColor6= Colors.black;
+
+    if (borderColor1 == null)
+      borderColor1 = Colors.black;
+    if (borderColor2 == null)
+      borderColor2 = Colors.black;
+    if (borderColor3 == null)
+      borderColor3 = Colors.black;
+    if (borderColor4 == null)
+      borderColor4 = Colors.black;
+    if (borderColor5 == null)
+      borderColor5 = Colors.black;
+    if (borderColor6 == null)
+      borderColor6 = Colors.black;
+
+    return Expanded(
+        child: Column (
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget> [
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget> [
+                _buildBuaImageWithDropZone(0,'assets/images/buagame/crab.png'),
+                _buildBuaImageWithDropZone(1,'assets/images/buagame/fish.png'),
+              ]
+          )  ,
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget> [
+                _buildBuaImageWithDropZone(2,'assets/images/buagame/prawn.png'),
+                _buildBuaImageWithDropZone(3,'assets/images/buagame/tiger.png'),
+              ]
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget> [
+                _buildBuaImageWithDropZone(4,'assets/images/buagame/rooster.png'),
+                _buildBuaImageWithDropZone(5,'assets/images/buagame/gourd.png'),
+              ]
+          ),
+        ]
+    ),
+    );
+
+  }
+
+
 
   Widget _buildBuaImageWithDropZone(int id, String imageName) {
     int buaId = id;
@@ -297,35 +397,33 @@ class _BuaGameState extends State<buaGame> {
                   border:  new Border.all(color: borderColor1, width: 20),
                   color: theGame.getAnswerColor(1),
                 ),
-                child: SizedBox(
-                  child:
+                child:
                   buaImage(
                       imageName
                   ),
-                ),
               );
           },
           onAccept: (player) {
             setState(() {
             theGame.setPlayerAnswer(buaId, int.parse(player.uid));
-            print("bua id->"+ buaId.toString());
-            print("item name->"+ player.playerName + ' item uid->' + player.uid);
+//            print("bua id->"+ buaId.toString());
+//            print("item name->"+ player.playerName + ' item uid->' + player.uid);
             borderColor1 = Colors.black;
             });
           },
           onWillAccept: (player) {
             if (player != null) {
-              print("bua id->"+ buaId.toString());
-              print("willAccept: " + player.uid.toString());
+//              print("bua id->"+ buaId.toString());
+//              print("willAccept: " + player.uid.toString());
             }
             borderColor1 = Colors.blue;
             return true;
           },
           onLeave: (player) {
-            if (player != null) {
-              print("bua id->"+ buaId.toString());
-              print("onLeave: " + player.uid.toString());
-            }
+//            if (player != null) {
+//              print("bua id->"+ buaId.toString());
+//              print("onLeave: " + player.uid.toString());
+//            }
             borderColor1 = Colors.black;
             return;
           },
@@ -336,10 +434,14 @@ class _BuaGameState extends State<buaGame> {
 
   Widget buaImage(String imageName) {
 
+    return  Image(image: AssetImage(imageName));
+    /*
    return  FittedBox(
       child:  Image(image: AssetImage(imageName)),
       fit: BoxFit.fill,
     );
+
+     */
   }
 
 
@@ -370,12 +472,12 @@ class _BuaGameState extends State<buaGame> {
 
     int diceValue = getDiceValue(whichDice);
     String tempString = Constants.diceFaces[diceValue];
-    print("which dice: " + whichDice.toString());
-    print("diceValue: " + diceValue.toString());
-    print("image Asset: " + tempString);
+//    print("which dice: " + whichDice.toString());
+//    print("diceValue: " + diceValue.toString());
+//    print("image Asset: " + tempString);
 
     return Container(
-      width: 100.0,
+      width: 75.0,
       //       height: 50.0,
       child:
       Image.asset(tempString, fit: BoxFit.contain),
@@ -385,8 +487,8 @@ class _BuaGameState extends State<buaGame> {
   Widget playerRow() {
 
     return Container(
-      //  width: 50.0,
-        height: 100.0,
+     //   width: 75.0,
+     //   height: 75.0,
         child:
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -412,8 +514,8 @@ class _BuaGameState extends State<buaGame> {
 
     return
       Container(
-        width: 100.0,
-        //       height: 50.0,
+        width: 75.0,
+        //  height: 75.0,
         child:
           Column(
             children: <Widget>[
@@ -483,7 +585,7 @@ class PlayerAvatar extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.0),
               child: SizedBox(
                 width: 100,
-                height: 130,
+                height: 96,
                 child: Center(
                   child: Column(
                       children: <Widget>[
