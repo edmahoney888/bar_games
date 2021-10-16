@@ -115,15 +115,35 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+          Expanded(
+          flex: 1,
+          child:
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Expanded(
+                    flex: 1,
+                    child:
                 playerWidget(0),
+                ),
+                Expanded(
+                    flex: 1,
+                    child:
                 playerWidget(1),
+                ),
+                Expanded(
+                    flex: 1,
+                    child:
                 playerWidget(2),
+                ),
+                Expanded(
+                    flex: 1,
+                    child:
                 playerWidget(3),
+                ),
               ]
             ),
+          ),
 
             const SizedBox(height: 30),
             TextButton(

@@ -502,18 +502,22 @@ class _BuaGameState extends State<buaGame> {
         child:
           Column(
             children: <Widget>[
-              _buildPlayer(
+            _buildPlayer(
                 player: theGame.thePlayers[0],
           ),
-              _buildPlayer(
+
+            _buildPlayer(
                 player: theGame.thePlayers[1],
               ),
-              _buildPlayer(
+
+            _buildPlayer(
                 player: theGame.thePlayers[2],
               ),
-              _buildPlayer(
+
+            _buildPlayer(
                 player: theGame.thePlayers[3],
               ),
+
             ],
           )
       );
@@ -525,40 +529,60 @@ class _BuaGameState extends State<buaGame> {
     return
       Column(
           children: <Widget>[
-            diceWidget(1),
-            diceWidget(2),
-            diceWidget(3),
-            Center(
-              child: ElevatedButton(
-                onPressed: ()
-                {
+            Expanded(
+              flex: 1,
+              child:
+              Center(
+                child: ElevatedButton(
+                  onPressed: ()
+                  {
 
-                  switch (getRoundState()) {
-                    case 0:
-                      {
-                        setState((){
-                          theGame.rollDice();
-                          theGame.gameState = 1;
-                        });
-                      }
-                      break;
-                    case 1:
-                      {
-                        setState((){
-                          theGame.resetState();
-                        });
-                      }
-                      break;
-                    default:
-                      {}
+                    switch (getRoundState()) {
+                      case 0:
+                        {
+                          setState((){
+                            theGame.rollDice();
+                            theGame.gameState = 1;
+                          });
+                        }
+                        break;
+                      case 1:
+                        {
+                          setState((){
+                            theGame.resetState();
+                          });
+                        }
+                        break;
+                      default:
+                        {}
+                    }
+
                   }
-
-                }
-                ,
-                child: Text(getButtonText()),
+                  ,
+                  child: Text(getButtonText()),
+                ),
               ),
             ),
-            Center(
+          Expanded(
+          flex: 1,
+          child:
+          diceWidget(1),
+          ),
+    Expanded(
+    flex: 1,
+    child:
+    diceWidget(2),
+    ),
+    Expanded(
+    flex: 1,
+    child:
+    diceWidget(3),
+    ),
+
+              Expanded(
+              flex: 1,
+    child:
+    Center(
               child: ElevatedButton(
                 onPressed: ()
                 {
@@ -568,32 +592,38 @@ class _BuaGameState extends State<buaGame> {
                 child: Text("Quit"),
               ),
             ),
+              ),
           ]
       );
   }
 
 
+  Widget _buildPlayer({
+    required PlayerInGame player,
+  }) {
+    return
+      Expanded(
+        flex: 1,
+        child:
+        Draggable<PlayerInGame>(
+      data: player,
+      dragAnchorStrategy: pointerDragAnchorStrategy,
+      feedback: DraggingListItem(
+        dragKey: _draggableKey,
+        imageName: player.playerAvatar,
+      ),
+      child: PlayerAvatar(
+        name: player.playerName,
+        score: player.playerScore,
+        imageName: player.playerAvatar,
+      ),
+    ),
+      );
+  }
 }
 
 final GlobalKey _draggableKey = GlobalKey();
 
-Widget _buildPlayer({
-  required PlayerInGame player,
-}) {
-  return Draggable<PlayerInGame>(
-    data: player,
-    dragAnchorStrategy: pointerDragAnchorStrategy,
-    feedback: DraggingListItem(
-      dragKey: _draggableKey,
-      imageName: player.playerAvatar,
-    ),
-    child: PlayerAvatar(
-      name: player.playerName,
-      score: player.playerScore,
-      imageName: player.playerAvatar,
-    ),
-  );
-}
 
 
 class PlayerAvatar extends StatelessWidget {
@@ -623,7 +653,16 @@ class PlayerAvatar extends StatelessWidget {
               child: SizedBox(
                 width: 100,
                 height: 96,
-                child: Center(
+                child:
+    Stack(
+      alignment: Alignment.bottomCenter,
+    children: <Widget>[
+      Image.asset(imageName, fit: BoxFit.contain),
+      Text(name + ": " + score.toString()),
+      ]
+    ),
+                    /*
+                Center(
                   child: Column(
                       children: <Widget>[
                   AnimatedContainer(
@@ -643,6 +682,9 @@ class PlayerAvatar extends StatelessWidget {
                   ]
                 ),
                 ),
+
+                     */
+
               ),
             ),
 
