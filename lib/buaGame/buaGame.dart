@@ -313,10 +313,10 @@ class _BuaGameState extends State<buaGame> {
 
     return Expanded(
       flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 6.0,
-        ),
+   //   child: Padding(
+   //     padding: const EdgeInsets.symmetric(
+  //        horizontal: 6.0,
+  //      ),
         child: DragTarget<PlayerInGame>(
           builder: (context, candidateItems, rejectedItems) {
             return
@@ -356,7 +356,7 @@ class _BuaGameState extends State<buaGame> {
             return;
           },
         ),
-      ),
+   //   ),
     );
   }
 
@@ -364,8 +364,8 @@ class _BuaGameState extends State<buaGame> {
 
     //return  Image(image: AssetImage(imageName));
 
-   return  Expanded(
-     flex: 1,
+   return  FittedBox(
+     fit: BoxFit.contain,
       child:  Image(image: AssetImage(imageName)),
     );
 
@@ -615,8 +615,8 @@ class PlayerAvatar extends StatelessWidget {
     return Material(
       elevation: 12.0,
       borderRadius: BorderRadius.circular(20),
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
+  //    child: Padding(
+  //      padding: const EdgeInsets.all(5.0),
         child:
             ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
@@ -671,7 +671,7 @@ class PlayerAvatar extends StatelessWidget {
             ),
             */
 
-      ),
+ //     ),
     );
   }
 }
