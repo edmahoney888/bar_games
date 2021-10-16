@@ -39,7 +39,7 @@ class _playerDetailState extends State<playerDetail> {
   @override
   Widget build(BuildContext context) {
     print("player pass->" + thePlayer.uid + " ->" + thePlayer.playerName);
-    myController.text = thePlayer.playerName;
+  //  myController.text = thePlayer.playerName;
 
     return Scaffold(
       key: scaffoldKey,
@@ -61,7 +61,7 @@ class _playerDetailState extends State<playerDetail> {
 
   Widget portrait() {
     return Column(children: <Widget>[
-      playerWidget(),
+      playerWidgetCol(),
       Center(
         child: ElevatedButton(
           onPressed: () {
@@ -75,23 +75,22 @@ class _playerDetailState extends State<playerDetail> {
   }
 
   Widget landscape() {
-    return Column(
+    return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-      playerWidget(),
-      Center(
-        child: ElevatedButton(
-          onPressed: () {
-            thePlayer.playerName = myController.text;
-            Navigator.pop(context, thePlayer);
-          },
+          playerWidgetRow(),
+          ElevatedButton(
+            onPressed: () {
+              thePlayer.playerName = myController.text;
+              Navigator.pop(context, thePlayer);
+              },
           child: Text("Finish"),
         ),
-      ),
+
     ]);
   }
 
-  Widget playerWidget() {
+  Widget playerWidgetCol() {
 
     return Container(
       width: 100.0,
@@ -124,6 +123,59 @@ class _playerDetailState extends State<playerDetail> {
       ),
     );
   }
+
+  Widget playerWidgetRow() {
+
+    return Container(
+      width: 500.0,
+
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child:
+              Container(
+                width: 100.0,
+                //       height: 50.0,
+                child:
+                GestureDetector(
+                  onTap: () =>
+                      setState(() {
+                        nextImage();
+                      }),
+
+                  child:Image.asset(thePlayer.playerAvatar, fit: BoxFit.contain),
+                ),
+              ),
+    ),
+    //      Text("PlayerName: "),
+          Expanded(
+            flex: 1,
+            child:
+ //         Padding(
+ //           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+  //          child:
+            Container(
+              width: 200.0,
+              child:
+            TextField(
+            decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter a search term',
+                labelText: 'Enter player name'
+            ),
+            controller: myController,
+          ),
+          ),
+ //   ),
+    ),
+
+        ],
+      ),
+    );
+  }
+
 
   void nextImage() {
     int tempAvatarIndex = 0;
