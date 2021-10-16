@@ -1500,8 +1500,8 @@ io.flutter.plugin.platform.PlatformViewRegistryImpl:
     public boolean registerViewFactory(java.lang.String,io.flutter.plugin.platform.PlatformViewFactory)
 androidx.core.app.ServiceCompat$StopForegroundFlags
 androidx.loader.R$style
-kotlin.collections.ArraysKt
 kotlin.UIntArray$Iterator
+kotlin.collections.ArraysKt
 io.flutter.util.ViewUtils:
     public void <init>()
 androidx.core.net.ConnectivityManagerCompat

@@ -16,11 +16,11 @@ const RESOURCES = {
 "assets/assets/images/common/dice4.png": "8de59eece1200c1d0e80cb93b701f2cb",
 "assets/assets/images/common/dice5.png": "aa9bdd305f66ed0bd259aadb4e17328a",
 "assets/assets/images/common/dice6.png": "c27231a06070be8297b000bf1111034e",
-"assets/assets/images/playeravatars/blankPlayer.jpg": "05f4d5091a3a7b7a3b8e3b91092c6d9d",
+"assets/assets/images/playeravatars/blankPlayer.jpg": "9935bc8d163c8c29de31d4398508b867",
 "assets/assets/images/playeravatars/girl01.PNG": "dd922f6e4888bd53324a24d49494923c",
 "assets/assets/images/playeravatars/girl02.PNG": "f60f69693df1645c57c6318f49490a88",
 "assets/assets/images/playeravatars/girl03.PNG": "1c82328e4d8274b1488ab7775f51b05d",
-"assets/assets/images/playeravatars/girl04.jpg": "9474a1a20a240b1f019709be1aac2799",
+"assets/assets/images/playeravatars/girl04.jpg": "fb30caf9ed80d46d57fd29c95e89b185",
 "assets/assets/images/racegame/bull.gif": "f3728cc94347d5a59e1a81bf8d5c4a52",
 "assets/assets/images/racegame/bunny.gif": "b9a070fec1ecdd64b591575ac0419005",
 "assets/assets/images/racegame/elephant.gif": "ef3759f1e87c6278fe8f4c0dfb733536",
@@ -40,11 +40,11 @@ const RESOURCES = {
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "e252bbd7f7f26058ad77a307653754c4",
-"/": "e252bbd7f7f26058ad77a307653754c4",
-"main.dart.js": "0c6a32d44e076d1b74e68f52765d977d",
+"index.html": "5fb6366639e279bf4746be9b39abf738",
+"/": "5fb6366639e279bf4746be9b39abf738",
+"main.dart.js": "b4af3ea16131c67f077bbbec3c4b7842",
 "manifest.json": "680cfe490c08ec2af19077bc0fa7e302",
-"version.json": "18c860933121cdd7fc7a0eabb99a1605"
+"version.json": "d0991a221627686935e56c78f1b47810"
 };
 
 // The application shell files that are downloaded before a service worker can
