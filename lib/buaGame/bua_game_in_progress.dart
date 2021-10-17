@@ -9,24 +9,12 @@ class BuaGameInProgress {
   String defaultName = "Default Name";
   String defaultImage = 'assets/images/playeravatars/blankPlayer.jpg';
   List<PlayerInGame> thePlayers = [];
-//  PlayerInGame player1ID = new PlayerInGame();
-//  PlayerInGame player2ID = new PlayerInGame();
- // PlayerInGame player3ID = new PlayerInGame();
-//  PlayerInGame player4ID = new PlayerInGame();
-
   int gameState = 0;
-
   int dice1 = 0;
   int dice2 = 0;
   int dice3 = 0;
 
-//  List<BGPlayer> _players;
- // List<Round> _rounds;
- // List<Round> _roundsForGame;
- // List<Game> _games;
-//  List<Answers> _answers;
   bool _reveal = false;
-//  final dbHelper = DatabaseHelper.instance;
 
   final Color colorUnselected = Colors.redAccent;
   final Color colorSelected = Colors.blueAccent;
@@ -371,42 +359,6 @@ class BuaGameInProgress {
 
     tempImage = thePlayers[playerNum].playerAvatar;
 
-   // switch (playerNum) {
-      /*
-      case 1: {
-        if (player1ID.hasPlayer() )
-        {
-          tempImage = player1ID.getImage();
-        }
-      }
-      break;
-      case 2: {
-        if (player2ID.hasPlayer())
-        {
-          tempImage = player2ID.getImage();
-        }
-      }
-      break;
-      case 3: {
-        if (player3ID.hasPlayer())
-        {
-          tempImage = player3ID.getImage();
-        }
-      }
-      break;
-      case 4: {
-        if (player4ID.hasPlayer())
-        {
-          tempImage = player4ID.getImage();
-        }
-      }
-      break;
-      default: {
-        tempImage = "";
-      }
-
-       */
-   // }
     return tempImage;
   }
 
@@ -416,81 +368,22 @@ class BuaGameInProgress {
 
     tempName = thePlayers[playerNum].playerName;
 
-    /*
-    switch (playerNum) {
-      case 1: {
-
-          tempName = player1ID.playerName;
-
-      }
-      break;
-      case 2: {
-
-          tempName = player2ID.playerName;
-
-      }
-      break;
-      case 3: {
-
-          tempName = player3ID.playerName;
-
-      }
-      break;
-      case 4: {
-
-          tempName = player4ID.playerName;
-
-      }
-      break;
-      default: {
-        tempName = "";
-      }
-    }
-
-     */
     return tempName;
   }
 
 
   String getPlayerImageFromID(playerID) {
     String tempImage = "";
-    /*
-    if (_players != null) {
-      for (var n in _players) {
-        if (n.id == playerID) {
-          tempImage = n.image;
-        }
-      }
-    }
 
-     */
     return tempImage;
   }
 
 
-  void _printSelectedGame() {
-/*
-    if (selectedGame != null) {
-      print('===== selectedGame ==========');
-      print('ID: ${selectedGame.id}');
-      print('Name: ${selectedGame.name}');
-      print('========================================');
-    }
-    else
-      print('selected game is null');
-
- */
-  }
 
 
   String getCurrentRoundImage() {
     String tempImage = "";
-/*
-    if (currentRound != null) {
-      tempImage = currentRound.image;
-    }
 
- */
     return tempImage;
   }
 
@@ -498,76 +391,13 @@ class BuaGameInProgress {
   setPlayerAnswer(int answerNum, int playerNum) {
 
     thePlayers[playerNum].answerChosen = answerNum;
-/*
-    switch (playerNum) {
-      case 1: {
-        player1ID.setAnswer(answerNum);
-        print("======== setting player1 answer: " + answerNum.toString());
-      }
-      break;
-      case 2: {
-        player2ID.setAnswer(answerNum);
-        print("======== setting player2 answer: " + answerNum.toString());
-      }
-      break;
-      case 3: {
-        player3ID.setAnswer(answerNum);
-        print("======== setting player3 answer: " + answerNum.toString());
-      }
-      break;
-      case 4: {
-        player4ID.setAnswer(answerNum);
-        print("======== setting player4 answer: " + answerNum.toString());
-      }
-      break;
-      default: {
-      }
-    }
-
- */
-
 
   }
 
 
   Color getPlayerColor(int playerNum) {
     Color tempColor  = colorUnselected;
-/*
-    switch (playerNum) {
-      case 1: {
-        if (player1ID.hasPlayer())
-        {
-          tempColor = player1ID.itemColor;
-        }
-      }
-      break;
-      case 2: {
-        if (player2ID.hasPlayer())
-        {
-          tempColor = player2ID.itemColor;
-        }
-      }
-      break;
-      case 3: {
-        if (player3ID.hasPlayer())
-        {
-          tempColor = player3ID.itemColor;
-        }
-      }
-      break;
-      case 4: {
-        if (player4ID.hasPlayer())
-        {
-          tempColor = player4ID.itemColor;
-        }
-      }
-      break;
-      default: {
-        tempColor = colorUnselected;
-      }
-    }
 
- */
     return tempColor;
   }
 
@@ -575,306 +405,42 @@ class BuaGameInProgress {
   Color getAnswerColor(int answerNum) {
 
     Color tempColor  = colorUnselected;
-/*
-    if (_reveal == false) {
-      tempColor = colorAnswerHidden;
-    }
-    else {
-      if (correctAnswer(answerNum) > 0) {
-        switch (correctAnswer(answerNum)) {
-          case 1:
-            {
-              tempColor = colorAnswerCorrect1;
-            }
-            break;
-          case 2:
-            {
-              tempColor = colorAnswerCorrect2;
-            }
-            break;
-          case 3:
-            {
-              tempColor = colorAnswerCorrect3;
-            }
-            break;
-          default: {
-            tempColor = colorAnswerIncorrect;
-          }
-        }
-      }
-      else
-      {
-        tempColor = colorAnswerIncorrect;
-      }
-    }
 
-     */
     return tempColor;
   }
 
 
   loadFirstRound() {
-    /*
-    if (selectedRound != null) {
-      currentRound = selectedRound;
-      loadAnswers();
-    }
-    else {
-      print("tlr - selected is null");
-    }
 
-     */
   }
 
 
   loadAnswers() {
-    /*
-    Answers tempAnswer;
 
-    _answers = new List();
-    if (currentRound != null) {
-      tempAnswer = new Answers();
-      tempAnswer.count = 0;
-      tempAnswer.correct = false;
-      _answers.add(tempAnswer);
-
-      tempAnswer = new Answers();
-      tempAnswer.count = 0;
-      tempAnswer.correct = false;
-      _answers.add(tempAnswer);
-
-      tempAnswer = new Answers();
-      tempAnswer.count = 0;
-      tempAnswer.correct = false;
-      _answers.add(tempAnswer);
-
-      tempAnswer = new Answers();
-      tempAnswer.count = 0;
-      tempAnswer.correct = false;
-      _answers.add(tempAnswer);
-
-      tempAnswer = new Answers();
-      tempAnswer.count = 0;
-      tempAnswer.correct = false;
-      _answers.add(tempAnswer);
-
-      tempAnswer = new Answers();
-      tempAnswer.count = 0;
-      tempAnswer.correct = false;
-      _answers.add(tempAnswer);
-    }
-    else {
-      print("LA - currentRound is null");
-    }
-
-     */
   }
 
   loadPlayer(int playerPosition, int playerID)
   {
-    /*
-    Player tempPlayer  = getPlayerFromList(playerID);
 
-    switch (playerPosition) {
-      case 1: {
-        player1ID.thePlayer = tempPlayer;
-      }
-      break;
-      case 2: {
-        player2ID.thePlayer = tempPlayer;
-      }
-      break;
-      case 3: {
-        player3ID.thePlayer = tempPlayer;
-      }
-      break;
-      case 4: {
-        player4ID.thePlayer = tempPlayer;
-      }
-      break;
-      default: {
-      }
-    }
-
-     */
   }
 
-/*
-  BGPlayer getPlayerFromList(int playerID)
-  {
-    BGPlayer tempPlayer;
-
-    for (var n in _players) {
-      if (n.id == playerID) {
-        tempPlayer = n;
-      }
-    }
-
-
-    return tempPlayer;
-  }
-
- */
 
 
   showCorrectAnswers() {
-    /*
-    int tempanswer;
-    _reveal = true;
 
-    if (player1ID != null)
-    {
-      if (player1ID.getAnswer() != -1)
-      {
-        tempanswer = correctAnswer(player1ID.getAnswer());
-
-        if (tempanswer > 0)
-        {
-          //     player1ID.itemColor = colorCorrect;
-          player1ID.itemColor =  getAnswerColor(tempanswer);
-
-        }
-        else
-        {
-          player1ID.itemColor = colorIncorrect;
-        }
-      }
-    }
-    if (player2ID != null)
-    {
-      if (player2ID.getAnswer() != -1)
-      {
-        tempanswer = correctAnswer(player2ID.getAnswer());
-
-        if (tempanswer > 0)
-        {
-          player2ID.itemColor = colorCorrect;
-        }
-        else
-        {
-          player2ID.itemColor = colorIncorrect;
-        }
-      }
-    }
-    if (player3ID != null)
-    {
-      if (player3ID.getAnswer() != -1)
-      {
-        tempanswer = correctAnswer(player3ID.getAnswer());
-
-        if (tempanswer > 0)
-        {
-          player3ID.itemColor = colorCorrect;
-        }
-        else
-        {
-          player3ID.itemColor = colorIncorrect;
-        }
-      }
-    }
-    if (player4ID != null)
-    {
-      if (player4ID.getAnswer() != -1)
-      {
-        tempanswer = correctAnswer(player4ID.getAnswer());
-
-        if (tempanswer > 0)
-        {
-          player4ID.itemColor = colorCorrect;
-        }
-        else
-        {
-          player4ID.itemColor = colorIncorrect;
-        }
-      }
-    }
-
-     */
 
   }
 
   resetPlayerAnswers()
   {
-    /*
-    _reveal = false;
 
-    if (player1ID != null)
-    {
-      player1ID.setAnswer(-1);
-      player1ID.itemColor = Colors.redAccent;
-    }
-    if (player2ID != null)
-    {
-      player2ID.setAnswer(-1);
-      player2ID.itemColor = Colors.redAccent;
-    }
-    if (player3ID != null)
-    {
-      player3ID.setAnswer(-1);
-      player3ID.itemColor = Colors.redAccent;
-    }
-    if (player4ID != null)
-    {
-      player4ID.setAnswer(-1);
-      player4ID.itemColor = Colors.redAccent;
-    }
-
-     */
   }
 
-  /*
-  List<BGPlayer> getPlayerList() {
-    return _players;
-  }
 
-   */
-
-/*
-  List<Game> getGameList() {
-    return _games;
-  }
-
- */
 
 
   setPlayer(BGPlayer thePlayer) {
-    /*
-    if (thePlayer != null) {
-      if (player1ID.thePlayer == null)
-        player1ID.thePlayer = thePlayer;
-      else if (player2ID.thePlayer == null)
-        player2ID.thePlayer = thePlayer;
-      else if (player3ID.thePlayer == null)
-        player3ID.thePlayer = thePlayer;
-      else if (player4ID.thePlayer == null)
-        player4ID.thePlayer = thePlayer;
-    }
 
-     */
-  }
-
-/*
-  setGame(Game theGame) {
-    selectedGame = theGame;
-    _loadRoundsForGame(selectedGame.id);
-    loadFirstRound();
-
-    _printSelectedGame();
-  }
-
- */
-
-  rollDice() {
-    dice1 = rollADice();
-    dice2 = rollADice();
-    dice3 = rollADice();
-
-    score();
-
-    print("============= roll dice ============");
-    print("d1: " + dice1.toString());
-    print("d2: " + dice2.toString());
-    print("d3: " + dice3.toString());
   }
 
 
@@ -888,12 +454,7 @@ class BuaGameInProgress {
     print("player 2 score: " + thePlayers[1].playerScore.toString());
     print("player 3 score: " + thePlayers[2].playerScore.toString());
     print("player 4 score: " + thePlayers[3].playerScore.toString());
-    /*
-    print("player 1 score: " + player1ID.playerScore.toString());
-    print("player 2 score: " + player2ID.playerScore.toString());
-    print("player 3 score: " + player3ID.playerScore.toString());
-    print("player 4 score: " + player4ID.playerScore.toString());
-*/
+
     tempScore = correctAnswer(thePlayers[0].answerChosen);
     thePlayers[0].playerScore = thePlayers[0].playerScore + tempScore;
     tempScore = correctAnswer(thePlayers[1].answerChosen);
@@ -902,32 +463,27 @@ class BuaGameInProgress {
     thePlayers[2].playerScore = thePlayers[2].playerScore + tempScore;
     tempScore = correctAnswer(thePlayers[3].answerChosen);
     thePlayers[3].playerScore = thePlayers[3].playerScore + tempScore;
-    /*
-    tempScore = correctAnswer(player1ID.answerChosen);
-    player1ID.playerScore = player1ID.playerScore + tempScore;
-    tempScore = correctAnswer(player2ID.answerChosen);
-    player2ID.playerScore = player2ID.playerScore + tempScore;
-    tempScore = correctAnswer(player3ID.answerChosen);
-    player3ID.playerScore = player3ID.playerScore + tempScore;
-    tempScore = correctAnswer(player4ID.answerChosen);
-    player4ID.playerScore = player4ID.playerScore + tempScore;
 
-     */
-
-/*
-    print("============= score after ============");
-    print("player 1 score: " + player1ID.playerScore.toString());
-    print("player 2 score: " + player2ID.playerScore.toString());
-    print("player 3 score: " + player3ID.playerScore.toString());
-    print("player 4 score: " + player4ID.playerScore.toString());
-
-     */
     print("============= score after ============");
     print("player 1 score: " + thePlayers[0].playerScore.toString());
     print("player 2 score: " + thePlayers[1].playerScore.toString());
     print("player 3 score: " + thePlayers[2].playerScore.toString());
     print("player 4 score: " + thePlayers[3].playerScore.toString());
 
+  }
+
+
+  rollDice() {
+    dice1 = rollADice();
+    dice2 = rollADice();
+    dice3 = rollADice();
+
+    score();
+
+    print("============= roll dice ============");
+    print("d1: " + dice1.toString());
+    print("d2: " + dice2.toString());
+    print("d3: " + dice3.toString());
   }
 
 

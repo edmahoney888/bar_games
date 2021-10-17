@@ -77,6 +77,7 @@ flutter:
      - assets/images/playeravatars/girl02.PNG
      - assets/images/playeravatars/girl03.PNG
      - assets/images/playeravatars/girl04.jpg
+     - assets/images/racegame/blankRacer.png
      - assets/images/racegame/horse.gif
      - assets/images/racegame/bull.gif
      - assets/images/racegame/bunny.gif

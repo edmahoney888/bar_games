@@ -1,6 +1,6 @@
 
-import 'package:flutter/cupertino.dart';
-
+//import 'package:flutter/cupertino.dart';
+/*
 class raceGame extends StatefulWidget {
   @override
   _RaceGameState createState() => _RaceGameState();
@@ -24,3 +24,5 @@ class _RaceGameWidget extends StatelessWidget {
   }
 
 }
+
+ */

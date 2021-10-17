@@ -77,7 +77,7 @@ class buaGame extends StatefulWidget {
 class _BuaGameState extends State<buaGame> {
   List <PlayerInGame> playerList;
 
-  _BuaGameState(this. playerList);  //constructor
+  _BuaGameState(this.playerList);  //constructor
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   BuaGameInProgress theGame = new BuaGameInProgress();

@@ -1,7 +1,7 @@
 import 'package:bar_games/buaGame/buaGame.dart';
 import 'package:bar_games/playerDetail.dart';
 import 'package:bar_games/player_in_game.dart';
-import 'package:bar_games/raceGame.dart';
+import 'package:bar_games/raceGame/raceGame.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -267,12 +267,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 
-  gotoRaceGameActivity(BuildContext context){
+  gotoRaceGameActivity(BuildContext context) async {
 
-    Navigator.push(
+    final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => raceGame()),
+      MaterialPageRoute(builder: (context) => raceGame(playerList: thePlayers)),
     );
+
+// update player list with data from result
+    setState(() {
+      thePlayers = result;
+    });
 
   }
 
