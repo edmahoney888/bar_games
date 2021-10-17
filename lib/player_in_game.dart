@@ -6,7 +6,7 @@ class PlayerInGame {
   String playerAvatar = "assets/images/playeravatars/blankPlayer.jpg";
   int playerScore = 0;
   String uid = '0';
-  int answerChosen = -1;
+  int answerChosen = 0;
   Color itemColor = Colors.redAccent;
   final Color colorUnselected = Colors.redAccent;
   final Color colorSelected = Colors.blueAccent;
