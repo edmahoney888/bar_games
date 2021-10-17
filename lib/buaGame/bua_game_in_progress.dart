@@ -933,7 +933,7 @@ class BuaGameInProgress {
 
   int rollADice() {
     final _random = new Random();
-    return _random.nextInt(6);
+    return _random.nextInt(6) + 1;
   }
 
 
@@ -967,6 +967,11 @@ class BuaGameInProgress {
     dice3 = 0;
 
     gameState = 0;
+
+    thePlayers[0].answerChosen = 0;
+    thePlayers[1].answerChosen = 0;
+    thePlayers[2].answerChosen = 0;
+    thePlayers[3].answerChosen = 0;
   }
 
 }

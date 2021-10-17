@@ -8,6 +8,7 @@ class Constants{
   static const String FirstItem = 'Load Player';
   static const String SecondItem = 'Load Round';
 
+  static const String ZeroDiceFace = 'assets/images/buagame/blank.png';
   static const String FirstDiceFace = 'assets/images/buagame/crab.png';
   static const String SecondDiceFace = 'assets/images/buagame/fish.png';
   static const String ThirdDiceFace = 'assets/images/buagame/prawn.png';
@@ -17,6 +18,7 @@ class Constants{
 
 
   static const List<String> diceFaces = <String>[
+    ZeroDiceFace,
     FirstDiceFace,
     SecondDiceFace,
     ThirdDiceFace,
@@ -90,7 +92,7 @@ class _BuaGameState extends State<buaGame> {
     return Scaffold(
       key: scaffoldKey,
         appBar: AppBar(
-        title: Text('Bar Games: Bua Game'
+        title: Text('Bar Games: Fish Prawn Crab'
         ''),
         ),
 
@@ -220,9 +222,9 @@ class _BuaGameState extends State<buaGame> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget> [
-              _buildBuaImageWithDropZone(0,'assets/images/buagame/crab.png'),
-              _buildBuaImageWithDropZone(1,'assets/images/buagame/fish.png'),
-              _buildBuaImageWithDropZone(2,'assets/images/buagame/prawn.png'),
+              _buildBuaImageWithDropZone(1,Constants.diceFaces[1]),
+              _buildBuaImageWithDropZone(2,Constants.diceFaces[2]),
+              _buildBuaImageWithDropZone(3,Constants.diceFaces[3]),
               ]
             )  ,
             ),
@@ -231,9 +233,9 @@ class _BuaGameState extends State<buaGame> {
           child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
-                _buildBuaImageWithDropZone(3,'assets/images/buagame/tiger.png'),
-                _buildBuaImageWithDropZone(4,'assets/images/buagame/rooster.png'),
-                _buildBuaImageWithDropZone(5,'assets/images/buagame/gourd.png'),
+                _buildBuaImageWithDropZone(4,Constants.diceFaces[4]),
+                _buildBuaImageWithDropZone(5,Constants.diceFaces[5]),
+                _buildBuaImageWithDropZone(6,Constants.diceFaces[6]),
               ]
             ),
       ),
@@ -274,8 +276,8 @@ class _BuaGameState extends State<buaGame> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
-                _buildBuaImageWithDropZone(0,'assets/images/buagame/crab.png'),
-                _buildBuaImageWithDropZone(1,'assets/images/buagame/fish.png'),
+                _buildBuaImageWithDropZone(1,Constants.diceFaces[1]),
+                _buildBuaImageWithDropZone(2,Constants.diceFaces[2]),
               ]
           ),
             ),
@@ -284,8 +286,8 @@ class _BuaGameState extends State<buaGame> {
           child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
-                _buildBuaImageWithDropZone(2,'assets/images/buagame/prawn.png'),
-                _buildBuaImageWithDropZone(3,'assets/images/buagame/tiger.png'),
+                _buildBuaImageWithDropZone(3,Constants.diceFaces[3]),
+                _buildBuaImageWithDropZone(4,Constants.diceFaces[4]),
               ]
           ),
       ),
@@ -294,8 +296,8 @@ class _BuaGameState extends State<buaGame> {
           child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
-                _buildBuaImageWithDropZone(4,'assets/images/buagame/rooster.png'),
-                _buildBuaImageWithDropZone(5,'assets/images/buagame/gourd.png'),
+                _buildBuaImageWithDropZone(5,Constants.diceFaces[5]),
+                _buildBuaImageWithDropZone(6,Constants.diceFaces[6]),
               ]
           ),
       ),
@@ -334,15 +336,15 @@ class _BuaGameState extends State<buaGame> {
           onAccept: (player) {
             setState(() {
             theGame.setPlayerAnswer(buaId, int.parse(player.uid));
-//            print("bua id->"+ buaId.toString());
-//            print("item name->"+ player.playerName + ' item uid->' + player.uid);
+            print("accept ==== bua id->"+ buaId.toString());
+            print("item name->"+ player.playerName + ' item uid->' + player.uid);
             borderColor1 = Colors.black;
             });
           },
           onWillAccept: (player) {
             if (player != null) {
-//              print("bua id->"+ buaId.toString());
-//              print("willAccept: " + player.uid.toString());
+              print("will accept ===== bua id->"+ buaId.toString());
+              print("willAccept: " + player.uid.toString());
             }
             borderColor1 = Colors.blue;
             return true;
@@ -612,13 +614,65 @@ class _BuaGameState extends State<buaGame> {
         dragKey: _draggableKey,
         imageName: player.playerAvatar,
       ),
-      child: PlayerAvatar(
-        name: player.playerName,
-        score: player.playerScore,
-        imageName: player.playerAvatar,
+      child: playerAvatar(
+          player: player
       ),
     ),
       );
+  }
+
+
+  Widget playerAvatar({
+    required PlayerInGame player,
+  }) {
+    String answerImage = "";
+    double opacitySetting = 0.5;
+
+
+    if (player.answerChosen == 0)
+    {
+      opacitySetting = 0.0;
+      answerImage = player.playerAvatar;
+      print("player original: " + answerImage);
+    }
+    else
+    {
+      opacitySetting = 0.5;
+      answerImage = Constants.diceFaces[player.answerChosen];
+      print("player changed: " + answerImage);
+    }
+
+    return Material(
+        elevation: 12.0,
+        borderRadius: BorderRadius.circular(20),
+        //    child: Padding(
+        //      padding: const EdgeInsets.all(5.0),
+        child:
+        ClipRRect(
+        borderRadius: BorderRadius.circular(12.0),
+    child: SizedBox(
+    width: 100,
+    height: 96,
+    child:
+    Stack(
+    alignment: Alignment.bottomCenter,
+    children: <Widget>[
+    //  Image.asset(imageName, fit: BoxFit.contain),
+    Image.asset(answerImage, fit: BoxFit.contain),
+    /*
+      Opacity(
+        opacity: opacitySetting,
+        child:
+          Image.asset(Constants.diceFaces[answer], fit: BoxFit.contain),
+      ),
+
+       */
+    Text(player.playerName + ": " + player.playerScore.toString()),
+    ]
+    ),
+    ),
+    ),
+    );
   }
 }
 
@@ -627,21 +681,41 @@ final GlobalKey _draggableKey = GlobalKey();
 
 
 class PlayerAvatar extends StatelessWidget {
-  const PlayerAvatar({
+   PlayerAvatar({
     Key? key,
     this.name = '',
     this.score = 0,
     required this.imageName,
+    this.answer = 0,
     this.isDepressed = false,
   }) : super(key: key);
 
   final String name;
   final int score;
+  final int answer;
   final String imageName;
   final bool isDepressed;
+  String answerImage = "";
+  double opacitySetting = 0.5;
+
 
   @override
   Widget build(BuildContext context) {
+
+    if (answer == 0)
+      {
+
+        opacitySetting = 0.0;
+        answerImage = imageName;
+        print("player original: " + answerImage);
+      }
+    else
+      {
+        opacitySetting = 0.5;
+        answerImage = Constants.diceFaces[answer];
+        print("player changed: " + answerImage);
+      }
+
     return Material(
       elevation: 12.0,
       borderRadius: BorderRadius.circular(20),
@@ -657,7 +731,16 @@ class PlayerAvatar extends StatelessWidget {
     Stack(
       alignment: Alignment.bottomCenter,
     children: <Widget>[
-      Image.asset(imageName, fit: BoxFit.contain),
+    //  Image.asset(imageName, fit: BoxFit.contain),
+      Image.asset(answerImage, fit: BoxFit.contain),
+      /*
+      Opacity(
+        opacity: opacitySetting,
+        child:
+          Image.asset(Constants.diceFaces[answer], fit: BoxFit.contain),
+      ),
+
+       */
       Text(name + ": " + score.toString()),
       ]
     ),
