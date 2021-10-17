@@ -167,7 +167,7 @@ class _RaceGameState extends State<raceGame> {
 
 
   Widget raceTilesPT(int numColumns) {
-    if (horsesChosen == false)
+    if (theGame.gameState == 0)
       return chooseHorsePT(2);
     else
       return raceHorsePT();
@@ -177,7 +177,7 @@ class _RaceGameState extends State<raceGame> {
   Widget raceTilesLS(int numColumns) {
 
 
-    if (horsesChosen == false)
+    if (theGame.gameState == 0)
       return chooseHorseLS(3);
     else
       return raceHorseLS();
@@ -340,14 +340,28 @@ class _RaceGameState extends State<raceGame> {
 
   }
   Widget raceHorseLS() {
-
+  int numColumns =  theGame.numColumns;
     //return  Image(image: AssetImage(imageName));
 
-    return  FittedBox(
-      fit: BoxFit.contain,
-      child:  Text("race horse LS"),
-    );
+ //   return  FittedBox(
+ //     fit: BoxFit.contain,
+ //     child:  Text("race horse LS"),
+ //   );
 
+
+    return Container(
+      child:
+      GridView.count(     //TODO: replace this with rows
+        crossAxisCount: numColumns,
+
+        children: List.generate(6 * numColumns, (index) {
+          return Center(
+            child: raceImageWidget(index, numColumns),
+            //    child: Image.asset(Constants.horses[theGame.getImageNumber(index, numColumns)], fit: BoxFit.contain),
+          );
+        }),
+      ),
+    );
   }
 
 /*
@@ -1257,7 +1271,7 @@ class _RaceGameState extends State<raceGame> {
                     case 1:
                       {
                         setState((){
-                          theGame.resetState();
+       //                   theGame.resetState();
                         });
                       }
                       break;
@@ -1278,6 +1292,7 @@ class _RaceGameState extends State<raceGame> {
               child: ElevatedButton(
                 onPressed: ()
                 {
+                  theGame.resetState();
                   Navigator.pop(context, theGame.thePlayers);
                 }
                 ,
@@ -1337,7 +1352,6 @@ class _RaceGameState extends State<raceGame> {
                       case 0:
                         {
                           setState((){
-                            theGame.rollDice();
                             theGame.gameState = 1;
                           });
                         }
@@ -1345,7 +1359,7 @@ class _RaceGameState extends State<raceGame> {
                       case 1:
                         {
                           setState((){
-                            theGame.resetState();
+  //                          theGame.resetState();
                           });
                         }
                         break;
@@ -1382,6 +1396,7 @@ class _RaceGameState extends State<raceGame> {
                 child: ElevatedButton(
                   onPressed: ()
                   {
+                    theGame.resetState();
                     Navigator.pop(context, theGame.thePlayers);
                   }
                   ,
@@ -1475,9 +1490,9 @@ class _RaceGameState extends State<raceGame> {
     String tempText;
 
     if (getRoundState() == 0)
-      tempText = 'Roll';
+      tempText = 'Go To Races';
     else if (getRoundState() == 1)
-      tempText = 'Next';
+      tempText = 'Start Race';
     else
       tempText = 'OOOPS!';
 

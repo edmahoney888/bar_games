@@ -66,6 +66,7 @@ flutter:
      - assets/images/buagame/tiger.png
      - assets/images/buagame/prawn.png
      - assets/images/buagame/rooster.png
+     - assets/images/common/blankdice.png
      - assets/images/common/dice1.png
      - assets/images/common/dice2.png
      - assets/images/common/dice3.png
