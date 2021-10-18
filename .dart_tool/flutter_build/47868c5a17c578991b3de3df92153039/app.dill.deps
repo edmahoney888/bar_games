@@ -6,7 +6,9 @@ file:///C:/Users/edmah/AndroidStudioProjects/bar_games/lib/main.dart
 file:///C:/Users/edmah/AndroidStudioProjects/bar_games/lib/player.dart
 file:///C:/Users/edmah/AndroidStudioProjects/bar_games/lib/playerDetail.dart
 file:///C:/Users/edmah/AndroidStudioProjects/bar_games/lib/player_in_game.dart
-file:///C:/Users/edmah/AndroidStudioProjects/bar_games/lib/raceGame.dart
+file:///C:/Users/edmah/AndroidStudioProjects/bar_games/lib/raceGame/chooseRacers.dart
+file:///C:/Users/edmah/AndroidStudioProjects/bar_games/lib/raceGame/raceGame.dart
+file:///C:/Users/edmah/AndroidStudioProjects/bar_games/lib/raceGame/race_game_in_progress.dart
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0/lib/characters.dart
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0/lib/src/characters.dart
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0/lib/src/characters_impl.dart

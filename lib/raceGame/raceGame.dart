@@ -134,11 +134,11 @@ class _RaceGameState extends State<raceGame> {
   Widget body(BuildContext context) {
     if(MediaQuery.of(context).orientation == Orientation.portrait)
     {
-      print("portrait");
+//      print("portrait");
       return portrait();
     }
     else {
-      print("landscape");
+//      print("landscape");
       return landscape();
     }
   }
@@ -293,15 +293,15 @@ class _RaceGameState extends State<raceGame> {
         onAccept: (player) {
           setState(() {
             theGame.setPlayerAnswer(raceId, int.parse(player.uid));
-            print("accept ==== bua id->"+ raceId.toString());
-            print("item name->"+ player.playerName + ' item uid->' + player.uid);
+ //           print("accept ==== bua id->"+ raceId.toString());
+ //           print("item name->"+ player.playerName + ' item uid->' + player.uid);
             borderColor1 = Colors.black;
           });
         },
         onWillAccept: (player) {
           if (player != null) {
-            print("will accept ===== bua id->"+ raceId.toString());
-            print("willAccept: " + player.uid.toString());
+ //           print("will accept ===== bua id->"+ raceId.toString());
+ //           print("willAccept: " + player.uid.toString());
           }
           borderColor1 = Colors.blue;
           return true;
@@ -346,6 +346,7 @@ class _RaceGameState extends State<raceGame> {
     return Container(
       child: Row(
         children: <Widget> [
+          // the number of columns here should match game.raceplaces
         Column (
             mainAxisAlignment: MainAxisAlignment.center,
             children:  List.generate(6, (rowIndex) {
@@ -403,13 +404,17 @@ class _RaceGameState extends State<raceGame> {
 
   Widget raceImageWidget(int rowIndex, int colIndex) {
     //   String tempFilePath;
-    print ("raceimage col:" + colIndex.toString() + " rowindex: " + rowIndex.toString());
+//    print ("raceimage col:" + colIndex.toString() + " rowindex: " + rowIndex.toString());
 
     // return  Image.asset(theGame.getRacerImage(rowIndex, colIndex), fit: BoxFit.contain);
     return Expanded(
       flex: 1,
       child:
-      Center(
+      Container(
+        decoration: new BoxDecoration(
+          border:  new Border.all(color: theGame.raceColors[rowIndex+1], width: 10),
+          color: theGame.raceColors[rowIndex],
+        ),
         // child: Text("race:" + rowIndex.toString() + "value: " + theGame.theRace[rowIndex].toString()),
         child: Image.asset(theGame.getRacerImage(rowIndex, colIndex), fit: BoxFit.contain),
       ),
@@ -1318,6 +1323,14 @@ class _RaceGameState extends State<raceGame> {
                           });
                         }
                         break;
+                      case 2:
+                        {
+                          setState((){
+                            theGame.awardFinishes();
+
+                          });
+                        }
+                        break;
                       default:
                         {}
                     }
@@ -1398,13 +1411,13 @@ class _RaceGameState extends State<raceGame> {
     {
       opacitySetting = 0.0;
       answerImage = player.playerAvatar;
-      print("player original: " + answerImage);
+ //     print("player original: " + answerImage);
     }
     else
     {
       opacitySetting = 0.5;
       answerImage = Constants.racerImages[player.answerChosen];
-      print("player changed: " + answerImage);
+//      print("player changed: " + answerImage);
     }
 
     return Material(
@@ -1448,6 +1461,8 @@ class _RaceGameState extends State<raceGame> {
       tempText = 'Go To Races';
     else if (getRoundState() == 1)
       tempText = 'Run Race';
+    else if (getRoundState() == 2)
+      tempText = 'Finish';
     else
       tempText = 'OOOPS!';
 

@@ -57,10 +57,18 @@ class RaceGameInProgress {
   String defaultImage = 'assets/images/playeravatars/blankPlayer.jpg';
   List<PlayerInGame> thePlayers = [];
   List<int> theRace = [0,0,0,0,0,0,0];
+  List<int> finishes = [0,0,0,0,0,0,0];
   int gameState = 0;
   int dice1 = 0;
   int dice2 = 0;
   int dice3 = 0;
+  bool firstPlace = false;
+  bool secondPlace = false;
+  bool thirdPlace = false;
+  int numRaceSteps = 7;
+  bool allFinished = false;
+  List<Color> raceColors = [Colors.black,Colors.black,Colors.black,Colors.black,Colors.black,Colors.black,Colors.black];
+
   /*
   Game currentGame;
   Round currentRound;
@@ -115,9 +123,9 @@ class RaceGameInProgress {
   final Color colorAnswerCorrect = Colors.amber;
   final Color colorAnswerIncorrect = Colors.deepPurpleAccent;
 
-  final Color firstPlace = Colors.amber;
-  final Color secondPlace = Colors.red;
-  final Color thirdPlace = Colors.green;
+  final Color firstPlaceColor = Colors.amber;
+  final Color secondPlaceColor = Colors.red;
+  final Color thirdPlaceColor = Colors.green;
 
   /*
   static const String Horse0 = 'assets/race/blankRacer.png';
@@ -322,8 +330,8 @@ class RaceGameInProgress {
     else
       tempStr = Constants.racerImages[imgNum];
 
-    print('ID: ${imgNum}');
-    print('Image: ${tempStr}');
+//    print('ID: ${imgNum}');
+//    print('Image: ${tempStr}');
 
     return tempStr;
   }
@@ -1133,6 +1141,107 @@ class RaceGameInProgress {
 
  */
 
+
+  awardFinishes() {
+    // score player 1
+
+    thePlayers[0].playerScore = thePlayers[0].playerScore + finishes[thePlayers[0].answerChosen];
+    thePlayers[1].playerScore = thePlayers[1].playerScore + finishes[thePlayers[1].answerChosen];
+    thePlayers[2].playerScore = thePlayers[2].playerScore + finishes[thePlayers[2].answerChosen];
+    thePlayers[3].playerScore = thePlayers[3].playerScore + finishes[thePlayers[3].answerChosen];
+  }
+
+
+  checkAllFinished() {
+    bool tempAllFinished = true;
+
+      for (int counter = 1; counter <= theRace.length-1; counter++)
+      {
+        if (theRace[counter] < numRaceSteps)
+          tempAllFinished = false;
+      }
+
+      if (tempAllFinished)
+        gameState = 2;
+  }
+
+
+
+  checkWinners() {
+
+    if (firstPlace == false)
+      {
+        for (int counter = 1; counter <= theRace.length-1; counter++)
+          {
+ //           print("check first place - counter: " + counter.toString());
+ //           print("theRace: " + theRace[counter].toString());
+ //           print("finishes: " + finishes[counter].toString());
+ //           print("numRaceSteps: " + numRaceSteps.toString());
+            if ((theRace[counter] >= numRaceSteps) && ( finishes[counter] == 0)) {
+              finishes[counter] = 3;
+              raceColors[counter] = firstPlaceColor;
+ //             print("===finishedfirst!: " + counter.toString());
+              firstPlace = true;
+            }
+          }
+
+      }
+    else if (secondPlace == false)
+      {
+        for (int counter = 1; counter <= theRace.length-1; counter++)
+        {
+//          print("check second place - counter: " + counter.toString());
+//          print("theRace: " + theRace[counter].toString());
+//          print("finishes: " + finishes[counter].toString());
+ //         print("numRaceSteps: " + numRaceSteps.toString());
+          if ((theRace[counter] >= numRaceSteps) && ( finishes[counter] == 0)) {
+            finishes[counter] = 2;
+            raceColors[counter] = secondPlaceColor;
+ //           print("===finished second!: " + numRaceSteps.toString());
+            secondPlace = true;
+          }
+        }
+
+      }
+    else if (thirdPlace == false)
+      {
+        for (int counter = 1; counter <= theRace.length-1; counter++)
+        {
+//          print("check third place - counter: " + counter.toString());
+//          print("theRace: " + theRace[counter].toString());
+//          print("finishes: " + finishes[counter].toString());
+//          print("numRaceSteps: " + numRaceSteps.toString());
+          if ((theRace[counter] >= numRaceSteps) && ( finishes[counter] == 0)) {
+            finishes[counter] = 1;
+            raceColors[counter] = thirdPlaceColor;
+ //           print("===finished third!: " + numRaceSteps.toString());
+            thirdPlace = true;
+          }
+        }
+
+      }
+    else
+      {
+
+      }
+
+//    print("==== finishes =======");
+//    print("finishes 1: " + finishes[1].toString() );
+//    print("finishes 2: " + finishes[2].toString() );
+//    print("finishes 3: " + finishes[3].toString() );
+//    print("finishes 4: " + finishes[4].toString() );
+//    print("finishes 5: " + finishes[5].toString() );
+ //   print("finishes 6: " + finishes[6].toString() );
+
+ //   print("==== race colors =======");
+//    print("race color 1: " + raceColors[1].toString() );
+//    print("race color 2: " + raceColors[2].toString() );
+//    print("race color 3: " + raceColors[3].toString() );
+ //   print("race color 4: " + raceColors[4].toString() );
+//    print("race color 5: " + raceColors[5].toString() );
+ //   print("race color 6: " + raceColors[6].toString() );
+  }
+
   score() {
     // score first dice
     theRace[dice1+1] = theRace[dice1+1] + 1;
@@ -1150,11 +1259,14 @@ class RaceGameInProgress {
     dice3 = rollADice();
 
     score();
+    checkWinners();
+    checkAllFinished();
 
-    print("============= roll dice ============");
-    print("d1: " + dice1.toString());
-    print("d2: " + dice2.toString());
-    print("d3: " + dice3.toString());
+//    print("============= roll dice ============");
+//    print("d1: " + dice1.toString());
+//    print("d2: " + dice2.toString());
+//    print("d3: " + dice3.toString());
+
   }
 
 
@@ -1210,6 +1322,9 @@ class RaceGameInProgress {
     theRace[5] = 0;
     theRace[6] = 0;
 
+    firstPlace = false;
+    secondPlace = false;
+    thirdPlace = false;
   }
 
   /*
