@@ -56,6 +56,7 @@ class RaceGameInProgress {
   String defaultName = "Default Name";
   String defaultImage = 'assets/images/playeravatars/blankPlayer.jpg';
   List<PlayerInGame> thePlayers = [];
+  List<int> theRace = [0,0,0,0,0,0,0];
   int gameState = 0;
   int dice1 = 0;
   int dice2 = 0;
@@ -75,13 +76,13 @@ class RaceGameInProgress {
   PlayerInGame player6ID = new PlayerInGame();
 
    */
-
-  int horse1 = 0;
-  int horse2 = 0;
-  int horse3 = 0;
-  int horse4 = 0;
-  int horse5 = 0;
-  int horse6 = 0;
+  int horse0 = 0;
+  int horse1 = 1;
+  int horse2 = 2;
+  int horse3 = 3;
+  int horse4 = 4;
+  int horse5 = 5;
+  int horse6 = 6;
   bool horse1Finished = false;
   bool horse2Finished = false;
   bool horse3Finished = false;
@@ -249,48 +250,72 @@ class RaceGameInProgress {
    */
 
 
-  int getImageNumber(int index, int numColumns) {
+  int getImageNumber(int rowIndex, int colIndex) {
 //    int tempInt = 0;
 
     // horse 1 is ( 0 * numcolumns) -> (1 * numcolumns) - 1
-    if (index < numColumns)
-      if (index == horse1 )
-        return 0;
+  //  if (rowIndex < colIndex)
+      if (rowIndex == horse1 ) {
+        if (colIndex == theRace[horse1])
+          return horse1;
+        else
+          return horse0;
+      }
 
     // horse 2 is ( 1 * numcolumns) -> (2 * numcolumns) - 1
-    if (index < (2 * numColumns))
-      if (index == horse2 + numColumns )
-        return 1;
+ //   if (rowIndex < (2 * colIndex))
+      if (rowIndex == horse2 ) {
+        if (colIndex == theRace[horse2])
+          return horse2;
+        else
+          return horse0;
+      }
 
     // horse 3 is ( 2 * numcolumns) -> (3 * numcolumns) - 1
-    if (index < (3* numColumns))
-      if (index == horse3 + (numColumns * 2))
-        return 2;
+  //  if (rowIndex < (3* colIndex))
+      if (rowIndex == horse3 ) {
+        if (colIndex == theRace[horse3])
+          return horse3;
+        else
+          return horse0;
+      }
 
     // horse 4 is ( 3 * numcolumns) -> (4 * numcolumns) - 1
-    if (index < (4 * numColumns))
-      if (index == horse4 + (numColumns * 3))
-        return 3;
+ //   if (rowIndex < (4 * colIndex))
+      if (rowIndex == horse4 ) {
+        if (colIndex == theRace[horse4])
+          return horse4;
+        else
+          return horse0;
+      }
 
     // horse 5 is ( 4 * numcolumns) -> (5 * numcolumns) - 1
-    if (index < (5 * numColumns))
-      if (index == horse5 + (numColumns * 4))
-        return 4;
+ //   if (rowIndex < (5 * colIndex))
+      if (rowIndex == horse5 ) {
+        if (colIndex == theRace[horse5])
+          return horse5;
+        else
+          return horse0;
+      }
 
     // horse 6 is ( 5 * numcolumns) -> (6 * numcolumns) - 1
-    if (index < (6 * numColumns))
-      if (index == horse6 + (numColumns * 5))
-        return 5;
+ //   if (rowIndex < (6 * colIndex))
+      if (rowIndex == horse6 ) {
+        if (colIndex == theRace[horse6])
+          return horse6;
+        else
+          return horse0;
+      }
 
-    return -1;
+    return horse0;
   }
 
 
-  String getHorseImage(indexNum, numColumns)
+  String getRacerImage(rowIndex, colIndex)
   {
     String tempStr;
 
-    int imgNum = getImageNumber(indexNum, numColumns);
+    int imgNum = getImageNumber(rowIndex+1, colIndex);
 
     if (imgNum == -1)
       tempStr = Constants.racerImages[0];
@@ -303,7 +328,7 @@ class RaceGameInProgress {
     return tempStr;
   }
 
-
+/*
   String getHorseImageStr(int horseNum)
   {
     String tempStr;
@@ -315,6 +340,8 @@ class RaceGameInProgress {
 
     return tempStr;
   }
+
+ */
 
 
 /*
@@ -1106,13 +1133,23 @@ class RaceGameInProgress {
 
  */
 
+  score() {
+    // score first dice
+    theRace[dice1+1] = theRace[dice1+1] + 1;
+
+    //score second dice
+    theRace[dice2+1] = theRace[dice2+1] + 1;
+
+    //score third dice
+    theRace[dice3+1] = theRace[dice3+1] + 1;
+  }
 
   rollDice() {
     dice1 = rollADice();
     dice2 = rollADice();
     dice3 = rollADice();
 
-   // score();
+    score();
 
     print("============= roll dice ============");
     print("d1: " + dice1.toString());
@@ -1123,7 +1160,7 @@ class RaceGameInProgress {
 
   int rollADice() {
     final _random = new Random();
-    return _random.nextInt(6) + 1;
+    return _random.nextInt(6);
   }
 
 
@@ -1158,10 +1195,21 @@ class RaceGameInProgress {
 
     gameState = 0;
 
-    thePlayers[0].answerChosen = 0;
-    thePlayers[1].answerChosen = 0;
-    thePlayers[2].answerChosen = 0;
-    thePlayers[3].answerChosen = 0;
+    if (thePlayers != null) {
+      thePlayers[0].answerChosen = 0;
+      thePlayers[1].answerChosen = 0;
+      thePlayers[2].answerChosen = 0;
+      thePlayers[3].answerChosen = 0;
+    }
+
+    theRace[0] = 0;
+    theRace[1] = 0;
+    theRace[2] = 0;
+    theRace[3] = 0;
+    theRace[4] = 0;
+    theRace[5] = 0;
+    theRace[6] = 0;
+
   }
 
   /*

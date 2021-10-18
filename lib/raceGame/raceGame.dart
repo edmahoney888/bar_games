@@ -99,7 +99,8 @@ class _RaceGameState extends State<raceGame> {
   void initState() {
     super.initState();
 //    borderColor = Colors.black;
-    theGame.numColumns = 11;
+    theGame.numColumns = 2;
+//    theGame.resetState();
   }
 
 
@@ -340,26 +341,77 @@ class _RaceGameState extends State<raceGame> {
 
   }
   Widget raceHorseLS() {
-  int numColumns =  theGame.numColumns;
-    //return  Image(image: AssetImage(imageName));
-
- //   return  FittedBox(
- //     fit: BoxFit.contain,
- //     child:  Text("race horse LS"),
- //   );
-
+ // int numColumns =  theGame.numColumns;
 
     return Container(
-      child:
-      GridView.count(     //TODO: replace this with rows
-        crossAxisCount: numColumns,
+      child: Row(
+        children: <Widget> [
+        Column (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  List.generate(6, (rowIndex) {
+              return
+                raceImageWidget(rowIndex, 0);
+                    }),
+                  ),
+          Column (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  List.generate(6, (rowIndex) {
+              return
+                raceImageWidget(rowIndex, 1);
+            }),
+          ),
+          Column (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  List.generate(6, (rowIndex) {
+              return
+                raceImageWidget(rowIndex, 2);
+            }),
+          ),
+          Column (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  List.generate(6, (rowIndex) {
+              return
+                raceImageWidget(rowIndex, 3);
+            }),
+          ),
+          Column (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  List.generate(6, (rowIndex) {
+              return
+                raceImageWidget(rowIndex, 4);
+            }),
+          ),
+          Column (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  List.generate(6, (rowIndex) {
+              return
+                raceImageWidget(rowIndex, 5);
+            }),
+          ),
+          Column (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  List.generate(6, (rowIndex) {
+              return
+                raceImageWidget(rowIndex, 6);
+            }),
+          ),
+        ]
+      ),
+    );
+  }
 
-        children: List.generate(6 * numColumns, (index) {
-          return Center(
-            child: raceImageWidget(index, numColumns),
-            //    child: Image.asset(Constants.horses[theGame.getImageNumber(index, numColumns)], fit: BoxFit.contain),
-          );
-        }),
+
+  Widget raceImageWidget(int rowIndex, int colIndex) {
+    //   String tempFilePath;
+    print ("raceimage col:" + colIndex.toString() + " rowindex: " + rowIndex.toString());
+
+    // return  Image.asset(theGame.getRacerImage(rowIndex, colIndex), fit: BoxFit.contain);
+    return Expanded(
+      flex: 1,
+      child:
+      Center(
+        // child: Text("race:" + rowIndex.toString() + "value: " + theGame.theRace[rowIndex].toString()),
+        child: Image.asset(theGame.getRacerImage(rowIndex, colIndex), fit: BoxFit.contain),
       ),
     );
   }
@@ -818,104 +870,6 @@ class _RaceGameState extends State<raceGame> {
   }
 
 
-  Widget raceImageWidget(int indexNum, int numColumns) {
-    String tempFilePath;
-
-    // horse 1 is ( 0 * numcolumns) -> (1 * numcolumns) - 1
-    /*
-    if (indexNum == 0) {
-      tempFilePath = theGame.getPlayerImage(1);
-      if (tempFilePath == null)
-        return Image.asset('assets/blankPlayer.jpg', fit: BoxFit.contain);
-      else
-        return Container(
-            decoration: new BoxDecoration(
-              border: new Border.all(color: theGame.getPlayerColor(1),  width: 4.0,),
-            ),
-            child:Image.file(File(tempFilePath), fit: BoxFit.contain),
-        );
-
-    }
-
-    // horse 2 is ( 1 * numcolumns) -> (2 * numcolumns) - 1
-    if (indexNum == (numColumns)) {
-      tempFilePath = theGame.getPlayerImage(2);
-      if (tempFilePath == null)
-        return Image.asset('assets/blankPlayer.jpg', fit: BoxFit.contain);
-      else
-        return Container(
-          decoration: new BoxDecoration(
-            border: new Border.all(color: theGame.getPlayerColor(2),  width: 4.0,),
-          ),
-          child:Image.file(File(tempFilePath), fit: BoxFit.contain),
-        );
-    }
-
-    // horse 3 is ( 2 * numcolumns) -> (3 * numcolumns) - 1
-    if (indexNum == (2 * numColumns)){
-      tempFilePath = theGame.getPlayerImage(3);
-      if (tempFilePath == null)
-        return Image.asset('assets/blankPlayer.jpg', fit: BoxFit.contain);
-      else
-        return Container(
-          decoration: new BoxDecoration(
-            border: new Border.all(color: theGame.getPlayerColor(3),  width: 4.0,),
-          ),
-          child:Image.file(File(tempFilePath), fit: BoxFit.contain),
-        );
-    }
-
-    // horse 4 is ( 3 * numcolumns) -> (4 * numcolumns) - 1
-    if (indexNum == (3 * numColumns))
-      {
-        tempFilePath = theGame.getPlayerImage(4);
-        if (tempFilePath == null)
-          return Image.asset('assets/blankPlayer.jpg', fit: BoxFit.contain);
-        else
-          return Container(
-            decoration: new BoxDecoration(
-              border: new Border.all(color: theGame.getPlayerColor(4),  width: 4.0,),
-            ),
-            child:Image.file(File(tempFilePath), fit: BoxFit.contain),
-          );
-      }
-
-
-    // horse 5 is ( 4 * numcolumns) -> (5 * numcolumns) - 1
-    if (indexNum == (4 * numColumns))
-      {
-        tempFilePath = theGame.getPlayerImage(5);
-        if (tempFilePath == null)
-          return Image.asset('assets/blankPlayer.jpg', fit: BoxFit.contain);
-        else
-          return Container(
-            decoration: new BoxDecoration(
-              border: new Border.all(color: theGame.getPlayerColor(5),  width: 4.0,),
-            ),
-            child:Image.file(File(tempFilePath), fit: BoxFit.contain),
-          );
-      }
-
-    // horse 6 is ( 5 * numcolumns) -> (6 * numcolumns) - 1
-    if (indexNum == (5 * numColumns))
-      {
-        tempFilePath = theGame.getPlayerImage(6);
-        if (tempFilePath == null)
-          return Image.asset('assets/blankPlayer.jpg', fit: BoxFit.contain);
-        else
-          return Container(
-            decoration: new BoxDecoration(
-              border: new Border.all(color: theGame.getPlayerColor(6),  width: 4.0,),
-            ),
-            child:Image.file(File(tempFilePath), fit: BoxFit.contain),
-          );
-      }
-*/
-
-    return  Image.asset(theGame.getHorseImage(indexNum, numColumns), fit: BoxFit.contain);
-//    return  Image.asset(Constants.horses[theGame.getImageNumber(indexNum, numColumns)], fit: BoxFit.contain);
-
-  }
 
 
 /*
@@ -1209,7 +1163,7 @@ class _RaceGameState extends State<raceGame> {
   Widget diceWidget(int whichDice) {
 
     int diceValue = getDiceValue(whichDice);
-    String tempString = Constants.diceFaces[diceValue];
+    String tempString = Constants.diceFaces[diceValue+1];
 //    print("which dice: " + whichDice.toString());
 //    print("diceValue: " + diceValue.toString());
 //    print("image Asset: " + tempString);
@@ -1359,7 +1313,8 @@ class _RaceGameState extends State<raceGame> {
                       case 1:
                         {
                           setState((){
-  //                          theGame.resetState();
+                            theGame.rollDice();
+
                           });
                         }
                         break;
@@ -1492,7 +1447,7 @@ class _RaceGameState extends State<raceGame> {
     if (getRoundState() == 0)
       tempText = 'Go To Races';
     else if (getRoundState() == 1)
-      tempText = 'Start Race';
+      tempText = 'Run Race';
     else
       tempText = 'OOOPS!';
 
