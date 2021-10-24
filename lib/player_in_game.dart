@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class PlayerInGame {
   String playerName = "default";
-  String playerAvatar = "assets/images/playeravatars/blankPlayer.jpg";
+  String defaultAvatar = "assets/images/playeravatars/blankPlayer.jpg";
+  Image playerAvatar = Image.asset("assets/images/playeravatars/blankPlayer.jpg", fit: BoxFit.contain);
   int playerScore = 0;
   String uid = '0';
   int answerChosen = 0;
@@ -30,7 +31,7 @@ class PlayerInGame {
   }
 
 
-  String getImage() {
+  Image getImage() {
     return playerAvatar;
   }
 

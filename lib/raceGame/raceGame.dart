@@ -1390,7 +1390,7 @@ class _RaceGameState extends State<raceGame> {
           dragAnchorStrategy: pointerDragAnchorStrategy,
           feedback: DraggingListItem(
             dragKey: _draggableKey,
-            imageName: player.playerAvatar,
+            playerImage: player.playerAvatar,
           ),
           child: playerAvatar(
               player: player
@@ -1403,7 +1403,7 @@ class _RaceGameState extends State<raceGame> {
   Widget playerAvatar({
     required PlayerInGame player,
   }) {
-    String answerImage = "";
+    Image answerImage;
     double opacitySetting = 0.5;
 
 
@@ -1416,7 +1416,8 @@ class _RaceGameState extends State<raceGame> {
     else
     {
       opacitySetting = 0.5;
-      answerImage = Constants.racerImages[player.answerChosen];
+ //     answerImage = Constants.racerImages[player.answerChosen];
+      answerImage = Image(image: AssetImage(Constants.racerImages[player.answerChosen]));
 //      print("player changed: " + answerImage);
     }
 
@@ -1436,7 +1437,8 @@ class _RaceGameState extends State<raceGame> {
               alignment: Alignment.bottomCenter,
               children: <Widget>[
                 //  Image.asset(imageName, fit: BoxFit.contain),
-                Image.asset(answerImage, fit: BoxFit.contain),
+             //   Image.asset(answerImage, fit: BoxFit.contain),
+                answerImage,
                 /*
       Opacity(
         opacity: opacitySetting,
@@ -1480,11 +1482,11 @@ class DraggingListItem extends StatelessWidget {
   const DraggingListItem({
     Key? key,
     required this.dragKey,
-    required this.imageName,
+    required this.playerImage,
   }) : super(key: key);
 
   final GlobalKey dragKey;
-  final String imageName;
+  final Image playerImage;
 
   @override
   Widget build(BuildContext context) {
@@ -1498,7 +1500,8 @@ class DraggingListItem extends StatelessWidget {
           width: 100,
           child: Opacity(
             opacity: 0.85,
-            child: Image.asset(imageName, fit: BoxFit.contain),
+          //  child: Image.asset(imageName, fit: BoxFit.contain),
+            child: playerImage,
           ),
         ),
       ),

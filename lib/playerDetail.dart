@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:bar_games/player_in_game.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'image_from_gallery_ex.dart';
 
 class Constants{
 
@@ -19,6 +24,8 @@ class Constants{
   ];
 }
 
+enum ImageSourceType { gallery, camera }
+
 class playerDetail extends StatefulWidget {
   final PlayerInGame thePlayer;
 
@@ -30,11 +37,22 @@ class playerDetail extends StatefulWidget {
 
 class _playerDetailState extends State<playerDetail> {
   PlayerInGame thePlayer;
+//  var _galleryImage;
+  var imagePicker;
+  var type;
+  Image chosenImage = Image.asset(Constants.FirstAvatar, fit: BoxFit.contain);
 
   _playerDetailState(this.thePlayer); //constructor
   final myController = TextEditingController();
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    imagePicker = new ImagePicker();
+//    _galleryImage = Constants.FirstAvatar;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +80,8 @@ class _playerDetailState extends State<playerDetail> {
   Widget portrait() {
     return Column(children: <Widget>[
       playerWidgetCol(),
+      playerGalleryWidget(),
+      playerCameraWidget(),
       Center(
         child: ElevatedButton(
           onPressed: () {
@@ -71,6 +91,7 @@ class _playerDetailState extends State<playerDetail> {
           child: Text("Finish"),
         ),
       ),
+
     ]);
   }
 
@@ -79,6 +100,8 @@ class _playerDetailState extends State<playerDetail> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           playerWidgetRow(),
+          playerGalleryWidget(),
+          playerCameraWidget(),
           ElevatedButton(
             onPressed: () {
               thePlayer.playerName = myController.text;
@@ -110,7 +133,8 @@ class _playerDetailState extends State<playerDetail> {
                     nextImage();
                   }),
 
-                  child:Image.asset(thePlayer.playerAvatar, fit: BoxFit.contain),
+                  child:chosenImage,
+//                  child:Image.asset(thePlayer.playerAvatar, fit: BoxFit.contain),
                 ),
               ),
             ],
@@ -144,8 +168,8 @@ class _playerDetailState extends State<playerDetail> {
                       setState(() {
                         nextImage();
                       }),
-
-                  child:Image.asset(thePlayer.playerAvatar, fit: BoxFit.contain),
+                  child:chosenImage,
+               //   child:Image.asset(thePlayer.playerAvatar, fit: BoxFit.contain),
                 ),
               ),
     ),
@@ -179,13 +203,16 @@ class _playerDetailState extends State<playerDetail> {
 
   void nextImage() {
     int tempAvatarIndex = 0;
-
+/*
     tempAvatarIndex = Constants.avatarImages.indexOf(thePlayer.playerAvatar);
     if (tempAvatarIndex == Constants.avatarImages.length - 1 )
       tempAvatarIndex = 0;
     else
       tempAvatarIndex++;
     thePlayer.playerAvatar = Constants.avatarImages[tempAvatarIndex];
+    chosenImage = Image.asset(thePlayer.playerAvatar, fit: BoxFit.contain);
+
+ */
   }
 
   @override
@@ -194,4 +221,142 @@ class _playerDetailState extends State<playerDetail> {
     myController.dispose();
     super.dispose();
   }
+
+  void _handleURLButtonPress(BuildContext context, var type) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ImageFromGalleryEx(type)));
+  }
+
+
+
+  Widget playerGalleryWidget() {
+    type = ImageSource.gallery;
+    var galImage;
+
+    if (kIsWeb)
+      return
+        Text("is web");
+    else
+      return Column(
+      children: <Widget>[
+        SizedBox(
+          height: 52,
+        ),
+    ElevatedButton(
+    onPressed: () async {
+    XFile image = await imagePicker.pickImage(
+    source:  ImageSource.gallery);
+    setState(() {
+      galImage = File(image.path);
+
+    chosenImage = Image.file(
+      galImage,
+      width: 200.0,
+      height: 200.0,
+      fit: BoxFit.fitHeight,
+    );
+      thePlayer.playerAvatar = chosenImage;
+    });
+    },
+    child: Text("Gallery"),
+    ),
+
+      ],
+    );
+  }
+
+  Widget playerCameraWidget() {
+    type = ImageSource.camera;
+    var camImage;
+    if (kIsWeb)
+      return
+        Text("is web");
+    else
+      return Column(
+        children: <Widget>[
+          SizedBox(
+            height: 52,
+          ),
+          ElevatedButton(
+            onPressed: () async {
+
+              XFile image = await imagePicker.pickImage(
+                  source:  ImageSource.camera, preferredCameraDevice: CameraDevice.front);
+
+
+              setState(() {
+                camImage = File(image.path);
+
+                chosenImage = Image.file(
+                  camImage,
+                  width: 200.0,
+                  height: 200.0,
+                  fit: BoxFit.fitHeight,
+                );
+                thePlayer.playerAvatar = chosenImage;
+              });
+            },
+            child: Text("Camera"),
+          ),
+
+        ],
+      );
+  }
+
+
+  /*
+  Widget playerGalleryWidget() {
+    type = ImageSource.gallery;
+    if (kIsWeb)
+      return
+        Text("is web");
+    else
+      return Column(
+        children: <Widget>[
+          SizedBox(
+            height: 52,
+          ),
+          Center(
+            child: GestureDetector(
+              onTap: () async {
+                var source = type == ImageSourceType.camera
+                    ? ImageSource.camera
+                    : ImageSource.gallery;
+                XFile image = await imagePicker.pickImage(
+                    source:  ImageSource.gallery);
+                setState(() {
+                  _galleryImage = File(image.path);
+                });
+              },
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                    color: Colors.red[200]),
+                child: _galleryImage != null
+                    ? Image.file(
+                  _galleryImage,
+                  width: 200.0,
+                  height: 200.0,
+                  fit: BoxFit.fitHeight,
+                )
+                    : Container(
+                  decoration: BoxDecoration(
+                      color: Colors.red[200]),
+                  width: 200,
+                  height: 200,
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: Colors.grey[800],
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      );
+  }
+
+   */
+
 }

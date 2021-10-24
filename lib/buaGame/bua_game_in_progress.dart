@@ -354,10 +354,10 @@ class BuaGameInProgress {
   }
 
 
-  String getPlayerImage(int playerNum) {
-    String tempImage = "";
+  Image getPlayerImage(int playerNum) {
+    Image tempImage;
 
-    tempImage = thePlayers[playerNum].playerAvatar;
+    tempImage = thePlayers[playerNum].getImage();
 
     return tempImage;
   }

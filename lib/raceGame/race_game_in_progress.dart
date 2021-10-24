@@ -588,8 +588,8 @@ class RaceGameInProgress {
    */
 
 
-  String getPlayerImage(int playerNum) {
-    String tempImage = "";
+  Image getPlayerImage(int playerNum) {
+    Image tempImage;
 
     tempImage = thePlayers[playerNum].playerAvatar;
 

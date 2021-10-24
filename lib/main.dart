@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // initialize the players list
           player1ID = new PlayerInGame();
           player1ID.playerName = defaultName;
-          player1ID.playerAvatar = defaultImage;
+          player1ID.playerAvatar = Image.asset(defaultImage, fit: BoxFit.contain);
           player1ID.playerScore = 0;
           player1ID.uid = i.toString();
           thePlayers.add(player1ID);
@@ -291,7 +291,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // update player list with data from result
     setState(() {
-      thePlayers[playerNum] = result;
+      if (result != null)
+        thePlayers[playerNum] = result;
     });
 
   }
@@ -311,7 +312,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 child:
               GestureDetector(
                 onTap: () => gotoPlayerDetailActivity(context, playerNum),
-                child:Image.asset(thePlayers[playerNum].playerAvatar, fit: BoxFit.contain),
+             //   child:Image.asset(thePlayers[playerNum].playerAvatar, fit: BoxFit.contain),
+                child:thePlayers[playerNum].playerAvatar,
               ),
               ),
               Text(
