@@ -336,15 +336,15 @@ class _BuaGameState extends State<buaGame> {
           onAccept: (player) {
             setState(() {
             theGame.setPlayerAnswer(buaId, int.parse(player.uid));
-            print("accept ==== bua id->"+ buaId.toString());
-            print("item name->"+ player.playerName + ' item uid->' + player.uid);
+//            print("accept ==== bua id->"+ buaId.toString());
+ //           print("item name->"+ player.playerName + ' item uid->' + player.uid);
             borderColor1 = Colors.black;
             });
           },
           onWillAccept: (player) {
             if (player != null) {
-              print("will accept ===== bua id->"+ buaId.toString());
-              print("willAccept: " + player.uid.toString());
+//              print("will accept ===== bua id->"+ buaId.toString());
+//              print("willAccept: " + player.uid.toString());
             }
             borderColor1 = Colors.blue;
             return true;

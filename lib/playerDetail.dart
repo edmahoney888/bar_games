@@ -79,9 +79,35 @@ class _playerDetailState extends State<playerDetail> {
 
   Widget portrait() {
     return Column(children: <Widget>[
-      playerWidgetCol(),
+        Expanded(
+        flex: 1,
+        child:
+      playerImageWidget(),
+        ),
+    Expanded(
+    flex: 1,
+    child:
+      playerAvatarWidget(),
+    ),
+    Expanded(
+    flex: 1,
+    child:
+  //    playerWidgetCol(),
       playerGalleryWidget(),
+    ),
+    Expanded(
+    flex: 1,
+    child:
       playerCameraWidget(),
+    ),
+    Expanded(
+    flex: 1,
+    child:
+      playerNameWidget(),
+    ),
+      Expanded(
+      flex: 1,
+    child:
       Center(
         child: ElevatedButton(
           onPressed: () {
@@ -91,17 +117,44 @@ class _playerDetailState extends State<playerDetail> {
           child: Text("Finish"),
         ),
       ),
-
-    ]);
+      ),
+    ]
+    );
   }
 
   Widget landscape() {
     return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          playerWidgetRow(),
+      //    playerWidgetRow(),
+        Expanded(
+        flex: 1,
+        child:
+          playerImageWidget(),
+        ),
+    Expanded(
+    flex: 1,
+    child:
+          playerAvatarWidget(),
+    ),
+    Expanded(
+    flex: 1,
+    child:
           playerGalleryWidget(),
+    ),
+    Expanded(
+    flex: 1,
+    child:
           playerCameraWidget(),
+    ),
+    Expanded(
+    flex: 1,
+    child:
+          playerNameWidget(),
+    ),
+          Expanded(
+          flex: 1,
+    child:
           ElevatedButton(
             onPressed: () {
               thePlayer.playerName = myController.text;
@@ -109,8 +162,10 @@ class _playerDetailState extends State<playerDetail> {
               },
           child: Text("Finish"),
         ),
+          ),
 
-    ]);
+    ]
+    );
   }
 
   Widget playerWidgetCol() {
@@ -148,6 +203,7 @@ class _playerDetailState extends State<playerDetail> {
     );
   }
 
+  /*
   Widget playerWidgetRow() {
 
     return Container(
@@ -200,6 +256,52 @@ class _playerDetailState extends State<playerDetail> {
     );
   }
 
+   */
+
+  Widget playerImageWidget() {
+
+    return Container(
+      width: 500.0,
+
+      child: chosenImage,
+    );
+  }
+
+
+  Widget playerNameWidget() {
+
+    return Container(
+      width: 500.0,
+
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          //      Text("PlayerName: "),
+          Expanded(
+            flex: 1,
+            child:
+            Container(
+              width: 200.0,
+              child:
+              TextField(
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter your name',
+                    labelText: 'Enter player name'
+                ),
+                controller: myController,
+              ),
+            ),
+            //   ),
+          ),
+
+        ],
+      ),
+    );
+  }
+
+
+
 
   void nextImage() {
     int tempAvatarIndex = 0;
@@ -227,6 +329,31 @@ class _playerDetailState extends State<playerDetail> {
         MaterialPageRoute(builder: (context) => ImageFromGalleryEx(type)));
   }
 
+
+  Widget playerAvatarWidget() {
+    type = ImageSource.gallery;
+    var avImage;
+
+      return Column(
+        children: <Widget>[
+          SizedBox(
+            height: 52,
+          ),
+          ElevatedButton(
+            onPressed: ()  {
+
+              setState(() {
+                chosenImage = Image.asset(Constants.SecondAvatar, fit: BoxFit.contain);
+
+                thePlayer.playerAvatar = chosenImage;
+              });
+            },
+            child: Text("Avatar"),
+          ),
+
+        ],
+      );
+  }
 
 
   Widget playerGalleryWidget() {
