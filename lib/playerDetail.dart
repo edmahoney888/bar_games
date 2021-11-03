@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'chooseAvatar.dart';
 import 'image_from_gallery_ex.dart';
 
 class Constants{
@@ -40,6 +41,7 @@ class _playerDetailState extends State<playerDetail> {
 //  var _galleryImage;
   var imagePicker;
   var type;
+  int imageNumReturn = 0;
   Image chosenImage = Image.asset(Constants.FirstAvatar, fit: BoxFit.contain);
 
   _playerDetailState(this.thePlayer); //constructor
@@ -71,13 +73,13 @@ class _playerDetailState extends State<playerDetail> {
 
   Widget body(BuildContext context) {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
-      return portrait();
+      return portrait(context);
     } else {
-      return landscape();
+      return landscape(context);
     }
   }
 
-  Widget portrait() {
+  Widget portrait(BuildContext context) {
     return Column(children: <Widget>[
         Expanded(
         flex: 1,
@@ -87,7 +89,7 @@ class _playerDetailState extends State<playerDetail> {
     Expanded(
     flex: 1,
     child:
-      playerAvatarWidget(),
+      playerAvatarWidget(context),
     ),
     Expanded(
     flex: 1,
@@ -122,7 +124,7 @@ class _playerDetailState extends State<playerDetail> {
     );
   }
 
-  Widget landscape() {
+  Widget landscape(BuildContext context) {
     return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -135,7 +137,7 @@ class _playerDetailState extends State<playerDetail> {
     Expanded(
     flex: 1,
     child:
-          playerAvatarWidget(),
+          playerAvatarWidget(context),
     ),
     Expanded(
     flex: 1,
@@ -330,7 +332,7 @@ class _playerDetailState extends State<playerDetail> {
   }
 
 
-  Widget playerAvatarWidget() {
+  Widget playerAvatarWidget(BuildContext context) {
     type = ImageSource.gallery;
     var avImage;
 
@@ -340,10 +342,11 @@ class _playerDetailState extends State<playerDetail> {
             height: 52,
           ),
           ElevatedButton(
-            onPressed: ()  {
+            onPressed: ()  async {
+              await gotoChooseAvatarActivity(context);
 
               setState(() {
-                chosenImage = Image.asset(Constants.SecondAvatar, fit: BoxFit.contain);
+//                chosenImage = Image.asset(Constants.SecondAvatar, fit: BoxFit.contain);
 
                 thePlayer.playerAvatar = chosenImage;
               });
@@ -485,5 +488,23 @@ class _playerDetailState extends State<playerDetail> {
   }
 
    */
+
+  gotoChooseAvatarActivity(BuildContext context) async {
+
+    imageNumReturn = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => chooseAvatar()
+      ),
+    );
+    print('image num returned: ' + imageNumReturn.toString());
+
+    // update player list with data from result
+    setState(() {
+      if (imageNumReturn != 0)
+        chosenImage = Image.asset(Constants.avatarImages[imageNumReturn], fit: BoxFit.contain);
+      print('image num returned - assigned: ' + imageNumReturn.toString());
+    });
+
+  }
 
 }
