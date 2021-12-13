@@ -413,7 +413,11 @@ class _RaceGameState extends State<RaceGame> {
       child:
       Container(
         decoration: BoxDecoration(
-          border:  Border.all(color: theGame.raceColors[rowIndex+1], width: 5),
+       //   border:  Border.all(color: theGame.raceColors[rowIndex+1], width: 5),
+          border:  Border(top: BorderSide(color: theGame.raceColors[rowIndex+1], width: 5),
+            bottom: BorderSide(color: theGame.raceColors[rowIndex+1], width: 5),
+          ),
+
           color: theGame.raceColors[rowIndex],
         ),
         // child: Text("race:" + rowIndex.toString() + "value: " + theGame.theRace[rowIndex].toString()),
