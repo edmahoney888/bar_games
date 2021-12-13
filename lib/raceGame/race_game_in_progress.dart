@@ -5,50 +5,50 @@ import 'dart:math';
 import '../player_in_game.dart';
 
 class Constants{
-  static const String FirstItem = 'Load Player';
-  static const String SecondItem = 'Load Round';
+  static const String firstItem = 'Load Player';
+  static const String secondItem = 'Load Round';
 
-  static const String ZeroRacer = 'assets/images/racegame/blankRacer.png';
-  static const String FirstRacer = 'assets/images/racegame/bunny.gif';
-  static const String SecondRacer = 'assets/images/racegame/elephant.gif';
-  static const String ThirdRacer = 'assets/images/racegame/horse.gif';
-  static const String FourthRacer = 'assets/images/racegame/monkey.gif';
-  static const String FifthRacer = 'assets/images/racegame/ostrich.gif';
-  static const String SixthRacer = 'assets/images/racegame/tiger.gif';
+  static const String zeroRacer = 'assets/images/racegame/blankRacer.png';
+  static const String firstRacer = 'assets/images/racegame/bunny.gif';
+  static const String secondRacer = 'assets/images/racegame/elephant.gif';
+  static const String thirdRacer = 'assets/images/racegame/horse.gif';
+  static const String fourthRacer = 'assets/images/racegame/monkey.gif';
+  static const String fifthRacer = 'assets/images/racegame/ostrich.gif';
+  static const String sixthRacer = 'assets/images/racegame/tiger.gif';
 
 
   static const List<String> racerImages = <String>[
-    ZeroRacer,
-    FirstRacer,
-    SecondRacer,
-    ThirdRacer,
-    FourthRacer,
-    FifthRacer,
-    SixthRacer,
+    zeroRacer,
+    firstRacer,
+    secondRacer,
+    thirdRacer,
+    fourthRacer,
+    fifthRacer,
+    sixthRacer,
   ];
 
-  static const String ZeroDiceFace = 'assets/images/common/blankdice.png';
-  static const String FirstDiceFace = 'assets/images/common/dice1.png';
-  static const String SecondDiceFace = 'assets/images/common/dice2.png';
-  static const String ThirdDiceFace = 'assets/images/common/dice3.png';
-  static const String FourthDiceFace = 'assets/images/common/dice4.png';
-  static const String FifthDiceFace = 'assets/images/common/dice5.png';
-  static const String SixthDiceFace = 'assets/images/common/dice6.png';
+  static const String zeroDiceFace = 'assets/images/common/blankdice.png';
+  static const String firstDiceFace = 'assets/images/common/dice1.png';
+  static const String secondDiceFace = 'assets/images/common/dice2.png';
+  static const String thirdDiceFace = 'assets/images/common/dice3.png';
+  static const String fourthDiceFace = 'assets/images/common/dice4.png';
+  static const String fifthDiceFace = 'assets/images/common/dice5.png';
+  static const String sixthDiceFace = 'assets/images/common/dice6.png';
 
 
   static const List<String> diceFaces = <String>[
-  ZeroDiceFace,
-  FirstDiceFace,
-  SecondDiceFace,
-  ThirdDiceFace,
-  FourthDiceFace,
-  FifthDiceFace,
-  SixthDiceFace,
+  zeroDiceFace,
+  firstDiceFace,
+  secondDiceFace,
+  thirdDiceFace,
+  fourthDiceFace,
+  fifthDiceFace,
+  sixthDiceFace,
   ];
 
   static const List<String> choices = <String>[
-    FirstItem,
-    SecondItem,
+    firstItem,
+    secondItem,
   ];
 }
 
@@ -111,7 +111,7 @@ class RaceGameInProgress {
   List<Answers> _answers;
 
  */
-  bool _reveal = false;
+ // bool _reveal = false;
 //  final dbHelper = DatabaseHelper.instance;
 
   final Color colorUnselected = Colors.redAccent;
@@ -264,55 +264,61 @@ class RaceGameInProgress {
     // horse 1 is ( 0 * numcolumns) -> (1 * numcolumns) - 1
   //  if (rowIndex < colIndex)
       if (rowIndex == horse1 ) {
-        if (colIndex == theRace[horse1])
+        if (colIndex == theRace[horse1]) {
           return horse1;
-        else
+        } else {
           return horse0;
+        }
       }
 
     // horse 2 is ( 1 * numcolumns) -> (2 * numcolumns) - 1
  //   if (rowIndex < (2 * colIndex))
       if (rowIndex == horse2 ) {
-        if (colIndex == theRace[horse2])
+        if (colIndex == theRace[horse2]) {
           return horse2;
-        else
+        } else {
           return horse0;
+        }
       }
 
     // horse 3 is ( 2 * numcolumns) -> (3 * numcolumns) - 1
   //  if (rowIndex < (3* colIndex))
       if (rowIndex == horse3 ) {
-        if (colIndex == theRace[horse3])
+        if (colIndex == theRace[horse3]) {
           return horse3;
-        else
+        } else {
           return horse0;
+        }
       }
 
     // horse 4 is ( 3 * numcolumns) -> (4 * numcolumns) - 1
  //   if (rowIndex < (4 * colIndex))
       if (rowIndex == horse4 ) {
-        if (colIndex == theRace[horse4])
+        if (colIndex == theRace[horse4]) {
           return horse4;
-        else
+        } else {
           return horse0;
+        }
       }
 
     // horse 5 is ( 4 * numcolumns) -> (5 * numcolumns) - 1
  //   if (rowIndex < (5 * colIndex))
       if (rowIndex == horse5 ) {
-        if (colIndex == theRace[horse5])
+        if (colIndex == theRace[horse5]) {
           return horse5;
-        else
+        } else {
           return horse0;
+        }
       }
 
     // horse 6 is ( 5 * numcolumns) -> (6 * numcolumns) - 1
  //   if (rowIndex < (6 * colIndex))
       if (rowIndex == horse6 ) {
-        if (colIndex == theRace[horse6])
+        if (colIndex == theRace[horse6]) {
           return horse6;
-        else
+        } else {
           return horse0;
+        }
       }
 
     return horse0;
@@ -325,10 +331,11 @@ class RaceGameInProgress {
 
     int imgNum = getImageNumber(rowIndex+1, colIndex);
 
-    if (imgNum == -1)
+    if (imgNum == -1) {
       tempStr = Constants.racerImages[0];
-    else
+    } else {
       tempStr = Constants.racerImages[imgNum];
+    }
 
 //    print('ID: ${imgNum}');
 //    print('Image: ${tempStr}');
@@ -1143,12 +1150,22 @@ class RaceGameInProgress {
 
 
   awardFinishes() {
+    int tempScore = 0;
     // score player 1
 
-    thePlayers[0].playerScore = thePlayers[0].playerScore + finishes[thePlayers[0].answerChosen];
-    thePlayers[1].playerScore = thePlayers[1].playerScore + finishes[thePlayers[1].answerChosen];
-    thePlayers[2].playerScore = thePlayers[2].playerScore + finishes[thePlayers[2].answerChosen];
-    thePlayers[3].playerScore = thePlayers[3].playerScore + finishes[thePlayers[3].answerChosen];
+ //   thePlayers[0].playerScore = thePlayers[0].playerScore + finishes[thePlayers[0].answerChosen];
+ //   thePlayers[1].playerScore = thePlayers[1].playerScore + finishes[thePlayers[1].answerChosen];
+ //   thePlayers[2].playerScore = thePlayers[2].playerScore + finishes[thePlayers[2].answerChosen];
+ //   thePlayers[3].playerScore = thePlayers[3].playerScore + finishes[thePlayers[3].answerChosen];
+
+
+    thePlayers[0].playerRndScore = thePlayers[0].playerRndScore + finishes[thePlayers[0].answerChosen];
+
+    thePlayers[1].playerRndScore = thePlayers[1].playerRndScore + finishes[thePlayers[1].answerChosen];
+
+    thePlayers[2].playerRndScore = thePlayers[2].playerRndScore + finishes[thePlayers[2].answerChosen];
+
+    thePlayers[3].playerRndScore = thePlayers[3].playerRndScore + finishes[thePlayers[3].answerChosen];
   }
 
 
@@ -1157,12 +1174,14 @@ class RaceGameInProgress {
 
       for (int counter = 1; counter <= theRace.length-1; counter++)
       {
-        if (theRace[counter] < numRaceSteps)
+        if (theRace[counter] < numRaceSteps) {
           tempAllFinished = false;
+        }
       }
 
-      if (tempAllFinished)
+      if (tempAllFinished) {
         gameState = 2;
+      }
   }
 
 
@@ -1242,7 +1261,7 @@ class RaceGameInProgress {
  //   print("race color 6: " + raceColors[6].toString() );
   }
 
-  score() {
+  advance() {
     // score first dice
     theRace[dice1+1] = theRace[dice1+1] + 1;
 
@@ -1253,12 +1272,14 @@ class RaceGameInProgress {
     theRace[dice3+1] = theRace[dice3+1] + 1;
   }
 
+
+
   rollDice() {
     dice1 = rollADice();
     dice2 = rollADice();
     dice3 = rollADice();
 
-    score();
+    advance();
     checkWinners();
     checkAllFinished();
 
@@ -1271,7 +1292,7 @@ class RaceGameInProgress {
 
 
   int rollADice() {
-    final _random = new Random();
+    final _random = Random();
     return _random.nextInt(6);
   }
 
@@ -1325,6 +1346,24 @@ class RaceGameInProgress {
     firstPlace = false;
     secondPlace = false;
     thirdPlace = false;
+  }
+
+  rollupScore() {
+    thePlayers[0].playerScore = thePlayers[0].playerScore + thePlayers[0].playerRndScore;
+
+    thePlayers[1].playerScore = thePlayers[1].playerScore + thePlayers[1].playerRndScore;
+
+    thePlayers[2].playerScore = thePlayers[2].playerScore + thePlayers[2].playerRndScore;
+
+    thePlayers[3].playerScore = thePlayers[3].playerScore + thePlayers[3].playerRndScore;
+
+    thePlayers[0].playerRndScore = 0;
+
+    thePlayers[1].playerRndScore = 0;
+
+    thePlayers[2].playerRndScore = 0;
+
+    thePlayers[3].playerRndScore = 0;
   }
 
   /*

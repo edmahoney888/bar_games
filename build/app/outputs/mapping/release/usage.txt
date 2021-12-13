@@ -1660,8 +1660,8 @@ androidx.core.database.DatabaseUtilsCompat
 androidx.fragment.app.FragmentTransitionCompat21$1
 androidx.core.view.MenuItemCompat$OnActionExpandListener
 kotlin.collections.ArraysKt___ArraysKt$asSequence$$inlined$Sequence$1
-kotlin.coroutines.ContinuationKt$Continuation$1
 androidx.loader.app.LoaderManagerImpl$LoaderObserver
+kotlin.coroutines.ContinuationKt$Continuation$1
 kotlin.SynchronizedLazyImpl
 androidx.core.graphics.drawable.TintAwareDrawable
 kotlin.sequences.SequencesKt___SequencesKt$filterIsInstance$1
@@ -2230,8 +2230,8 @@ io.flutter.plugin.common.EventChannel$StreamHandler
 kotlin.jvm.internal.Ref$DoubleRef
 org.intellij.lang.annotations.JdkConstants$InputEventMask
 kotlin.annotation.AnnotationTarget
-androidx.fragment.app.FragmentTransitionImpl$3
 androidx.core.provider.FontsContractCompat$FontInfo
+androidx.fragment.app.FragmentTransitionImpl$3
 org.intellij.lang.annotations.JdkConstants$HorizontalAlignment
 androidx.core.widget.NestedScrollView$SavedState
 androidx.annotation.RequiresFeature
@@ -3307,5 +3307,5 @@ io.flutter.Log:
     public static int INFO
     public static int VERBOSE
     public static int WARN
-androidx.lifecycle.DefaultLifecycleObserver$-CC
 io.flutter.plugin.platform.PlatformView$-CC
+androidx.lifecycle.DefaultLifecycleObserver$-CC

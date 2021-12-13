@@ -6,6 +6,7 @@ class PlayerInGame {
   String defaultAvatar = "assets/images/playeravatars/blankPlayer.jpg";
   Image playerAvatar = Image.asset("assets/images/playeravatars/blankPlayer.jpg", fit: BoxFit.contain);
   int playerScore = 0;
+  int playerRndScore = 0;
   String uid = '0';
   int answerChosen = 0;
   Color itemColor = Colors.redAccent;
@@ -20,7 +21,7 @@ class PlayerInGame {
 
   setAnswer(int theAnswer)
   {
-    print("======== setting answer: " + theAnswer.toString());
+ //   print("======== setting answer: " + theAnswer.toString());
     answerChosen = theAnswer;
     itemColor = colorSelected;
   }

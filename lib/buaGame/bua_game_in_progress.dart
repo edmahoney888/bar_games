@@ -14,7 +14,7 @@ class BuaGameInProgress {
   int dice2 = 0;
   int dice3 = 0;
 
-  bool _reveal = false;
+ // bool _reveal = false;
 
   final Color colorUnselected = Colors.redAccent;
   final Color colorSelected = Colors.blueAccent;
@@ -190,14 +190,17 @@ class BuaGameInProgress {
     int tempAnswer = 0;
     int tempAnswerVal = theAnswer;
 
-    if (dice1 == tempAnswerVal)
+    if (dice1 == tempAnswerVal) {
       tempAnswer = 1;
+    }
 
-    if (dice2 == tempAnswerVal)
+    if (dice2 == tempAnswerVal) {
       tempAnswer = tempAnswer + 1;
+    }
 
-    if (dice3 == tempAnswerVal)
+    if (dice3 == tempAnswerVal) {
       tempAnswer = tempAnswer + 1;
+    }
 
     return tempAnswer;
   }
@@ -239,7 +242,7 @@ class BuaGameInProgress {
   }
 
 
-  void _printSelectedPlayer() {
+ // void _printSelectedPlayer() {
 /*
     if (selectedPlayer != null) {
       print('===== selectedPlayer ==========');
@@ -255,7 +258,7 @@ class BuaGameInProgress {
       print('selected player is null');
 
  */
-  }
+ // }
 
 
   _loadGames() async {
@@ -291,7 +294,7 @@ class BuaGameInProgress {
   }
 
 
-  _loadRoundsForGame(int gameNum) async {
+  //_loadRoundsForGame(int gameNum) async {
     /*
     if (_roundsForGame != null)
       _roundsForGame = null;
@@ -307,10 +310,10 @@ class BuaGameInProgress {
     }
 
      */
-  }
+  //}
 
 
-  void _printSelectedRound() {
+ // void _printSelectedRound() {
 /*
     if (selectedRound != null) {
       print('===== selectedRound ==========');
@@ -326,7 +329,7 @@ class BuaGameInProgress {
       print('selected player is null');
 
  */
-  }
+  //}
 
   nextRound()  {
     /*
@@ -449,26 +452,26 @@ class BuaGameInProgress {
 
     //score player 1
     int tempScore = 0;
-    print("============= score before ============");
-    print("player 1 score: " + thePlayers[0].playerScore.toString());
-    print("player 2 score: " + thePlayers[1].playerScore.toString());
-    print("player 3 score: " + thePlayers[2].playerScore.toString());
-    print("player 4 score: " + thePlayers[3].playerScore.toString());
+   // print("============= score before ============");
+   // print("player 1 score: " + thePlayers[0].playerRndScore.toString());
+   // print("player 2 score: " + thePlayers[1].playerRndScore.toString());
+   // print("player 3 score: " + thePlayers[2].playerRndScore.toString());
+   // print("player 4 score: " + thePlayers[3].playerRndScore.toString());
 
     tempScore = correctAnswer(thePlayers[0].answerChosen);
-    thePlayers[0].playerScore = thePlayers[0].playerScore + tempScore;
+    thePlayers[0].playerRndScore = thePlayers[0].playerRndScore + tempScore;
     tempScore = correctAnswer(thePlayers[1].answerChosen);
-    thePlayers[1].playerScore = thePlayers[1].playerScore + tempScore;
+    thePlayers[1].playerRndScore = thePlayers[1].playerRndScore + tempScore;
     tempScore = correctAnswer(thePlayers[2].answerChosen);
-    thePlayers[2].playerScore = thePlayers[2].playerScore + tempScore;
+    thePlayers[2].playerRndScore = thePlayers[2].playerRndScore + tempScore;
     tempScore = correctAnswer(thePlayers[3].answerChosen);
-    thePlayers[3].playerScore = thePlayers[3].playerScore + tempScore;
+    thePlayers[3].playerRndScore = thePlayers[3].playerRndScore + tempScore;
 
-    print("============= score after ============");
-    print("player 1 score: " + thePlayers[0].playerScore.toString());
-    print("player 2 score: " + thePlayers[1].playerScore.toString());
-    print("player 3 score: " + thePlayers[2].playerScore.toString());
-    print("player 4 score: " + thePlayers[3].playerScore.toString());
+  //  print("============= score after ============");
+  //  print("player 1 score: " + thePlayers[0].playerRndScore.toString());
+  //  print("player 2 score: " + thePlayers[1].playerRndScore.toString());
+  //  print("player 3 score: " + thePlayers[2].playerRndScore.toString());
+  //  print("player 4 score: " + thePlayers[3].playerRndScore.toString());
 
   }
 
@@ -480,15 +483,15 @@ class BuaGameInProgress {
 
     score();
 
-    print("============= roll dice ============");
-    print("d1: " + dice1.toString());
-    print("d2: " + dice2.toString());
-    print("d3: " + dice3.toString());
+   // print("============= roll dice ============");
+   // print("d1: " + dice1.toString());
+   // print("d2: " + dice2.toString());
+   // print("d3: " + dice3.toString());
   }
 
 
   int rollADice() {
-    final _random = new Random();
+    final _random = Random();
     return _random.nextInt(6) + 1;
   }
 
@@ -530,4 +533,22 @@ class BuaGameInProgress {
     thePlayers[3].answerChosen = 0;
   }
 
+
+  rollupScore() {
+    thePlayers[0].playerScore = thePlayers[0].playerScore + thePlayers[0].playerRndScore;
+
+    thePlayers[1].playerScore = thePlayers[1].playerScore + thePlayers[1].playerRndScore;
+
+    thePlayers[2].playerScore = thePlayers[2].playerScore + thePlayers[2].playerRndScore;
+
+    thePlayers[3].playerScore = thePlayers[3].playerScore + thePlayers[3].playerRndScore;
+
+    thePlayers[0].playerRndScore = 0;
+
+    thePlayers[1].playerRndScore = 0;
+
+    thePlayers[2].playerRndScore = 0;
+
+    thePlayers[3].playerRndScore = 0;
+  }
 }

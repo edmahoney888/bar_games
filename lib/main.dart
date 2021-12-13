@@ -1,7 +1,7 @@
-import 'package:bar_games/buaGame/buaGame.dart';
-import 'package:bar_games/playerDetail.dart';
+import 'package:bar_games/buaGame/bua_game.dart';
+import 'package:bar_games/player_detail.dart';
 import 'package:bar_games/player_in_game.dart';
-import 'package:bar_games/raceGame/raceGame.dart';
+import 'package:bar_games/raceGame/race_game.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -44,7 +44,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+ // int _counter = 0;
   String defaultName = "Default";
   String defaultImage = 'assets/images/playeravatars/blankPlayer.jpg';
 
@@ -52,12 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (thePlayers.length == 0)
+    if (thePlayers.isEmpty)
       {
         PlayerInGame player1ID;
         for(var i = 0; i < 4; i++){
           // initialize the players list
-          player1ID = new PlayerInGame();
+          player1ID = PlayerInGame();
           player1ID.playerName = defaultName;
           player1ID.playerAvatar = Image.asset(defaultImage, fit: BoxFit.contain);
           player1ID.playerScore = 0;
@@ -256,7 +256,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => buaGame(playerList: thePlayers)
+      MaterialPageRoute(builder: (context) => BuaGame(playerList: thePlayers)
       ),
     );
 
@@ -271,7 +271,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => raceGame(playerList: thePlayers)),
+      MaterialPageRoute(builder: (context) => RaceGame(playerList: thePlayers)),
     );
 
 // update player list with data from result
@@ -285,14 +285,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => playerDetail(thePlayer: thePlayers[playerNum],)
+      MaterialPageRoute(builder: (context) => PlayerDetail(thePlayer: thePlayers[playerNum],)
       ),
     );
 
     // update player list with data from result
     setState(() {
-      if (result != null)
+      if (result != null) {
         thePlayers[playerNum] = result;
+      }
     });
 
   }
@@ -301,7 +302,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget playerWidget(int playerNum) {
 
     return
-      Container(
+      SizedBox(
           width: 100.0,
           //       height: 50.0,
           child:
