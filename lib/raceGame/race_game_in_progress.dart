@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import '../bar_constants.dart';
 import '../player_in_game.dart';
 
+/*
 class Constants{
   static const String firstItem = 'Load Player';
   static const String secondItem = 'Load Round';
@@ -52,6 +54,8 @@ class Constants{
   ];
 }
 
+ */
+
 class RaceGameInProgress {
   String defaultName = "Default Name";
   String defaultImage = 'assets/images/playeravatars/blankPlayer.jpg';
@@ -67,7 +71,7 @@ class RaceGameInProgress {
   bool thirdPlace = false;
   int numRaceSteps = 7;
   bool allFinished = false;
-  List<Color> raceColors = [Colors.black,Colors.black,Colors.black,Colors.black,Colors.black,Colors.black,Colors.black];
+  List<Color> raceColors = [Colors.white,Colors.white,Colors.white,Colors.white,Colors.white,Colors.white,Colors.white];
 
   /*
   Game currentGame;

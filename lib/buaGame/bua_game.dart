@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../bar_constants.dart';
 import '../player_in_game.dart';
 import 'bua_game_in_progress.dart';
 
+/*
 class Constants {
   static const String firstItem = 'Load Player';
   static const String secondItem = 'Load Round';
@@ -31,6 +33,8 @@ class Constants {
     secondItem,
   ];
 }
+
+ */
 
 //const List<Item> _items = [
 /*
@@ -158,9 +162,9 @@ class _BuaGameState extends State<BuaGame> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    _buildBuaImageWithDropZone(1, Constants.diceFaces[1]),
-                    _buildBuaImageWithDropZone(2, Constants.diceFaces[2]),
-                    _buildBuaImageWithDropZone(3, Constants.diceFaces[3]),
+                    _buildBuaImageWithDropZone(1, Constants.buaDiceFaces[1]),
+                    _buildBuaImageWithDropZone(2, Constants.buaDiceFaces[2]),
+                    _buildBuaImageWithDropZone(3, Constants.buaDiceFaces[3]),
                   ]),
             ),
             Expanded(
@@ -168,9 +172,9 @@ class _BuaGameState extends State<BuaGame> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    _buildBuaImageWithDropZone(4, Constants.diceFaces[4]),
-                    _buildBuaImageWithDropZone(5, Constants.diceFaces[5]),
-                    _buildBuaImageWithDropZone(6, Constants.diceFaces[6]),
+                    _buildBuaImageWithDropZone(4, Constants.buaDiceFaces[4]),
+                    _buildBuaImageWithDropZone(5, Constants.buaDiceFaces[5]),
+                    _buildBuaImageWithDropZone(6, Constants.buaDiceFaces[6]),
                   ]),
             ),
           ]),
@@ -202,8 +206,8 @@ class _BuaGameState extends State<BuaGame> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    _buildBuaImageWithDropZone(1, Constants.diceFaces[1]),
-                    _buildBuaImageWithDropZone(2, Constants.diceFaces[2]),
+                    _buildBuaImageWithDropZone(1, Constants.buaDiceFaces[1]),
+                    _buildBuaImageWithDropZone(2, Constants.buaDiceFaces[2]),
                   ]),
             ),
             Expanded(
@@ -211,8 +215,8 @@ class _BuaGameState extends State<BuaGame> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    _buildBuaImageWithDropZone(3, Constants.diceFaces[3]),
-                    _buildBuaImageWithDropZone(4, Constants.diceFaces[4]),
+                    _buildBuaImageWithDropZone(3, Constants.buaDiceFaces[3]),
+                    _buildBuaImageWithDropZone(4, Constants.buaDiceFaces[4]),
                   ]),
             ),
             Expanded(
@@ -220,8 +224,8 @@ class _BuaGameState extends State<BuaGame> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    _buildBuaImageWithDropZone(5, Constants.diceFaces[5]),
-                    _buildBuaImageWithDropZone(6, Constants.diceFaces[6]),
+                    _buildBuaImageWithDropZone(5, Constants.buaDiceFaces[5]),
+                    _buildBuaImageWithDropZone(6, Constants.buaDiceFaces[6]),
                   ]),
             ),
           ]),
@@ -299,7 +303,7 @@ class _BuaGameState extends State<BuaGame> {
 
   Widget diceWidget(int whichDice) {
     int diceValue = getDiceValue(whichDice);
-    String tempString = Constants.diceFaces[diceValue];
+    String tempString = Constants.buaDiceFaces[diceValue];
 
     return SizedBox(
       width: 75.0,
@@ -478,7 +482,7 @@ class _BuaGameState extends State<BuaGame> {
     } else {
  //     opacitySetting = 0.5;
       answerImage =
-          Image(image: AssetImage(Constants.diceFaces[player.answerChosen]));
+          Image(image: AssetImage(Constants.buaDiceFaces[player.answerChosen]));
     }
 
     return Material(
@@ -533,7 +537,7 @@ class PlayerAvatar extends StatelessWidget {
 //      print("player original: " + answerImage);
     } else {
       opacitySetting = 0.5;
-      answerImage = Constants.diceFaces[answer];
+      answerImage = Constants.buaDiceFaces[answer];
  //     print("player changed: " + answerImage);
     }
 

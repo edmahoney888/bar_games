@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:bar_games/raceGame/race_game_in_progress.dart';
 import 'package:flutter/material.dart';
 
+import '../bar_constants.dart';
 import '../player_in_game.dart';
 //import 'choose_racers.dart';
 
@@ -412,7 +413,7 @@ class _RaceGameState extends State<RaceGame> {
       child:
       Container(
         decoration: BoxDecoration(
-          border:  Border.all(color: theGame.raceColors[rowIndex+1], width: 10),
+          border:  Border.all(color: theGame.raceColors[rowIndex+1], width: 5),
           color: theGame.raceColors[rowIndex],
         ),
         // child: Text("race:" + rowIndex.toString() + "value: " + theGame.theRace[rowIndex].toString()),
