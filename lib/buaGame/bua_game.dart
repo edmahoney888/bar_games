@@ -8,70 +8,9 @@ import '../player/player_in_game.dart';
 import 'bua_game_in_progress.dart';
 import 'package:bar_games/player/player_widget.dart';
 
-/*
-class Constants {
-  static const String firstItem = 'Load Player';
-  static const String secondItem = 'Load Round';
 
-  static const String zeroDiceFace = 'assets/images/buagame/blank.png';
-  static const String firstDiceFace = 'assets/images/buagame/crab.png';
-  static const String secondDiceFace = 'assets/images/buagame/fish.png';
-  static const String thirdDiceFace = 'assets/images/buagame/prawn.png';
-  static const String fourthDiceFace = 'assets/images/buagame/tiger.png';
-  static const String fifthDiceFace = 'assets/images/buagame/rooster.png';
-  static const String sixthDiceFace = 'assets/images/buagame/gourd.png';
-
-  static const List<String> diceFaces = <String>[
-    zeroDiceFace,
-    firstDiceFace,
-    secondDiceFace,
-    thirdDiceFace,
-    fourthDiceFace,
-    fifthDiceFace,
-    sixthDiceFace,
-  ];
-
-  static const List<String> choices = <String>[
-    firstItem,
-    secondItem,
-  ];
-}
-
- */
-
-//const List<Item> _items = [
-/*
-  Item(
-    name: 'joy',
-    score: 0,
-    uid: '1',
-    imageName: "assets/images/playeravatars/girl01.PNG",
-
-  ),
-  Item(
-    name: 'jane',
-    score: 0,
-    uid: '2',
-    imageName: "assets/images/playeravatars/girl02.PNG",
-  ),
-  Item(
-    name: 'julie',
-    score: 0,
-    uid: '3',
-    imageName: "assets/images/playeravatars/girl03.PNG",
-  ),
-  Item(
-    name: 'josie',
-    score: 0,
-    uid: '4',
-    imageName: "assets/images/playeravatars/girl04.jpg",
-  ),
-
-   */
-//];
 
 class BuaGame extends StatefulWidget {
- // final List<PlayerInGame> playerList;
 
   BuaGame() : super();
 
@@ -80,7 +19,6 @@ class BuaGame extends StatefulWidget {
 }
 
 class _BuaGameState extends State<BuaGame> {
-  // List<PlayerInGame> playerList;
   final GlobalKey _draggableKey = GlobalKey();
   _BuaGameState(); //constructor
 
@@ -89,11 +27,7 @@ class _BuaGameState extends State<BuaGame> {
 
   @override
   Widget build(BuildContext context) {
-    // if (theGame.getNumOfPlayers() == 0) {
-    //   theGame.loadPlayers(playerList);
-    // }
-  //  print(
- //       "player pass->" + playerList[0].uid + " ->" + playerList[0].playerName);
+
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -112,9 +46,6 @@ class _BuaGameState extends State<BuaGame> {
     return theGame.gameState;
   }
 
-//  int GetDiceValue(int whichDice) {
-//    return theGame.getDiceValue(whichDice);
-//  }
 
   Widget body(BuildContext context) {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
@@ -129,7 +60,8 @@ class _BuaGameState extends State<BuaGame> {
       playerRow(),
       buaTilesPT(2),
       diceRow(),
-    ]);
+    ]
+    );
   }
 
   Widget landscape() {
@@ -137,23 +69,11 @@ class _BuaGameState extends State<BuaGame> {
       playerCol(),
       buaTilesLS(3),
       diceCol(),
-    ]);
+    ]
+    );
   }
 
   Widget buaTilesLS(int numColumns) {
-  //  Color borderColor1 = Colors.black;
-  //  Color borderColor2 = Colors.black;
- //   Color borderColor3 = Colors.black;
-  //  Color borderColor4 = Colors.black;
- //   Color borderColor5 = Colors.black;
- //  Color borderColor6 = Colors.black;
-
-  //  if (borderColor1 == null) borderColor1 = Colors.black;
- //   if (borderColor2 == null) borderColor2 = Colors.black;
- //   if (borderColor3 == null) borderColor3 = Colors.black;
- //   if (borderColor4 == null) borderColor4 = Colors.black;
- //   if (borderColor5 == null) borderColor5 = Colors.black;
- //   if (borderColor6 == null) borderColor6 = Colors.black;
 
     return Expanded(
       flex: 1,
@@ -180,24 +100,12 @@ class _BuaGameState extends State<BuaGame> {
                     _buildBuaImageWithDropZone(6, Constants.buaDiceFaces[6]),
                   ]),
             ),
-          ]),
+          ]
+      ),
     );
   }
 
   Widget buaTilesPT(int numColumns) {
- //   Color borderColor1 = Colors.black;
- //   Color borderColor2 = Colors.black;
- //   Color borderColor3 = Colors.black;
- //   Color borderColor4 = Colors.black;
- //   Color borderColor5 = Colors.black;
- //   Color borderColor6 = Colors.black;
-
- //   if (borderColor1 == null) borderColor1 = Colors.black;
- //   if (borderColor2 == null) borderColor2 = Colors.black;
- //   if (borderColor3 == null) borderColor3 = Colors.black;
- //   if (borderColor4 == null) borderColor4 = Colors.black;
- //   if (borderColor5 == null) borderColor5 = Colors.black;
- //   if (borderColor6 == null) borderColor6 = Colors.black;
 
     return Expanded(
       flex: 1,
@@ -254,7 +162,6 @@ class _BuaGameState extends State<BuaGame> {
         onAccept: (player) {
           setState(() {
             Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, buaId );
-           // theGame.setPlayerAnswer(buaId, int.parse(player.uid));
             borderColor1 = Colors.black;
           });
         },
@@ -264,10 +171,7 @@ class _BuaGameState extends State<BuaGame> {
           return true;
         },
         onLeave: (player) {
-//            if (player != null) {
-//              print("bua id->"+ buaId.toString());
-//              print("onLeave: " + player.uid.toString());
-//            }
+
           borderColor1 = Colors.black;
           return;
         },
@@ -460,158 +364,5 @@ class _BuaGameState extends State<BuaGame> {
       ),
     ]);
   }
-
-  /*
-  Widget _buildPlayer({
-    required int playerNum,
-  }) {
-    PlayerInGame player = Provider.of<BarPlayers>(context, listen: true).playerList[playerNum];
-    return Expanded(
-      flex: 1,
-      child: Draggable<PlayerInGame>(
-        data: player,
-        dragAnchorStrategy: pointerDragAnchorStrategy,
-        feedback: DraggingListItem(
-          dragKey: _draggableKey,
-          playerImage: player.playerAvatar,
-        ),
-        child: playerAvatar(player: player),
-      ),
-    );
-  }
-
-  Widget playerAvatar({
-    required PlayerInGame player,
-  }) {
-    Image answerImage;
- //   double opacitySetting = 0.5;
-
-    if (player.answerChosen == 0) {
-//      opacitySetting = 0.0;
-      answerImage = player.playerAvatar;
-    } else {
- //     opacitySetting = 0.5;
-      answerImage =
-          Image(image: AssetImage(Constants.buaDiceFaces[player.answerChosen]));
-    }
-
-    return Material(
-      elevation: 12.0,
-      borderRadius: BorderRadius.circular(20),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12.0),
-        child: SizedBox(
-          width: 100,
-          height: 96,
-          child:
-          Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-            answerImage,
-            Text(player.playerName),
-                Text('Rd: ' + player.playerRndScore.toString()),
-                Text('Tot: ' + player.playerTotScore.toString()),
-          ]
-          ),
-        ),
-      ),
-    );
-  }
-
-   */
 }
 
-
-/*
-class PlayerAvatar extends StatelessWidget {
-  PlayerAvatar({
-    Key? key,
-    this.name = '',
-    this.score = 0,
-    required this.imageName,
-    this.answer = 0,
-    this.isDepressed = false,
-  }) : super(key: key);
-
-  final String name;
-  final int score;
-  final int answer;
-  final String imageName;
-  final bool isDepressed;
-  String answerImage = "";
-  double opacitySetting = 0.5;
-
-  @override
-  Widget build(BuildContext context) {
-    if (answer == 0) {
-      opacitySetting = 0.0;
-      answerImage = imageName;
-//      print("player original: " + answerImage);
-    } else {
-      opacitySetting = 0.5;
-      answerImage = Constants.buaDiceFaces[answer];
- //     print("player changed: " + answerImage);
-    }
-
-    return Material(
-      elevation: 12.0,
-      borderRadius: BorderRadius.circular(20),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12.0),
-        child: SizedBox(
-          width: 100,
-          height: 96,
-          child: Stack(alignment: Alignment.bottomCenter, children: <Widget>[
-            Image.asset(answerImage, fit: BoxFit.contain),
-            Text(name + ": " + score.toString()),
-          ]),
-        ),
-      ),
-    );
-  }
-}
-
-class DraggingListItem extends StatelessWidget {
-  const DraggingListItem({
-    Key? key,
-    required this.dragKey,
-    required this.playerImage,
-  }) : super(key: key);
-
-  final GlobalKey dragKey;
-  final Image playerImage;
-
-  @override
-  Widget build(BuildContext context) {
-    return FractionalTranslation(
-      translation: const Offset(-0.5, -0.5),
-      child: ClipRRect(
-        key: dragKey,
-        borderRadius: BorderRadius.circular(12.0),
-        child: SizedBox(
-          height: 100,
-          width: 100,
-          child: Opacity(
-            opacity: 0.85,
-            child: playerImage,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-@immutable
-class Item {
-  const Item({
-    required this.score,
-    required this.name,
-    required this.uid,
-    required this.imageName,
-  });
-  final int score;
-  final String name;
-  final String uid;
-  final String imageName;
-}
-*/
