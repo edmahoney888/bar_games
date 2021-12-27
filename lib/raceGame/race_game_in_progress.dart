@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 import '../bar_constants.dart';
-import '../player_in_game.dart';
+import '../player/player_in_game.dart';
 
 /*
 class Constants{
@@ -57,9 +57,9 @@ class Constants{
  */
 
 class RaceGameInProgress {
-  String defaultName = "Default Name";
-  String defaultImage = 'assets/images/playeravatars/blankPlayer.jpg';
-  List<PlayerInGame> thePlayers = [];
+//  String defaultName = "Default Name";
+ // String defaultImage = 'assets/images/playeravatars/blankPlayer.jpg';
+//  List<PlayerInGame> thePlayers = [];
   List<int> theRace = [0,0,0,0,0,0,0];
   List<int> finishes = [0,0,0,0,0,0,0];
   int gameState = 0;
@@ -170,14 +170,14 @@ class RaceGameInProgress {
  //  _loadRounds();
   }
 
-  int getNumOfPlayers()
-  {
-    return thePlayers.length;
-  }
+  // int getNumOfPlayers()
+  // {
+  //   return thePlayers.length;
+  // }
 
-  loadPlayers(List<PlayerInGame> thePlayers)  {
-    this.thePlayers = thePlayers;
-  }
+  // loadPlayers(List<PlayerInGame> thePlayers)  {
+  //   this.thePlayers = thePlayers;
+  // }
 
   /*
   Map<String, dynamic> toMap() {
@@ -444,11 +444,11 @@ class RaceGameInProgress {
     return tempColor;
   }
 
-  setPlayerAnswer(int answerNum, int playerNum) {
-
-    thePlayers[playerNum].answerChosen = answerNum;
-
-  }
+  // setPlayerAnswer(int answerNum, int playerNum) {
+  //
+  //   thePlayers[playerNum].answerChosen = answerNum;
+  //
+  // }
 
 
 /*
@@ -599,13 +599,13 @@ class RaceGameInProgress {
    */
 
 
-  Image getPlayerImage(int playerNum) {
-    Image tempImage;
-
-    tempImage = thePlayers[playerNum].playerAvatar;
-
-    return tempImage;
-  }
+  // Image getPlayerImage(int playerNum) {
+  //   Image tempImage;
+  //
+  //   tempImage = thePlayers[playerNum].playerAvatar;
+  //
+  //   return tempImage;
+  // }
   /*
   String getPlayerImage(int playerNum) {
     String tempImage = "";
@@ -1153,24 +1153,24 @@ class RaceGameInProgress {
  */
 
 
-  awardFinishes() {
-    int tempScore = 0;
-    // score player 1
-
- //   thePlayers[0].playerScore = thePlayers[0].playerScore + finishes[thePlayers[0].answerChosen];
- //   thePlayers[1].playerScore = thePlayers[1].playerScore + finishes[thePlayers[1].answerChosen];
- //   thePlayers[2].playerScore = thePlayers[2].playerScore + finishes[thePlayers[2].answerChosen];
- //   thePlayers[3].playerScore = thePlayers[3].playerScore + finishes[thePlayers[3].answerChosen];
-
-
-    thePlayers[0].playerRndScore = thePlayers[0].playerRndScore + finishes[thePlayers[0].answerChosen];
-
-    thePlayers[1].playerRndScore = thePlayers[1].playerRndScore + finishes[thePlayers[1].answerChosen];
-
-    thePlayers[2].playerRndScore = thePlayers[2].playerRndScore + finishes[thePlayers[2].answerChosen];
-
-    thePlayers[3].playerRndScore = thePlayers[3].playerRndScore + finishes[thePlayers[3].answerChosen];
-  }
+ //  awardFinishes() {
+ //    int tempScore = 0;
+ //    // score player 1
+ //
+ // //   thePlayers[0].playerScore = thePlayers[0].playerScore + finishes[thePlayers[0].answerChosen];
+ // //   thePlayers[1].playerScore = thePlayers[1].playerScore + finishes[thePlayers[1].answerChosen];
+ // //   thePlayers[2].playerScore = thePlayers[2].playerScore + finishes[thePlayers[2].answerChosen];
+ // //   thePlayers[3].playerScore = thePlayers[3].playerScore + finishes[thePlayers[3].answerChosen];
+ //
+ //
+ //    thePlayers[0].playerRndScore = thePlayers[0].playerRndScore + finishes[thePlayers[0].answerChosen];
+ //
+ //    thePlayers[1].playerRndScore = thePlayers[1].playerRndScore + finishes[thePlayers[1].answerChosen];
+ //
+ //    thePlayers[2].playerRndScore = thePlayers[2].playerRndScore + finishes[thePlayers[2].answerChosen];
+ //
+ //    thePlayers[3].playerRndScore = thePlayers[3].playerRndScore + finishes[thePlayers[3].answerChosen];
+ //  }
 
 
   checkAllFinished() {
@@ -1332,12 +1332,12 @@ class RaceGameInProgress {
 
     gameState = 0;
 
-    if (thePlayers != null) {
-      thePlayers[0].answerChosen = 0;
-      thePlayers[1].answerChosen = 0;
-      thePlayers[2].answerChosen = 0;
-      thePlayers[3].answerChosen = 0;
-    }
+    // if (thePlayers != null) {
+    //   thePlayers[0].answerChosen = 0;
+    //   thePlayers[1].answerChosen = 0;
+    //   thePlayers[2].answerChosen = 0;
+    //   thePlayers[3].answerChosen = 0;
+    // }
 
     theRace[0] = 0;
     theRace[1] = 0;
@@ -1352,23 +1352,23 @@ class RaceGameInProgress {
     thirdPlace = false;
   }
 
-  rollupScore() {
-    thePlayers[0].playerScore = thePlayers[0].playerScore + thePlayers[0].playerRndScore;
-
-    thePlayers[1].playerScore = thePlayers[1].playerScore + thePlayers[1].playerRndScore;
-
-    thePlayers[2].playerScore = thePlayers[2].playerScore + thePlayers[2].playerRndScore;
-
-    thePlayers[3].playerScore = thePlayers[3].playerScore + thePlayers[3].playerRndScore;
-
-    thePlayers[0].playerRndScore = 0;
-
-    thePlayers[1].playerRndScore = 0;
-
-    thePlayers[2].playerRndScore = 0;
-
-    thePlayers[3].playerRndScore = 0;
-  }
+  // rollupScore() {
+  //   thePlayers[0].playerScore = thePlayers[0].playerScore + thePlayers[0].playerRndScore;
+  //
+  //   thePlayers[1].playerScore = thePlayers[1].playerScore + thePlayers[1].playerRndScore;
+  //
+  //   thePlayers[2].playerScore = thePlayers[2].playerScore + thePlayers[2].playerRndScore;
+  //
+  //   thePlayers[3].playerScore = thePlayers[3].playerScore + thePlayers[3].playerRndScore;
+  //
+  //   thePlayers[0].playerRndScore = 0;
+  //
+  //   thePlayers[1].playerRndScore = 0;
+  //
+  //   thePlayers[2].playerRndScore = 0;
+  //
+  //   thePlayers[3].playerRndScore = 0;
+  // }
 
   /*
   rollDice() {

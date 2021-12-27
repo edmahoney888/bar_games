@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import '../player.dart';
-import '../player_in_game.dart';
+import '../player/player.dart';
+import '../player/player_in_game.dart';
 
 class BuaGameInProgress {
   String defaultName = "Default Name";
   String defaultImage = 'assets/images/playeravatars/blankPlayer.jpg';
-  List<PlayerInGame> thePlayers = [];
+//  List<PlayerInGame> thePlayers = [];
   int gameState = 0;
   int dice1 = 0;
   int dice2 = 0;
@@ -180,12 +180,12 @@ class BuaGameInProgress {
     return tempAnswer;
   }
 
-  int getNumOfPlayers()
-  {
-    return thePlayers.length;
-  }
+  // int getNumOfPlayers()
+  // {
+  //   return thePlayers.length;
+  // }
 
-  int correctAnswer(int theAnswer)
+/*  int correctAnswer(int theAnswer)
   {
     int tempAnswer = 0;
     int tempAnswerVal = theAnswer;
@@ -203,7 +203,7 @@ class BuaGameInProgress {
     }
 
     return tempAnswer;
-  }
+  }*/
 
 
   resetAnswers()
@@ -215,31 +215,31 @@ class BuaGameInProgress {
   }
 
 
-  loadPlayers(List<PlayerInGame> thePlayers)  {
-    this.thePlayers = thePlayers;
-
-  //  setupPlayers();   //loads default players
-
-   // player1ID.playerName = "joy";
-  //  player1ID.playerAvatar = "assets/images/playeravatars/girl01.PNG";
-   // player2ID.playerName = "jane";
-  //  player2ID.playerAvatar = "assets/images/playeravatars/girl02.PNG";
-   // player3ID.playerName = "jay";
-   // player3ID.playerAvatar = "assets/images/playeravatars/girl03.PNG";
-    /*
-    _players = new List();
-
-    final loadedPlayers = await dbHelper.players();
-
-    for (var n in loadedPlayers) {
-      _players.add(n);
-      if (selectedPlayer == null) {
-        selectedPlayer = n;
-      }
-    }
-
-     */
-  }
+  // loadPlayers(List<PlayerInGame> thePlayers)  {
+  //   this.thePlayers = thePlayers;
+  //
+  // //  setupPlayers();   //loads default players
+  //
+  //  // player1ID.playerName = "joy";
+  // //  player1ID.playerAvatar = "assets/images/playeravatars/girl01.PNG";
+  //  // player2ID.playerName = "jane";
+  // //  player2ID.playerAvatar = "assets/images/playeravatars/girl02.PNG";
+  //  // player3ID.playerName = "jay";
+  //  // player3ID.playerAvatar = "assets/images/playeravatars/girl03.PNG";
+  //   /*
+  //   _players = new List();
+  //
+  //   final loadedPlayers = await dbHelper.players();
+  //
+  //   for (var n in loadedPlayers) {
+  //     _players.add(n);
+  //     if (selectedPlayer == null) {
+  //       selectedPlayer = n;
+  //     }
+  //   }
+  //
+  //    */
+  // }
 
 
  // void _printSelectedPlayer() {
@@ -357,22 +357,22 @@ class BuaGameInProgress {
   }
 
 
-  Image getPlayerImage(int playerNum) {
-    Image tempImage;
+  // Image getPlayerImage(int playerNum) {
+  //   Image tempImage;
+  //
+  //   tempImage = thePlayers[playerNum].getImage();
+  //
+  //   return tempImage;
+  // }
 
-    tempImage = thePlayers[playerNum].getImage();
 
-    return tempImage;
-  }
-
-
-  String getPlayerName(int playerNum) {
-    String tempName = "";
-
-    tempName = thePlayers[playerNum].playerName;
-
-    return tempName;
-  }
+  // String getPlayerName(int playerNum) {
+  //   String tempName = "";
+  //
+  //   tempName = thePlayers[playerNum].playerName;
+  //
+  //   return tempName;
+  // }
 
 
   String getPlayerImageFromID(playerID) {
@@ -391,11 +391,11 @@ class BuaGameInProgress {
   }
 
 
-  setPlayerAnswer(int answerNum, int playerNum) {
-
-    thePlayers[playerNum].answerChosen = answerNum;
-
-  }
+  // setPlayerAnswer(int answerNum, int playerNum) {
+  //
+  //   thePlayers[playerNum].answerChosen = answerNum;
+  //
+  // }
 
 
   Color getPlayerColor(int playerNum) {
@@ -447,7 +447,7 @@ class BuaGameInProgress {
   }
 
 
-
+/*
   score() {
 
     //score player 1
@@ -473,7 +473,7 @@ class BuaGameInProgress {
   //  print("player 3 score: " + thePlayers[2].playerRndScore.toString());
   //  print("player 4 score: " + thePlayers[3].playerRndScore.toString());
 
-  }
+  }*/
 
 
   rollDice() {
@@ -481,7 +481,7 @@ class BuaGameInProgress {
     dice2 = rollADice();
     dice3 = rollADice();
 
-    score();
+  //  score();
 
    // print("============= roll dice ============");
    // print("d1: " + dice1.toString());
@@ -527,14 +527,14 @@ class BuaGameInProgress {
 
     gameState = 0;
 
-    thePlayers[0].answerChosen = 0;
-    thePlayers[1].answerChosen = 0;
-    thePlayers[2].answerChosen = 0;
-    thePlayers[3].answerChosen = 0;
+    // thePlayers[0].answerChosen = 0;
+    // thePlayers[1].answerChosen = 0;
+    // thePlayers[2].answerChosen = 0;
+    // thePlayers[3].answerChosen = 0;
   }
 
 
-  rollupScore() {
+/*  rollupScore() {
     thePlayers[0].playerScore = thePlayers[0].playerScore + thePlayers[0].playerRndScore;
 
     thePlayers[1].playerScore = thePlayers[1].playerScore + thePlayers[1].playerRndScore;
@@ -550,5 +550,5 @@ class BuaGameInProgress {
     thePlayers[2].playerRndScore = 0;
 
     thePlayers[3].playerRndScore = 0;
-  }
+  }*/
 }

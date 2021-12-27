@@ -1,9 +1,13 @@
 import 'dart:io';
 import 'package:bar_games/raceGame/race_game_in_progress.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../bar_constants.dart';
-import '../player_in_game.dart';
+import '../player/player_in_game.dart';
+
+import 'package:bar_games/player/player_widget.dart';
+
 //import 'choose_racers.dart';
 
 /*
@@ -72,16 +76,16 @@ class Constants{
 
 
 class RaceGame extends StatefulWidget {
-  final List <PlayerInGame> playerList;
+//  final List <PlayerInGame> playerList;
 
-  RaceGame({required this.playerList}) : super();
+  RaceGame() : super();
 
   @override
-  _RaceGameState createState() => _RaceGameState(playerList);
+  _RaceGameState createState() => _RaceGameState();
 }
 
 class _RaceGameState extends State<RaceGame> {
-  List <PlayerInGame> playerList;
+//  List <PlayerInGame> playerList;
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   bool isReady = false;
@@ -94,7 +98,7 @@ class _RaceGameState extends State<RaceGame> {
   bool raceFinished = false;
 
 //  Color borderColor = Colors.black;
-  _RaceGameState(this.playerList);  //constructor
+  _RaceGameState();  //constructor
 
   @override
   void initState() {
@@ -119,10 +123,10 @@ class _RaceGameState extends State<RaceGame> {
 
 
   Widget build(BuildContext context) {
-    if (theGame.getNumOfPlayers() == 0)
-    {
-      theGame.loadPlayers(playerList);
-    }
+    // if (theGame.getNumOfPlayers() == 0)
+    // {
+    //   theGame.loadPlayers(playerList);
+    // }
     return Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
@@ -295,16 +299,17 @@ class _RaceGameState extends State<RaceGame> {
         },
         onAccept: (player) {
           setState(() {
-            theGame.setPlayerAnswer(raceId, int.parse(player.uid));
- //           print("accept ==== bua id->"+ raceId.toString());
- //           print("item name->"+ player.playerName + ' item uid->' + player.uid);
+            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, raceId  );
+        //    theGame.setPlayerAnswer(raceId, int.parse(player.uid));
+            print("accept ==== bua id->"+ raceId.toString());
+            print("item name->"+ player.playerName + ' item uid->' + player.uid.toString());
             borderColor1 = Colors.black;
           });
         },
         onWillAccept: (player) {
           if (player != null) {
- //           print("will accept ===== bua id->"+ raceId.toString());
- //           print("willAccept: " + player.uid.toString());
+            print("will accept ===== bua id->"+ raceId.toString());
+            print("willAccept: " + player.uid.toString());
           }
           borderColor1 = Colors.blue;
           return true;
@@ -1186,18 +1191,33 @@ class _RaceGameState extends State<RaceGame> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        playerWidget(
+          playerNum: 0,context: context, tileFaces: Constants.racerImages,
+        ),
+        playerWidget(
+          playerNum: 1,context: context,tileFaces: Constants.racerImages,
+        ),
+        playerWidget(
+          playerNum: 2,context: context,tileFaces: Constants.racerImages,
+        ),
+        playerWidget(
+          playerNum: 3,context: context,tileFaces: Constants.racerImages,
+        ),
+        /*
         _buildPlayer(
-          player: theGame.thePlayers[0],
+          playerNum: 0,
         ),
         _buildPlayer(
-          player: theGame.thePlayers[1],
+          playerNum: 1,
         ),
         _buildPlayer(
-          player: theGame.thePlayers[2],
+          playerNum: 2,
         ),
         _buildPlayer(
-          player: theGame.thePlayers[3],
+          playerNum: 3,
         ),
+
+         */
       ],
     );
   }
@@ -1246,11 +1266,12 @@ class _RaceGameState extends State<RaceGame> {
               child: ElevatedButton(
                 onPressed: ()
                 {
+                  Provider.of<BarPlayers>(context, listen: false).rollUpScore();
                   theGame.resetState();
-                  Navigator.pop(context, theGame.thePlayers);
+                  Navigator.pop(context);
                 }
                 ,
-                child: Text("Quit"),
+                child: Text("Finish"),
               ),
             ),
           ]
@@ -1267,21 +1288,36 @@ class _RaceGameState extends State<RaceGame> {
           child:
           Column(
             children: <Widget>[
+              playerWidget(
+                playerNum: 0,context: context,tileFaces: Constants.racerImages,
+              ),
+              playerWidget(
+                playerNum: 1,context: context,tileFaces: Constants.racerImages,
+              ),
+              playerWidget(
+                playerNum: 2,context: context,tileFaces: Constants.racerImages,
+              ),
+              playerWidget(
+                playerNum: 3,context: context,tileFaces: Constants.racerImages,
+              ),
+              /*
               _buildPlayer(
-                player: theGame.thePlayers[0],
+                playerNum: 0,
               ),
 
               _buildPlayer(
-                player: theGame.thePlayers[1],
+                playerNum: 1,
               ),
 
               _buildPlayer(
-                player: theGame.thePlayers[2],
+                playerNum: 2,
               ),
 
               _buildPlayer(
-                player: theGame.thePlayers[3],
+                playerNum: 3,
               ),
+
+               */
 
             ],
           )
@@ -1321,7 +1357,12 @@ class _RaceGameState extends State<RaceGame> {
                       case 2:
                         {
                           setState((){
-                            theGame.awardFinishes();
+                            BarPlayers thePlayers = Provider.of<BarPlayers>(context, listen: false);
+                 //           theGame.awardFinishes();
+                            thePlayers.addRndScore(0, theGame.finishes[thePlayers.playerList[0].answerChosen]);
+                            thePlayers.addRndScore(0, theGame.finishes[thePlayers.playerList[1].answerChosen]);
+                            thePlayers.addRndScore(0, theGame.finishes[thePlayers.playerList[2].answerChosen]);
+                            thePlayers.addRndScore(0, theGame.finishes[thePlayers.playerList[3].answerChosen]);
 
                           });
                         }
@@ -1359,12 +1400,13 @@ class _RaceGameState extends State<RaceGame> {
                 child: ElevatedButton(
                   onPressed: ()
                   {
-                    theGame.rollupScore();
+                    Provider.of<BarPlayers>(context, listen: false).rollUpScore();
+             //       theGame.rollupScore();
                     theGame.resetState();
-                    Navigator.pop(context, theGame.thePlayers);
+                    Navigator.pop(context);
                   }
                   ,
-                  child: Text("Quit"),
+                  child: Text("Finish"),
                 ),
               ),
             ),
@@ -1372,11 +1414,13 @@ class _RaceGameState extends State<RaceGame> {
       );
   }
 
+  /*
   final GlobalKey _draggableKey = GlobalKey();
 
   Widget _buildPlayer({
-    required PlayerInGame player,
+    required int playerNum,
   }) {
+    PlayerInGame player = Provider.of<BarPlayers>(context).playerList[playerNum];
     return
       Expanded(
         flex: 1,
@@ -1434,15 +1478,17 @@ class _RaceGameState extends State<RaceGame> {
               children: <Widget>[
                 answerImage,
                // Text(player.playerName + ": " + player.playerScore.toString()),
-                Text(player.playerName),
-                Text('Rd: ' + player.playerRndScore.toString()),
-                Text('Tot: ' + player.playerScore.toString()),
+               //  Text(player.playerName),
+               //  Text('Rd: ' + player.playerRndScore.toString()),
+               //  Text('Tot: ' + player.playerScore.toString()),
               ]
           ),
         ),
       ),
     );
   }
+
+   */
 
 
   String getButtonText() {
@@ -1467,7 +1513,7 @@ class _RaceGameState extends State<RaceGame> {
 
 }
 
-
+/*
 class DraggingListItem extends StatelessWidget {
   const DraggingListItem({
     Key? key,
@@ -1498,4 +1544,6 @@ class DraggingListItem extends StatelessWidget {
     );
   }
 }
+
+ */
 

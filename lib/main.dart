@@ -1,8 +1,10 @@
 import 'package:bar_games/buaGame/bua_game.dart';
-import 'package:bar_games/player_detail.dart';
-import 'package:bar_games/player_in_game.dart';
+import 'package:bar_games/player/player_detail.dart';
+import 'package:bar_games/player/player_in_game.dart';
 import 'package:bar_games/raceGame/race_game.dart';
+import 'package:bar_games/wheel/fortune_wheel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,13 +16,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Bar Games',
-      theme: ThemeData(
-        // This is the theme of your application.
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider(
+      create: (context) => BarPlayers(),
+      child: MaterialApp(
+        title: 'Bar Games',
+        theme: ThemeData(
+          // This is the theme of your application.
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(title: 'Bar Games'),
       ),
-      home: const MyHomePage(title: 'Bar Games'),
     );
   }
 }
@@ -44,28 +49,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- // int _counter = 0;
-  String defaultName = "Default";
-  String defaultImage = 'assets/images/playeravatars/blankPlayer.jpg';
-
-  List<PlayerInGame> thePlayers = [];
-
   @override
   Widget build(BuildContext context) {
-    if (thePlayers.isEmpty)
-      {
-        PlayerInGame player1ID;
-        for(var i = 0; i < 4; i++){
-          // initialize the players list
-          player1ID = PlayerInGame();
-          player1ID.playerName = defaultName;
-          player1ID.playerAvatar = Image.asset(defaultImage, fit: BoxFit.contain);
-          player1ID.playerScore = 0;
-          player1ID.uid = i.toString();
-          thePlayers.add(player1ID);
-        }
-
-      }
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -79,262 +64,199 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: body(context),
- // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
-
   Widget body(BuildContext context) {
-    if(MediaQuery.of(context).orientation == Orientation.portrait)
-    {
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
       return portrait();
-    }
-    else {
+    } else {
       return landscape();
     }
   }
 
-
   Widget portrait() {
-    return
-      Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child:
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child:
-                      playerWidget(0),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child:
-                      playerWidget(1),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child:
-                      playerWidget(2),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child:
-                      playerWidget(3),
-                    ),
-                  ]
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Expanded(
+                flex: 1,
+                child: playerWidget(0),
               ),
-            ),
-
-            const SizedBox(height: 30),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
+              Expanded(
+                flex: 1,
+                child: playerWidget(1),
               ),
-              onPressed: () {
-                gotoBuaGameActivity(context);
-              },
-              child: const Text('Fish-Crab-Prawn Game'),
-            ),
-            const SizedBox(height: 30),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
+              Expanded(
+                flex: 1,
+                child: playerWidget(2),
               ),
-              onPressed: () {
-                gotoRaceGameActivity(context);
-              },
-              child: const Text('Race Game'),
-            ),
-          ],
-        ),
-      );
-  }
-
-
-  Widget landscape() {
-    return
-      Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child:
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child:
-                      playerWidget(0),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child:
-                      playerWidget(1),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child:
-                      playerWidget(2),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child:
-                      playerWidget(3),
-                    ),
-                  ]
+              Expanded(
+                flex: 1,
+                child: playerWidget(3),
               ),
+            ]),
+          ),
+          const SizedBox(height: 30),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
             ),
-
-            const SizedBox(height: 30),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: () {
-                gotoBuaGameActivity(context);
-              },
-              child: const Text('Fish-Crab-Prawn Game'),
+            onPressed: () {
+              gotoBuaGameActivity(context);
+            },
+            child: const Text('Fish-Crab-Prawn Game'),
+          ),
+          const SizedBox(height: 30),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
             ),
-            const SizedBox(height: 30),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: () {
-                gotoRaceGameActivity(context);
-              },
-              child: const Text('Race Game'),
-            ),
-          ],
-        ),
-      );
-  }
-
-
-
-  gotoBuaGameActivity(BuildContext context) async {
-
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => BuaGame(playerList: thePlayers)
+            onPressed: () {
+              gotoRaceGameActivity(context);
+            },
+            child: const Text('Race Game'),
+          ),
+        ],
       ),
     );
+  }
 
-    // update player list with data from result
-    setState(() {
-      thePlayers = result;
-    });
+  Widget landscape() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Expanded(
+                flex: 1,
+                child: playerWidget(0),
+              ),
+              Expanded(
+                flex: 1,
+                child: playerWidget(1),
+              ),
+              Expanded(
+                flex: 1,
+                child: playerWidget(2),
+              ),
+              Expanded(
+                flex: 1,
+                child: playerWidget(3),
+              ),
+            ]),
+          ),
+          const SizedBox(height: 30),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: () {
+              gotoBuaGameActivity(context);
+              setState(() {
+
+              });
+            },
+            child: const Text('Fish-Crab-Prawn Game'),
+          ),
+          const SizedBox(height: 30),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: () {
+              gotoRaceGameActivity(context);
+            },
+            child: const Text('Race Game'),
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: () {
+              gotoFortuneWheelActivity(context);
+            },
+            child: const Text('Wheel Of Luck'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  gotoBuaGameActivity(BuildContext context) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => BuaGame()),
+    );
 
   }
 
   gotoRaceGameActivity(BuildContext context) async {
-
-    final result = await Navigator.push(
+    await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => RaceGame(playerList: thePlayers)),
+      MaterialPageRoute(builder: (context) => RaceGame()),
     );
-
-// update player list with data from result
-    setState(() {
-      thePlayers = result;
-    });
-
   }
+
+  gotoFortuneWheelActivity(BuildContext context) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ExampleApp()),
+    );
+  }
+
 
   gotoPlayerDetailActivity(BuildContext context, int playerNum) async {
+    Provider.of<BarPlayers>(context, listen: false).selectedPlayer = playerNum;
 
-    final result = await Navigator.push(
+    await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => PlayerDetail(thePlayer: thePlayers[playerNum],)
-      ),
+      MaterialPageRoute(builder: (context) => PlayerDetail()),
     );
-
-    // update player list with data from result
-    setState(() {
-      if (result != null) {
-        thePlayers[playerNum] = result;
-      }
-    });
-
   }
-
 
   Widget playerWidget(int playerNum) {
-
-    return
-      SizedBox(
-          width: 100.0,
-          //       height: 50.0,
-          child:
-          Column(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child:
-              GestureDetector(
+    return SizedBox(
+        width: 100.0,
+        //       height: 50.0,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
                 onTap: () => gotoPlayerDetailActivity(context, playerNum),
-             //   child:Image.asset(thePlayers[playerNum].playerAvatar, fit: BoxFit.contain),
-                child:thePlayers[playerNum].playerAvatar,
+                child: Provider.of<BarPlayers>(context, listen: false)
+                    .playerList[playerNum]
+                    .playerAvatar,
               ),
-              ),
-              Text(
-                thePlayers[playerNum].playerName,
-                style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                  fontSize: 18.0,
-                ),
-              ),
-              const SizedBox(height: 10.0),
-              Text(
-                thePlayers[playerNum].playerScore.toString(),
-                style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                ),
-              ),
-            ],
-          )
-      );
+            ),
+            Text(
+              Provider.of<BarPlayers>(context, listen: false)
+                  .playerList[playerNum]
+                  .playerName,
+              style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                    fontSize: 18.0,
+                  ),
+            ),
+            const SizedBox(height: 10.0),
+            Text(
+              Provider.of<BarPlayers>(context, listen: false)
+                  .playerList[playerNum]
+                  .playerTotScore
+                  .toString(),
+              style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                  ),
+            ),
+          ],
+        ));
   }
-
-
 }

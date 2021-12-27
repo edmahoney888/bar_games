@@ -64,4 +64,17 @@ class Constants {
     sixthDiceFace,
   ];
 
+  static const String firstAvatar = 'assets/images/playeravatars/blankPlayer.jpg';
+  static const String secondAvatar = 'assets/images/playeravatars/girl01.PNG';
+  static const String thirdAvatar = 'assets/images/playeravatars/girl02.PNG';
+  static const String fourthAvatar = 'assets/images/playeravatars/girl03.PNG';
+  static const String fifthAvatar = 'assets/images/playeravatars/girl04.jpg';
+
+  static const List<String> avatarImages = <String>[
+    firstAvatar,
+    secondAvatar,
+    thirdAvatar,
+    fourthAvatar,
+    fifthAvatar,
+  ];
 }

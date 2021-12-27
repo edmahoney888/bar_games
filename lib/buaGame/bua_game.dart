@@ -1,9 +1,12 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 import '../bar_constants.dart';
-import '../player_in_game.dart';
+import '../player/player_in_game.dart';
 import 'bua_game_in_progress.dart';
+import 'package:bar_games/player/player_widget.dart';
 
 /*
 class Constants {
@@ -68,27 +71,27 @@ class Constants {
 //];
 
 class BuaGame extends StatefulWidget {
-  final List<PlayerInGame> playerList;
+ // final List<PlayerInGame> playerList;
 
-  BuaGame({required this.playerList}) : super();
+  BuaGame() : super();
 
   @override
-  _BuaGameState createState() => _BuaGameState(playerList);
+  _BuaGameState createState() => _BuaGameState();
 }
 
 class _BuaGameState extends State<BuaGame> {
-  List<PlayerInGame> playerList;
-
-  _BuaGameState(this.playerList); //constructor
+  // List<PlayerInGame> playerList;
+  final GlobalKey _draggableKey = GlobalKey();
+  _BuaGameState(); //constructor
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   BuaGameInProgress theGame = BuaGameInProgress();
 
   @override
   Widget build(BuildContext context) {
-    if (theGame.getNumOfPlayers() == 0) {
-      theGame.loadPlayers(playerList);
-    }
+    // if (theGame.getNumOfPlayers() == 0) {
+    //   theGame.loadPlayers(playerList);
+    // }
   //  print(
  //       "player pass->" + playerList[0].uid + " ->" + playerList[0].playerName);
     return Scaffold(
@@ -250,7 +253,8 @@ class _BuaGameState extends State<BuaGame> {
         },
         onAccept: (player) {
           setState(() {
-            theGame.setPlayerAnswer(buaId, int.parse(player.uid));
+            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, buaId );
+           // theGame.setPlayerAnswer(buaId, int.parse(player.uid));
             borderColor1 = Colors.black;
           });
         },
@@ -315,17 +319,17 @@ class _BuaGameState extends State<BuaGame> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-    _buildPlayer(
-      player: theGame.thePlayers[0],
+        playerWidget(
+      playerNum: 0,context: context,tileFaces: Constants.buaDiceFaces,
     ),
-    _buildPlayer(
-      player: theGame.thePlayers[1],
+        playerWidget(
+      playerNum: 1,context: context,tileFaces: Constants.buaDiceFaces,
     ),
-    _buildPlayer(
-      player: theGame.thePlayers[2],
+        playerWidget(
+      playerNum: 2,context: context,tileFaces: Constants.buaDiceFaces,
     ),
-    _buildPlayer(
-      player: theGame.thePlayers[3],
+        playerWidget(
+      playerNum: 3,context: context,tileFaces: Constants.buaDiceFaces,
     ),
       ],
     );
@@ -341,6 +345,7 @@ class _BuaGameState extends State<BuaGame> {
                 {
                   setState(() {
                     theGame.rollDice();
+                    Provider.of<BarPlayers>(context, listen: true).correctAnswer(theGame.dice1, theGame.dice2, theGame.dice3);
                     theGame.gameState = 1;
                   });
                 }
@@ -349,6 +354,7 @@ class _BuaGameState extends State<BuaGame> {
                 {
                   setState(() {
                     theGame.resetState();
+                    Provider.of<BarPlayers>(context, listen: false).resetAnswers();
                   });
                 }
                 break;
@@ -365,7 +371,7 @@ class _BuaGameState extends State<BuaGame> {
       Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pop(context, theGame.thePlayers);
+            Navigator.pop(context);
           },
           child: Text("Quit"),
         ),
@@ -379,17 +385,17 @@ class _BuaGameState extends State<BuaGame> {
         //  height: 75.0,
         child: Column(
           children: <Widget>[
-            _buildPlayer(
-              player: theGame.thePlayers[0],
+            playerWidget(
+              playerNum:0, context: context,tileFaces: Constants.buaDiceFaces,
             ),
-            _buildPlayer(
-              player: theGame.thePlayers[1],
+            playerWidget(
+              playerNum:1,context: context,tileFaces: Constants.buaDiceFaces,
             ),
-            _buildPlayer(
-              player: theGame.thePlayers[2],
+            playerWidget(
+              playerNum:2,context: context,tileFaces: Constants.buaDiceFaces,
             ),
-            _buildPlayer(
-              player: theGame.thePlayers[3],
+            playerWidget(
+              playerNum:3,context: context,tileFaces: Constants.buaDiceFaces,
             ),
           ],
         ));
@@ -407,6 +413,7 @@ class _BuaGameState extends State<BuaGame> {
                   {
                     setState(() {
                       theGame.rollDice();
+                      Provider.of<BarPlayers>(context, listen: false).correctAnswer(theGame.dice1, theGame.dice2, theGame.dice3);
                       theGame.gameState = 1;
                     });
                   }
@@ -443,8 +450,9 @@ class _BuaGameState extends State<BuaGame> {
         child: Center(
           child: ElevatedButton(
             onPressed: () {
-              theGame.rollupScore();
-              Navigator.pop(context, theGame.thePlayers);
+              Provider.of<BarPlayers>(context, listen: false).rollUpScore();
+
+              Navigator.pop(context);
             },
             child: Text("Finish"),
           ),
@@ -453,9 +461,11 @@ class _BuaGameState extends State<BuaGame> {
     ]);
   }
 
+  /*
   Widget _buildPlayer({
-    required PlayerInGame player,
+    required int playerNum,
   }) {
+    PlayerInGame player = Provider.of<BarPlayers>(context, listen: true).playerList[playerNum];
     return Expanded(
       flex: 1,
       child: Draggable<PlayerInGame>(
@@ -500,17 +510,19 @@ class _BuaGameState extends State<BuaGame> {
             answerImage,
             Text(player.playerName),
                 Text('Rd: ' + player.playerRndScore.toString()),
-                Text('Tot: ' + player.playerScore.toString()),
+                Text('Tot: ' + player.playerTotScore.toString()),
           ]
           ),
         ),
       ),
     );
   }
+
+   */
 }
 
-final GlobalKey _draggableKey = GlobalKey();
 
+/*
 class PlayerAvatar extends StatelessWidget {
   PlayerAvatar({
     Key? key,
@@ -602,3 +614,4 @@ class Item {
   final String uid;
   final String imageName;
 }
+*/
