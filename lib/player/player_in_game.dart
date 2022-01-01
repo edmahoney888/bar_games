@@ -65,6 +65,7 @@ class BarPlayers with ChangeNotifier {
   addRndScore(int playerNum, int scoreInc) {
     playerList[playerNum].playerRndScore =
         playerList[playerNum].playerRndScore + scoreInc;
+    notifyListeners();
   }
 
   rollUpScore() {
@@ -113,6 +114,7 @@ class BarPlayers with ChangeNotifier {
     playerList[2].correctAnswer(dice1, dice2, dice3);
 
     playerList[3].correctAnswer(dice1, dice2, dice3);
+    notifyListeners();
   }
 
   resetState() {
@@ -122,20 +124,29 @@ class BarPlayers with ChangeNotifier {
       playerList[2].answerChosen = 0;
       playerList[3].answerChosen = 0;
     }
+    notifyListeners();
   }
 }
 
-class PlayerInGame {
-  String playerName = "default";
+class PlayerInGame with ChangeNotifier {
+  String _playerName = "default";
+
+  String get playerName => _playerName;
+
+  set playerName(String value) {
+    _playerName = value;
+    notifyListeners();
+  }
+
   String defaultAvatar = "assets/images/playeravatars/blankPlayer.jpg";
-  Image playerAvatar = Image.asset(
+  Image _playerAvatar = Image.asset(
       "assets/images/playeravatars/blankPlayer.jpg",
       fit: BoxFit.contain);
-  int playerTotScore = 0;
-  int playerRndScore = 0;
-  int uid = 0;
-  int answerChosen = 0;
-  Color itemColor = Colors.redAccent;
+  int _playerTotScore = 0;
+  int _playerRndScore = 0;
+  int _uid = 0;
+  int _answerChosen = 0;
+  Color _itemColor = Colors.redAccent;
   final Color colorUnselected = Colors.redAccent;
   final Color colorSelected = Colors.blueAccent;
   final Color colorCorrect = Colors.amber;
@@ -144,21 +155,22 @@ class PlayerInGame {
   PlayerInGame();
 
   setAnswer(int theAnswer) {
-    answerChosen = theAnswer;
-    itemColor = colorSelected;
+    _answerChosen = theAnswer;
+    _itemColor = colorSelected;
+    notifyListeners();
   }
 
   int getAnswer() {
-    return answerChosen;
+    return _answerChosen;
   }
 
   Image getImage() {
-    return playerAvatar;
+    return _playerAvatar;
   }
 
   correctAnswer(int dice1, int dice2, int dice3) {
     int tempAnswer = 0;
-    int tempAnswerVal = answerChosen;
+    int tempAnswerVal = _answerChosen;
 
     if (dice1 == tempAnswerVal) {
       tempAnswer = 1;
@@ -172,6 +184,47 @@ class PlayerInGame {
       tempAnswer = tempAnswer + 1;
     }
 
-    playerRndScore = playerRndScore + tempAnswer;
+    _playerRndScore = _playerRndScore + tempAnswer;
+  }
+
+  Image get playerAvatar => _playerAvatar;
+
+  set playerAvatar(Image value) {
+    _playerAvatar = value;
+    notifyListeners();
+  }
+
+  int get playerTotScore => _playerTotScore;
+
+  set playerTotScore(int value) {
+    _playerTotScore = value;
+    notifyListeners();
+  }
+
+  int get playerRndScore => _playerRndScore;
+
+  set playerRndScore(int value) {
+    _playerRndScore = value;
+    notifyListeners();
+  }
+
+  int get uid => _uid;
+
+  set uid(int value) {
+    _uid = value;
+  }
+
+  int get answerChosen => _answerChosen;
+
+  set answerChosen(int value) {
+    _answerChosen = value;
+    notifyListeners();
+  }
+
+  Color get itemColor => _itemColor;
+
+  set itemColor(Color value) {
+    _itemColor = value;
+    notifyListeners();
   }
 }

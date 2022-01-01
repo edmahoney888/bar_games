@@ -326,6 +326,7 @@ class _BuaGameState extends State<BuaGame> {
                   {
                     setState(() {
                       theGame.resetState();
+                      Provider.of<BarPlayers>(context, listen: false).resetAnswers();
                     });
                   }
                   break;

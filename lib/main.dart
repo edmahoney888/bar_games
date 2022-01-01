@@ -195,6 +195,9 @@ class _MyHomePageState extends State<MyHomePage> {
       context,
       MaterialPageRoute(builder: (context) => BuaGame()),
     );
+    setState(() {
+      //do something
+    });
 
   }
 
@@ -203,6 +206,9 @@ class _MyHomePageState extends State<MyHomePage> {
       context,
       MaterialPageRoute(builder: (context) => RaceGame()),
     );
+    setState(() {
+      //do something
+    });
   }
 
   gotoFortuneWheelActivity(BuildContext context) async {
@@ -210,6 +216,9 @@ class _MyHomePageState extends State<MyHomePage> {
       context,
       MaterialPageRoute(builder: (context) => ExampleApp()),
     );
+    setState(() {
+      //do something
+    });
   }
 
 
@@ -220,6 +229,9 @@ class _MyHomePageState extends State<MyHomePage> {
       context,
       MaterialPageRoute(builder: (context) => PlayerDetail()),
     );
+    setState(() {
+      //do something
+    });
   }
 
   Widget playerWidget(int playerNum) {
