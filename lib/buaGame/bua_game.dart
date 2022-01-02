@@ -31,7 +31,7 @@ class _BuaGameState extends State<BuaGame> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: Text('Bar Games: Fish Prawn Crab'
+        title: Text('Games with Friends: Fish Prawn Crab'
             ''),
       ),
       body: body(context),

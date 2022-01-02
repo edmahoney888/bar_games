@@ -2,10 +2,12 @@
 
 import 'dart:async';
 
+import 'package:bar_games/player/player_in_game.dart';
 import 'package:bar_games/player/player_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
+import 'package:provider/provider.dart';
 
 import '../bar_constants.dart';
 
@@ -51,7 +53,7 @@ class _ExamplePageState extends State<ExamplePage> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: Text('Bar Games: Fish Prawn Crab'
+        title: Text('Games with Friends: Fortune Wheel'
             ''),
       ),
       body: body(context),
@@ -75,6 +77,10 @@ class _ExamplePageState extends State<ExamplePage> {
       ),
       Expanded(
         flex: 1,
+        child: bettingFieldPT(3),
+      ),
+      Expanded(
+        flex: 1,
         child: fWheelPT(context),
       ),
     ]
@@ -88,7 +94,11 @@ class _ExamplePageState extends State<ExamplePage> {
         child: playerCol(),
       ),
       Expanded(
-        flex: 1,
+        flex: 2,
+        child: bettingFieldLS(3),
+      ),
+      Expanded(
+        flex: 2,
         child: fWheelLS(context),
       ),
     ]
@@ -110,6 +120,7 @@ class _ExamplePageState extends State<ExamplePage> {
       '10',
       '11',
       '12',
+
     ];
 
     int returnval = 0;
@@ -161,7 +172,7 @@ class _ExamplePageState extends State<ExamplePage> {
                       style: oddStyle),
                   FortuneItem(child: Text('12'),
                       style: evenStyle),
-                  // for (var it in items) FortuneItem(child: Text(it)),
+
                 ],
 
               ),
@@ -238,13 +249,151 @@ class _ExamplePageState extends State<ExamplePage> {
                       style: oddStyle),
                   FortuneItem(child: Text('12'),
                       style: evenStyle),
-                  // for (var it in items) FortuneItem(child: Text(it)),
                 ],
 
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget bettingFieldLS(int numColumns) {
+
+    return Expanded(
+      flex: 1,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(1, Colors.red),
+                    _buildBetFieldWithDropZone(2, Colors.black),
+                    _buildBetFieldWithDropZone(3, Colors.red),
+                  ]),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(4, Colors.black),
+                    _buildBetFieldWithDropZone(5, Colors.red),
+                    _buildBetFieldWithDropZone(6, Colors.black),
+                  ]),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(7, Colors.red),
+                    _buildBetFieldWithDropZone(8, Colors.black),
+                    _buildBetFieldWithDropZone(9, Colors.red),
+                  ]),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(10, Colors.black),
+                    _buildBetFieldWithDropZone(11, Colors.red),
+                    _buildBetFieldWithDropZone(12, Colors.black),
+                  ]),
+            ),
+          ]
+      ),
+    );
+  }
+
+  Widget bettingFieldPT(int numColumns) {
+
+    return Expanded(
+      flex: 1,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(1, Colors.red),
+                    _buildBetFieldWithDropZone(2, Colors.black),
+                    _buildBetFieldWithDropZone(3, Colors.red),
+                  ]),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(4, Colors.black),
+                    _buildBetFieldWithDropZone(5, Colors.red),
+                    _buildBetFieldWithDropZone(6, Colors.black),
+                  ]),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(7, Colors.red),
+                    _buildBetFieldWithDropZone(8, Colors.black),
+                    _buildBetFieldWithDropZone(9, Colors.red),
+                  ]),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(10, Colors.black),
+                    _buildBetFieldWithDropZone(11, Colors.red),
+                    _buildBetFieldWithDropZone(12, Colors.black),
+                  ]),
+            ),
+          ]),
+    );
+  }
+
+  Widget _buildBetFieldWithDropZone(int id, Color fieldColor) {
+    int buaId = id;
+    Color borderColor1 = Colors.blue;
+
+    return Expanded(
+      flex: 1,
+      child: DragTarget<PlayerInGame>(
+        builder: (context, candidateItems, rejectedItems) {
+          return Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: borderColor1, width: 20),
+              color: fieldColor,
+            ),
+            child: Text(id.toString()),
+          );
+        },
+        onAccept: (player) {
+          setState(() {
+            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, buaId );
+            borderColor1 = Colors.blue;
+          });
+        },
+        onWillAccept: (player) {
+          if (player != null) {}
+          borderColor1 = Colors.yellow;
+          return true;
+        },
+        onLeave: (player) {
+
+          borderColor1 = Colors.blue;
+          return;
+        },
       ),
     );
   }
@@ -271,7 +420,7 @@ class _ExamplePageState extends State<ExamplePage> {
 
   Widget playerCol() {
     return SizedBox(
-        width: 150.0,
+        width: 50.0,
         //  height: 75.0,
         child: Column(
           children: <Widget>[

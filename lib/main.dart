@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => BarPlayers(),
       child: MaterialApp(
-        title: 'Bar Games',
+        title: 'Games with Friends',
         theme: ThemeData(
           // This is the theme of your application.
           primarySwatch: Colors.blue,
