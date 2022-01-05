@@ -260,56 +260,81 @@ class _ExamplePageState extends State<ExamplePage> {
   }
 
   Widget bettingFieldLS(int numColumns) {
-
     return Expanded(
-      flex: 1,
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    _buildBetFieldWithDropZone(1, Colors.red),
-                    _buildBetFieldWithDropZone(2, Colors.black),
-                    _buildBetFieldWithDropZone(3, Colors.red),
-                  ]),
-            ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    _buildBetFieldWithDropZone(4, Colors.black),
-                    _buildBetFieldWithDropZone(5, Colors.red),
-                    _buildBetFieldWithDropZone(6, Colors.black),
-                  ]),
-            ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    _buildBetFieldWithDropZone(7, Colors.red),
-                    _buildBetFieldWithDropZone(8, Colors.black),
-                    _buildBetFieldWithDropZone(9, Colors.red),
-                  ]),
-            ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    _buildBetFieldWithDropZone(10, Colors.black),
-                    _buildBetFieldWithDropZone(11, Colors.red),
-                    _buildBetFieldWithDropZone(12, Colors.black),
-                  ]),
-            ),
-          ]
-      ),
-    );
+             flex: 1,
+             child:  GridView.count(
+                 crossAxisCount: 3,
+                 crossAxisSpacing: 0.0,
+                 mainAxisSpacing: 0.0,
+                 children: [
+                  _buildBetFieldWithDropZone(1, Colors.red),
+                  _buildBetFieldWithDropZone(2, Colors.black),
+                  _buildBetFieldWithDropZone(3, Colors.red),
+                   _buildBetFieldWithDropZone(4, Colors.black),
+                   _buildBetFieldWithDropZone(5, Colors.red),
+                   _buildBetFieldWithDropZone(6, Colors.black),
+                   _buildBetFieldWithDropZone(7, Colors.red),
+                   _buildBetFieldWithDropZone(8, Colors.black),
+                   _buildBetFieldWithDropZone(9, Colors.red),
+                   _buildBetFieldWithDropZone(10, Colors.black),
+                   _buildBetFieldWithDropZone(11, Colors.red),
+                   _buildBetFieldWithDropZone(12, Colors.black),
+                  ]
+                 ),
+             );
   }
+
+  // Widget bettingFieldLS(int numColumns) {
+  //
+  //   return Expanded(
+  //     flex: 1,
+  //     child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: <Widget>[
+  //           Expanded(
+  //             flex: 1,
+  //             child: Row(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: <Widget>[
+  //                   _buildBetFieldWithDropZone(1, Colors.red),
+  //                   _buildBetFieldWithDropZone(2, Colors.black),
+  //                   _buildBetFieldWithDropZone(3, Colors.red),
+  //                 ]),
+  //           ),
+  //           Expanded(
+  //             flex: 1,
+  //             child: Row(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: <Widget>[
+  //                   _buildBetFieldWithDropZone(4, Colors.black),
+  //                   _buildBetFieldWithDropZone(5, Colors.red),
+  //                   _buildBetFieldWithDropZone(6, Colors.black),
+  //                 ]),
+  //           ),
+  //           Expanded(
+  //             flex: 1,
+  //             child: Row(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: <Widget>[
+  //                   _buildBetFieldWithDropZone(7, Colors.red),
+  //                   _buildBetFieldWithDropZone(8, Colors.black),
+  //                   _buildBetFieldWithDropZone(9, Colors.red),
+  //                 ]),
+  //           ),
+  //           Expanded(
+  //             flex: 1,
+  //             child: Row(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: <Widget>[
+  //                   _buildBetFieldWithDropZone(10, Colors.black),
+  //                   _buildBetFieldWithDropZone(11, Colors.red),
+  //                   _buildBetFieldWithDropZone(12, Colors.black),
+  //                 ]),
+  //           ),
+  //         ]
+  //     ),
+  //   );
+  // }
 
   Widget bettingFieldPT(int numColumns) {
 
@@ -372,15 +397,24 @@ class _ExamplePageState extends State<ExamplePage> {
         builder: (context, candidateItems, rejectedItems) {
           return Container(
             decoration: BoxDecoration(
-              border: Border.all(color: borderColor1, width: 20),
+              border: Border.all(color: borderColor1, width: 6),
               color: fieldColor,
             ),
-            child: Text(id.toString()),
+            child: FittedBox(
+                fit: BoxFit.fitHeight,
+                child: Text(
+                  id.toString(),
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                )
+            ),
           );
         },
         onAccept: (player) {
           setState(() {
-            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, buaId );
+            // need to set bet here
+            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, 0 );
             borderColor1 = Colors.blue;
           });
         },

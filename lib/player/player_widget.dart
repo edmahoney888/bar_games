@@ -57,7 +57,10 @@ Widget playerAvatar({
         Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              answerImage,
+            Expanded(
+            flex: 1,
+            child: answerImage,
+            ),
               Text(player.playerName),
               Text('Rd: ' + player.playerRndScore.toString()),
               Text('Tot: ' + player.playerTotScore.toString()),
