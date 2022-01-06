@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:bar_games/player/player_in_game.dart';
@@ -10,33 +8,24 @@ import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:provider/provider.dart';
 
 import '../bar_constants.dart';
+import 'fortune_game_in_progress.dart';
 
-
-class ExampleApp extends StatelessWidget {
+class FortunePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Wheel of Luck',
-      home: ExamplePage(),
-    );
-  }
+  _FortunePageState createState() => _FortunePageState();
 }
 
-class ExamplePage extends StatefulWidget {
-  @override
-  _ExamplePageState createState() => _ExamplePageState();
-}
-
-class _ExamplePageState extends State<ExamplePage> {
+class _FortunePageState extends State<FortunePage> {
   StreamController<int> selected = StreamController<int>();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  FortuneGameInProgress theGame = FortuneGameInProgress();
 
-  FortuneItemStyle oddStyle =  FortuneItemStyle(
+  FortuneItemStyle oddStyle = FortuneItemStyle(
     color: Colors.red, // <-- custom circle slice fill color
     borderColor: Colors.white, // <-- custom circle slice stroke color
     borderWidth: 3, // <-- custom circle slice stroke width
   );
-  FortuneItemStyle evenStyle =  FortuneItemStyle(
+  FortuneItemStyle evenStyle = FortuneItemStyle(
     color: Colors.black, // <-- custom circle slice fill color
     borderColor: Colors.white, // <-- custom circle slice stroke color
     borderWidth: 3, // <-- custom circle slice stroke width
@@ -49,7 +38,6 @@ class _ExamplePageState extends State<ExamplePage> {
   }
 
   Widget build(BuildContext context) {
-
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -68,7 +56,6 @@ class _ExamplePageState extends State<ExamplePage> {
     }
   }
 
-
   Widget portrait(BuildContext context) {
     return Column(children: <Widget>[
       Expanded(
@@ -83,8 +70,7 @@ class _ExamplePageState extends State<ExamplePage> {
         flex: 1,
         child: fWheelPT(context),
       ),
-    ]
-    );
+    ]);
   }
 
   Widget landscape(BuildContext context) {
@@ -101,8 +87,7 @@ class _ExamplePageState extends State<ExamplePage> {
         flex: 2,
         child: fWheelLS(context),
       ),
-    ]
-    );
+    ]);
   }
 
   @override
@@ -120,20 +105,17 @@ class _ExamplePageState extends State<ExamplePage> {
       '10',
       '11',
       '12',
-
     ];
 
     int returnval = 0;
 
-
     return Container(
-
       child: GestureDetector(
         onTap: () {
           setState(() {
-
             returnval = Fortune.randomInt(0, items.length);
-            print("====> random val:" + returnval.toString());
+            print("====> random val1:" + returnval.toString());
+            theGame.result = returnval;
 
             selected.add(
               returnval,
@@ -146,35 +128,19 @@ class _ExamplePageState extends State<ExamplePage> {
               child: FortuneWheel(
                 selected: selected.stream,
                 items: [
-                  FortuneItem(
-                      child: Text('1'),
-                      style: oddStyle
-                  ),
-                  FortuneItem(child: Text('2'),
-                      style: evenStyle),
-                  FortuneItem(child: Text('3'),
-                      style: oddStyle),
-                  FortuneItem(child: Text('4'),
-                      style: evenStyle),
-                  FortuneItem(child: Text('5'),
-                      style: oddStyle),
-                  FortuneItem(child: Text('6'),
-                      style: evenStyle),
-                  FortuneItem(child: Text('7'),
-                      style: oddStyle),
-                  FortuneItem(child: Text('8'),
-                      style: evenStyle),
-                  FortuneItem(child: Text('9'),
-                      style: oddStyle),
-                  FortuneItem(child: Text('10'),
-                      style: evenStyle),
-                  FortuneItem(child: Text('11'),
-                      style: oddStyle),
-                  FortuneItem(child: Text('12'),
-                      style: evenStyle),
-
+                  FortuneItem(child: Text('1'), style: oddStyle),
+                  FortuneItem(child: Text('2'), style: evenStyle),
+                  FortuneItem(child: Text('3'), style: oddStyle),
+                  FortuneItem(child: Text('4'), style: evenStyle),
+                  FortuneItem(child: Text('5'), style: oddStyle),
+                  FortuneItem(child: Text('6'), style: evenStyle),
+                  FortuneItem(child: Text('7'), style: oddStyle),
+                  FortuneItem(child: Text('8'), style: evenStyle),
+                  FortuneItem(child: Text('9'), style: oddStyle),
+                  FortuneItem(child: Text('10'), style: evenStyle),
+                  FortuneItem(child: Text('11'), style: oddStyle),
+                  FortuneItem(child: Text('12'), style: evenStyle),
                 ],
-
               ),
             ),
           ],
@@ -202,19 +168,33 @@ class _ExamplePageState extends State<ExamplePage> {
 
     int returnval = 0;
 
-
     return Container(
-
       child: GestureDetector(
         onTap: () {
           setState(() {
 
             returnval = Fortune.randomInt(0, items.length);
-            print("====> random val:" + returnval.toString());
+            print("====> random val2:" + returnval.toString());
+            theGame.result = returnval;
 
             selected.add(
               returnval,
             );
+
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winNumber(0));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winNumber(1));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winNumber(2));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winNumber(3));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winBlack(0));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winBlack(1));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winBlack(2));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winBlack(3));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winRed(0));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winRed(1));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winRed(2));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winRed(3));
+
+            theGame.clearWheel();
           });
         },
         child: Column(
@@ -223,34 +203,19 @@ class _ExamplePageState extends State<ExamplePage> {
               child: FortuneWheel(
                 selected: selected.stream,
                 items: [
-                  FortuneItem(
-                      child: Text('1'),
-                      style: oddStyle
-                  ),
-                  FortuneItem(child: Text('2'),
-                      style: evenStyle),
-                  FortuneItem(child: Text('3'),
-                      style: oddStyle),
-                  FortuneItem(child: Text('4'),
-                      style: evenStyle),
-                  FortuneItem(child: Text('5'),
-                      style: oddStyle),
-                  FortuneItem(child: Text('6'),
-                      style: evenStyle),
-                  FortuneItem(child: Text('7'),
-                      style: oddStyle),
-                  FortuneItem(child: Text('8'),
-                      style: evenStyle),
-                  FortuneItem(child: Text('9'),
-                      style: oddStyle),
-                  FortuneItem(child: Text('10'),
-                      style: evenStyle),
-                  FortuneItem(child: Text('11'),
-                      style: oddStyle),
-                  FortuneItem(child: Text('12'),
-                      style: evenStyle),
+                  FortuneItem(child: Text('1'), style: oddStyle),
+                  FortuneItem(child: Text('2'), style: evenStyle),
+                  FortuneItem(child: Text('3'), style: oddStyle),
+                  FortuneItem(child: Text('4'), style: evenStyle),
+                  FortuneItem(child: Text('5'), style: oddStyle),
+                  FortuneItem(child: Text('6'), style: evenStyle),
+                  FortuneItem(child: Text('7'), style: oddStyle),
+                  FortuneItem(child: Text('8'), style: evenStyle),
+                  FortuneItem(child: Text('9'), style: oddStyle),
+                  FortuneItem(child: Text('10'), style: evenStyle),
+                  FortuneItem(child: Text('11'), style: oddStyle),
+                  FortuneItem(child: Text('12'), style: evenStyle),
                 ],
-
               ),
             ),
           ],
@@ -260,28 +225,25 @@ class _ExamplePageState extends State<ExamplePage> {
   }
 
   Widget bettingFieldLS(int numColumns) {
-    return Expanded(
-             flex: 1,
-             child:  GridView.count(
-                 crossAxisCount: 3,
-                 crossAxisSpacing: 0.0,
-                 mainAxisSpacing: 0.0,
-                 children: [
-                  _buildBetFieldWithDropZone(1, Colors.red),
-                  _buildBetFieldWithDropZone(2, Colors.black),
-                  _buildBetFieldWithDropZone(3, Colors.red),
-                   _buildBetFieldWithDropZone(4, Colors.black),
-                   _buildBetFieldWithDropZone(5, Colors.red),
-                   _buildBetFieldWithDropZone(6, Colors.black),
-                   _buildBetFieldWithDropZone(7, Colors.red),
-                   _buildBetFieldWithDropZone(8, Colors.black),
-                   _buildBetFieldWithDropZone(9, Colors.red),
-                   _buildBetFieldWithDropZone(10, Colors.black),
-                   _buildBetFieldWithDropZone(11, Colors.red),
-                   _buildBetFieldWithDropZone(12, Colors.black),
-                  ]
-                 ),
-             );
+    return
+      GridView.count(
+          crossAxisCount: 3,
+          crossAxisSpacing: 0.0,
+          mainAxisSpacing: 0.0,
+          children: [
+            _buildBetFieldWithDropZone(0, Colors.red),
+            _buildBetFieldWithDropZone(1, Colors.black),
+            _buildBetFieldWithDropZone(2, Colors.red),
+            _buildBetFieldWithDropZone(3, Colors.black),
+            _buildBetFieldWithDropZone(4, Colors.red),
+            _buildBetFieldWithDropZone(5, Colors.black),
+            _buildBetFieldWithDropZone(6, Colors.red),
+            _buildBetFieldWithDropZone(7, Colors.black),
+            _buildBetFieldWithDropZone(8, Colors.red),
+            _buildBetFieldWithDropZone(9, Colors.black),
+            _buildBetFieldWithDropZone(10, Colors.red),
+            _buildBetFieldWithDropZone(11, Colors.black),
+          ]);
   }
 
   // Widget bettingFieldLS(int numColumns) {
@@ -337,7 +299,6 @@ class _ExamplePageState extends State<ExamplePage> {
   // }
 
   Widget bettingFieldPT(int numColumns) {
-
     return Expanded(
       flex: 1,
       child: Column(
@@ -388,7 +349,8 @@ class _ExamplePageState extends State<ExamplePage> {
   }
 
   Widget _buildBetFieldWithDropZone(int id, Color fieldColor) {
-    int buaId = id;
+    int wheelId = id;
+    int wheelNum = id + 1;
     Color borderColor1 = Colors.blue;
 
     return Expanded(
@@ -403,18 +365,18 @@ class _ExamplePageState extends State<ExamplePage> {
             child: FittedBox(
                 fit: BoxFit.fitHeight,
                 child: Text(
-                  id.toString(),
+                  wheelNum.toString(),
                   style: TextStyle(
                     color: Colors.white,
                   ),
-                )
-            ),
+                )),
           );
         },
         onAccept: (player) {
           setState(() {
             // need to set bet here
-            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, 0 );
+            theGame.placeNumBet(wheelId, player.uid);
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(player.uid, -1);
             borderColor1 = Colors.blue;
           });
         },
@@ -424,7 +386,92 @@ class _ExamplePageState extends State<ExamplePage> {
           return true;
         },
         onLeave: (player) {
+          borderColor1 = Colors.blue;
+          return;
+        },
+      ),
+    );
+  }
 
+  Widget _buildRedBetFieldWithDropZone(Color fieldColor) {
+    Color borderColor1 = Colors.blue;
+
+    return Expanded(
+      flex: 1,
+      child: DragTarget<PlayerInGame>(
+        builder: (context, candidateItems, rejectedItems) {
+          return Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: borderColor1, width: 6),
+              color: fieldColor,
+            ),
+            child: FittedBox(
+                fit: BoxFit.fitHeight,
+                child: Text(
+                  "Red",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                )),
+          );
+        },
+        onAccept: (player) {
+          setState(() {
+            // need to set bet here
+            theGame.placeBetRed(player.uid);
+//            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, 0 );
+            borderColor1 = Colors.blue;
+          });
+        },
+        onWillAccept: (player) {
+          if (player != null) {}
+          borderColor1 = Colors.yellow;
+          return true;
+        },
+        onLeave: (player) {
+          borderColor1 = Colors.blue;
+          return;
+        },
+      ),
+    );
+  }
+
+  Widget _buildBlackBetFieldWithDropZone(Color fieldColor) {
+    Color borderColor1 = Colors.blue;
+
+    return Expanded(
+      flex: 1,
+      child: DragTarget<PlayerInGame>(
+        builder: (context, candidateItems, rejectedItems) {
+          return Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: borderColor1, width: 6),
+              color: fieldColor,
+            ),
+            child: FittedBox(
+                fit: BoxFit.fitHeight,
+                child: Text(
+                  "Black",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                )),
+          );
+        },
+        onAccept: (player) {
+          setState(() {
+            // need to set bet here
+            theGame.placeBetBlack(player.uid);
+//            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, 0 );
+            borderColor1 = Colors.blue;
+          });
+        },
+        onWillAccept: (player) {
+          if (player != null) {}
+          borderColor1 = Colors.yellow;
+          return true;
+        },
+        onLeave: (player) {
           borderColor1 = Colors.blue;
           return;
         },
@@ -437,16 +484,24 @@ class _ExamplePageState extends State<ExamplePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         playerWidget(
-          playerNum: 0,context: context,tileFaces: Constants.buaDiceFaces,
+          playerNum: 0,
+          context: context,
+          tileFaces: Constants.buaDiceFaces,
         ),
         playerWidget(
-          playerNum: 1,context: context,tileFaces: Constants.buaDiceFaces,
+          playerNum: 1,
+          context: context,
+          tileFaces: Constants.buaDiceFaces,
         ),
         playerWidget(
-          playerNum: 2,context: context,tileFaces: Constants.buaDiceFaces,
+          playerNum: 2,
+          context: context,
+          tileFaces: Constants.buaDiceFaces,
         ),
         playerWidget(
-          playerNum: 3,context: context,tileFaces: Constants.buaDiceFaces,
+          playerNum: 3,
+          context: context,
+          tileFaces: Constants.buaDiceFaces,
         ),
       ],
     );
@@ -459,19 +514,26 @@ class _ExamplePageState extends State<ExamplePage> {
         child: Column(
           children: <Widget>[
             playerWidget(
-              playerNum:0, context: context,tileFaces: Constants.buaDiceFaces,
+              playerNum: 0,
+              context: context,
+              tileFaces: Constants.buaDiceFaces,
             ),
             playerWidget(
-              playerNum:1,context: context,tileFaces: Constants.buaDiceFaces,
+              playerNum: 1,
+              context: context,
+              tileFaces: Constants.buaDiceFaces,
             ),
             playerWidget(
-              playerNum:2,context: context,tileFaces: Constants.buaDiceFaces,
+              playerNum: 2,
+              context: context,
+              tileFaces: Constants.buaDiceFaces,
             ),
             playerWidget(
-              playerNum:3,context: context,tileFaces: Constants.buaDiceFaces,
+              playerNum: 3,
+              context: context,
+              tileFaces: Constants.buaDiceFaces,
             ),
           ],
         ));
   }
-
 }

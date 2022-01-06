@@ -214,7 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
   gotoFortuneWheelActivity(BuildContext context) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ExampleApp()),
+      MaterialPageRoute(builder: (context) => FortunePage()),
     );
     setState(() {
       //do something
