@@ -25,24 +25,24 @@ class Constants {
     secondItem,
   ];
 
+  static int raceLength = 7;
 
-  static const String zeroRacer = 'assets/images/racegame/blankRacer.png';
-  static const String firstRacer = 'assets/images/racegame/bunny.gif';
-  static const String secondRacer = 'assets/images/racegame/elephant.gif';
-  static const String thirdRacer = 'assets/images/racegame/horse.gif';
-  static const String fourthRacer = 'assets/images/racegame/monkey.gif';
-  static const String fifthRacer = 'assets/images/racegame/ostrich.gif';
-  static const String sixthRacer = 'assets/images/racegame/tiger.gif';
+  static const String racerBlank = 'assets/images/racegame/blankRacer.png';
+  static const String racer0 = 'assets/images/racegame/bunny.gif';
+  static const String racer1 = 'assets/images/racegame/elephant.gif';
+  static const String racer2 = 'assets/images/racegame/horse.gif';
+  static const String racer3 = 'assets/images/racegame/monkey.gif';
+  static const String racer4 = 'assets/images/racegame/ostrich.gif';
+  static const String racer5 = 'assets/images/racegame/tiger.gif';
 
 
   static const List<String> racerImages = <String>[
-    zeroRacer,
-    firstRacer,
-    secondRacer,
-    thirdRacer,
-    fourthRacer,
-    fifthRacer,
-    sixthRacer,
+    racer0,
+    racer1,
+    racer2,
+    racer3,
+    racer4,
+    racer5,
   ];
 
   static const String zeroDiceFace = 'assets/images/common/blankdice.png';

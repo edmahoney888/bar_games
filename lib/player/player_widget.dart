@@ -36,7 +36,7 @@ Widget playerAvatar({
   Image answerImage;
 
 
-  if (player.answerChosen == 0) {
+  if (player.answerChosen == -1) {
 
     answerImage = player.playerAvatar;
   } else {

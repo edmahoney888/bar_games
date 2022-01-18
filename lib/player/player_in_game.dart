@@ -41,10 +41,10 @@ class BarPlayers with ChangeNotifier {
   }
 
   resetAnswers() {
-    setAnswer(0, 0);
-    setAnswer(1, 0);
-    setAnswer(2, 0);
-    setAnswer(3, 0);
+    setAnswer(0, -1);
+    setAnswer(1, -1);
+    setAnswer(2, -1);
+    setAnswer(3, -1);
   }
 
   setSelectedPlayerName(String pName) {
@@ -119,10 +119,10 @@ class BarPlayers with ChangeNotifier {
 
   resetState() {
     if (playerList != null) {
-      playerList[0].answerChosen = 0;
-      playerList[1].answerChosen = 0;
-      playerList[2].answerChosen = 0;
-      playerList[3].answerChosen = 0;
+      playerList[0].answerChosen = -1;
+      playerList[1].answerChosen = -1;
+      playerList[2].answerChosen = -1;
+      playerList[3].answerChosen = -1;
     }
     notifyListeners();
   }
@@ -145,7 +145,7 @@ class PlayerInGame with ChangeNotifier {
   int _playerTotScore = 0;
   int _playerRndScore = 0;
   int _uid = 0;
-  int _answerChosen = 0;
+  int _answerChosen = -1;
   Color _itemColor = Colors.redAccent;
   final Color colorUnselected = Colors.redAccent;
   final Color colorSelected = Colors.blueAccent;

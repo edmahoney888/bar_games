@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:bar_games/raceGame/race_game_in_progress.dart';
+import 'package:bar_games/raceGame/racer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -117,6 +119,7 @@ class _RaceGameState extends State<RaceGame> {
     }
 
   Widget chooseHorseLS(int numColumns) {
+    Racers theRacers = theGame.theRacers;
 
     return Expanded(
       flex: 1,
@@ -129,9 +132,9 @@ class _RaceGameState extends State<RaceGame> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget> [
-                    _buildRaceImageWithDropZone(1,Constants.racerImages[1]),
-                    _buildRaceImageWithDropZone(2,Constants.racerImages[2]),
-                    _buildRaceImageWithDropZone(3,Constants.racerImages[3]),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[0].racerID,theRacers.theRacers[0].racerImage),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[1].racerID,theRacers.theRacers[1].racerImage),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[2].racerID,theRacers.theRacers[2].racerImage),
                   ]
               )  ,
             ),
@@ -140,9 +143,9 @@ class _RaceGameState extends State<RaceGame> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget> [
-                    _buildRaceImageWithDropZone(4,Constants.racerImages[4]),
-                    _buildRaceImageWithDropZone(5,Constants.racerImages[5]),
-                    _buildRaceImageWithDropZone(6,Constants.racerImages[6]),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[3].racerID,theRacers.theRacers[3].racerImage),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[4].racerID,theRacers.theRacers[4].racerImage),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[5].racerID,theRacers.theRacers[5].racerImage),
                   ]
               ),
             ),
@@ -154,7 +157,7 @@ class _RaceGameState extends State<RaceGame> {
 
 
   Widget chooseHorsePT(int numColumns) {
-
+    Racers theRacers = theGame.theRacers;
     return Expanded(
       flex: 1,
       child: Column (
@@ -165,8 +168,8 @@ class _RaceGameState extends State<RaceGame> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget> [
-                    _buildRaceImageWithDropZone(1,Constants.racerImages[1]),
-                    _buildRaceImageWithDropZone(2,Constants.racerImages[2]),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[0].racerID,theRacers.theRacers[0].racerImage),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[1].racerID,theRacers.theRacers[1].racerImage),
                   ]
               ),
             ),
@@ -175,8 +178,8 @@ class _RaceGameState extends State<RaceGame> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget> [
-                    _buildRaceImageWithDropZone(3,Constants.racerImages[3]),
-                    _buildRaceImageWithDropZone(4,Constants.racerImages[4]),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[2].racerID,theRacers.theRacers[2].racerImage),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[3].racerID,theRacers.theRacers[3].racerImage),
                   ]
               ),
             ),
@@ -185,8 +188,8 @@ class _RaceGameState extends State<RaceGame> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget> [
-                    _buildRaceImageWithDropZone(5,Constants.racerImages[5]),
-                    _buildRaceImageWithDropZone(6,Constants.racerImages[6]),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[4].racerID,theRacers.theRacers[4].racerImage),
+                    _buildRaceImageWithDropZone(theRacers.theRacers[5].racerID,theRacers.theRacers[5].racerImage),
                   ]
               ),
             ),
@@ -198,7 +201,7 @@ class _RaceGameState extends State<RaceGame> {
 
 
   Widget _buildRaceImageWithDropZone(int id, String imageName) {
-    int raceId = id;
+    int racerId = id;
     Color borderColor1  = Colors.black;
 
     return Expanded(
@@ -220,15 +223,15 @@ class _RaceGameState extends State<RaceGame> {
         },
         onAccept: (player) {
           setState(() {
-            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, raceId  );
-            print("accept ==== bua id->"+ raceId.toString());
+            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, racerId  );
+            print("accept ==== bua id->"+ racerId.toString());
             print("item name->"+ player.playerName + ' item uid->' + player.uid.toString());
             borderColor1 = Colors.black;
           });
         },
         onWillAccept: (player) {
           if (player != null) {
-            print("will accept ===== bua id->"+ raceId.toString());
+            print("will accept ===== bua id->"+ racerId.toString());
             print("willAccept: " + player.uid.toString());
           }
           borderColor1 = Colors.blue;
@@ -262,6 +265,7 @@ class _RaceGameState extends State<RaceGame> {
 
   }
   Widget raceHorseLS() {
+    Racers theRacers = theGame.theRacers;
 
     return Row(
       children: <Widget> [
@@ -270,75 +274,101 @@ class _RaceGameState extends State<RaceGame> {
           mainAxisAlignment: MainAxisAlignment.center,
           children:  List.generate(6, (rowIndex) {
             return
-              raceImageWidget(rowIndex, 0);
+              //raceImageWidget(rowIndex, 0);
+              raceImageWidget(theRacers.theRacers[rowIndex],0);
                   }),
                 ),
         Column (
           mainAxisAlignment: MainAxisAlignment.center,
           children:  List.generate(6, (rowIndex) {
             return
-              raceImageWidget(rowIndex, 1);
+              raceImageWidget(theRacers.theRacers[rowIndex], 1);
           }),
         ),
         Column (
           mainAxisAlignment: MainAxisAlignment.center,
           children:  List.generate(6, (rowIndex) {
             return
-              raceImageWidget(rowIndex, 2);
+              raceImageWidget(theRacers.theRacers[rowIndex], 2);
           }),
         ),
         Column (
           mainAxisAlignment: MainAxisAlignment.center,
           children:  List.generate(6, (rowIndex) {
             return
-              raceImageWidget(rowIndex, 3);
+              raceImageWidget(theRacers.theRacers[rowIndex], 3);
           }),
         ),
         Column (
           mainAxisAlignment: MainAxisAlignment.center,
           children:  List.generate(6, (rowIndex) {
             return
-              raceImageWidget(rowIndex, 4);
+              raceImageWidget(theRacers.theRacers[rowIndex], 4);
           }),
         ),
         Column (
           mainAxisAlignment: MainAxisAlignment.center,
           children:  List.generate(6, (rowIndex) {
             return
-              raceImageWidget(rowIndex, 5);
+              raceImageWidget(theRacers.theRacers[rowIndex], 5);
           }),
         ),
         Column (
           mainAxisAlignment: MainAxisAlignment.center,
           children:  List.generate(6, (rowIndex) {
             return
-              raceImageWidget(rowIndex, 6);
+              raceImageWidget(theRacers.theRacers[rowIndex], 6);
           }),
         ),
       ]
     );
   }
 
-
-  Widget raceImageWidget(int rowIndex, int colIndex) {
+  Widget raceImageWidget(Racer theRacer, int colIndex) {
+    int racerID;
 
     return Expanded(
       flex: 1,
       child:
       Container(
         decoration: BoxDecoration(
+          //ask the racer for these colors
 
-          border:  Border(top: BorderSide(color: theGame.raceColors[rowIndex+1], width: 5),
-            bottom: BorderSide(color: theGame.raceColors[rowIndex+1], width: 5),
+          border:  Border(top: BorderSide(color: theRacer.color, width: 5),
+            bottom: BorderSide(color: theRacer.color, width: 5),
           ),
 
-          color: theGame.raceColors[rowIndex],
+          //ask the racer for these colors
+          color: theRacer.color,
         ),
 
-        child: Image.asset(theGame.getRacerImage(rowIndex, colIndex), fit: BoxFit.contain),
+        child: Image.asset(theRacer.getImageInRace(colIndex), fit: BoxFit.contain),
       ),
     );
   }
+
+  // Widget raceImageWidget(int rowIndex, int colIndex) {
+  //   int racerID;
+  //
+  //   return Expanded(
+  //     flex: 1,
+  //     child:
+  //     Container(
+  //       decoration: BoxDecoration(
+  //         //ask the racer for these colors
+  //
+  //         border:  Border(top: BorderSide(color: theGame.raceColors[rowIndex+1], width: 5),
+  //           bottom: BorderSide(color: theGame.raceColors[rowIndex+1], width: 5),
+  //         ),
+  //
+  //         //ask the racer for these colors
+  //         color: theGame.raceColors[rowIndex],
+  //       ),
+  //
+  //       child: Image.asset(theGame.getRacerImage(rowIndex, colIndex), fit: BoxFit.contain),
+  //     ),
+  //   );
+  // }
 
 
   BoxDecoration myBoxDecoration() {
@@ -456,10 +486,12 @@ class _RaceGameState extends State<RaceGame> {
                   switch (getRoundState()) {
                     case 0:
                       {
-                        setState((){
+                        while (theGame.allFinished == false) {
                           theGame.rollDice();
-                          theGame.gameState = 1;
-                        });
+                          setState(() {
+                            theGame.gameState = 1;
+                          });
+                        }
                       }
                       break;
                     case 1:
@@ -550,10 +582,19 @@ class _RaceGameState extends State<RaceGame> {
                         break;
                       case 1:
                         {
-                          setState((){
-                            theGame.rollDice();
+                          while (theGame.allFinished == false) {
 
-                          });
+                            print("=======roll dice ======");
+                            theGame.rollDice();
+                            Timer(Duration(seconds: 1), ()
+                            {
+                              setState(() {
+
+                                //           theGame.gameState = 1;
+                              });
+                            });
+                          }
+                          theGame.gameState = 2;
                         }
                         break;
                       case 2:
@@ -561,11 +602,11 @@ class _RaceGameState extends State<RaceGame> {
                           setState((){
                             // make sure this is onlyu done once
                             BarPlayers thePlayers = Provider.of<BarPlayers>(context, listen: false);
-                            thePlayers.addRndScore(0, theGame.finishes[thePlayers.playerList[0].answerChosen]);
-                            thePlayers.addRndScore(0, theGame.finishes[thePlayers.playerList[1].answerChosen]);
-                            thePlayers.addRndScore(0, theGame.finishes[thePlayers.playerList[2].answerChosen]);
-                            thePlayers.addRndScore(0, theGame.finishes[thePlayers.playerList[3].answerChosen]);
-
+                            thePlayers.addRndScore(0, theGame.payout(thePlayers.playerList[0].answerChosen));
+                            thePlayers.addRndScore(1, theGame.payout(thePlayers.playerList[1].answerChosen));
+                            thePlayers.addRndScore(2, theGame.payout(thePlayers.playerList[2].answerChosen));
+                            thePlayers.addRndScore(3, theGame.payout(thePlayers.playerList[3].answerChosen));
+                            theGame.gameState = 3;
                           });
                         }
                         break;

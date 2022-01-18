@@ -1,11 +1,12 @@
 
+import 'package:bar_games/raceGame/racer.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import '../bar_constants.dart';
 
 
 class RaceGameInProgress {
-
+  Racers theRacers = Racers();
   List<int> theRace = [0,0,0,0,0,0,0];
   List<int> finishes = [0,0,0,0,0,0,0];
   int gameState = 0;
@@ -61,74 +62,74 @@ class RaceGameInProgress {
 
 
 
-  int getImageNumber(int rowIndex, int colIndex) {
+  // int getImageNumber(int rowIndex, int colIndex) {
+  //
+  //     if (rowIndex == horse1 ) {
+  //       if (colIndex == theRace[horse1]) {
+  //         return horse1;
+  //       } else {
+  //         return horse0;
+  //       }
+  //     }
+  //
+  //     if (rowIndex == horse2 ) {
+  //       if (colIndex == theRace[horse2]) {
+  //         return horse2;
+  //       } else {
+  //         return horse0;
+  //       }
+  //     }
+  //
+  //     if (rowIndex == horse3 ) {
+  //       if (colIndex == theRace[horse3]) {
+  //         return horse3;
+  //       } else {
+  //         return horse0;
+  //       }
+  //     }
+  //
+  //     if (rowIndex == horse4 ) {
+  //       if (colIndex == theRace[horse4]) {
+  //         return horse4;
+  //       } else {
+  //         return horse0;
+  //       }
+  //     }
+  //
+  //     if (rowIndex == horse5 ) {
+  //       if (colIndex == theRace[horse5]) {
+  //         return horse5;
+  //       } else {
+  //         return horse0;
+  //       }
+  //     }
+  //
+  //     if (rowIndex == horse6 ) {
+  //       if (colIndex == theRace[horse6]) {
+  //         return horse6;
+  //       } else {
+  //         return horse0;
+  //       }
+  //     }
+  //
+  //   return horse0;
+  // }
 
-      if (rowIndex == horse1 ) {
-        if (colIndex == theRace[horse1]) {
-          return horse1;
-        } else {
-          return horse0;
-        }
-      }
 
-      if (rowIndex == horse2 ) {
-        if (colIndex == theRace[horse2]) {
-          return horse2;
-        } else {
-          return horse0;
-        }
-      }
-
-      if (rowIndex == horse3 ) {
-        if (colIndex == theRace[horse3]) {
-          return horse3;
-        } else {
-          return horse0;
-        }
-      }
-
-      if (rowIndex == horse4 ) {
-        if (colIndex == theRace[horse4]) {
-          return horse4;
-        } else {
-          return horse0;
-        }
-      }
-
-      if (rowIndex == horse5 ) {
-        if (colIndex == theRace[horse5]) {
-          return horse5;
-        } else {
-          return horse0;
-        }
-      }
-
-      if (rowIndex == horse6 ) {
-        if (colIndex == theRace[horse6]) {
-          return horse6;
-        } else {
-          return horse0;
-        }
-      }
-
-    return horse0;
-  }
-
-
-  String getRacerImage(rowIndex, colIndex)
-  {
-    String tempStr;
-
-    int imgNum = getImageNumber(rowIndex+1, colIndex);
-
-    if (imgNum == -1) {
-      tempStr = Constants.racerImages[0];
-    } else {
-      tempStr = Constants.racerImages[imgNum];
-    }
-
-    return tempStr;
-  }
+  // String getRacerImage(rowIndex, colIndex)
+  // {
+  //   String tempStr;
+  //
+  //   int imgNum = getImageNumber(rowIndex+1, colIndex);
+  //
+  //   if (imgNum == -1) {
+  //     tempStr = Constants.racerImages[0];
+  //   } else {
+  //     tempStr = Constants.racerImages[imgNum];
+  //   }
+  //
+  //   return tempStr;
+  // }
 
 
   resetAnswers()
@@ -143,79 +144,97 @@ class RaceGameInProgress {
     return tempColor;
   }
 
+  int payout(int racerID)
+  {
+    int tempPayout = 0;
+
+    tempPayout = theRacers.payout(racerID);
+
+    return tempPayout;
+  }
 
 
   checkAllFinished() {
-    bool tempAllFinished = true;
 
-      for (int counter = 1; counter <= theRace.length-1; counter++)
-      {
-        if (theRace[counter] < numRaceSteps) {
-          tempAllFinished = false;
-        }
-      }
+    if (theRacers.allFinished())
+    {
+         allFinished = true;
+         gameState = 2;
 
-      if (tempAllFinished) {
-        gameState = 2;
-      }
+    }
+    // bool tempAllFinished = true;
+    //
+    //   for (int counter = 1; counter <= theRace.length-1; counter++)
+    //   {
+    //     if (theRace[counter] < numRaceSteps) {
+    //       tempAllFinished = false;
+    //     }
+    //   }
+    //
+    //   if (tempAllFinished) {
+    //     print("all finish = true");
+    //     allFinished = true;
+    //     gameState = 2;
+    //   }
   }
 
 
 
-  checkWinners() {
-
-    if (firstPlace == false)
-      {
-        for (int counter = 1; counter <= theRace.length-1; counter++)
-          {
-            if ((theRace[counter] >= numRaceSteps) && ( finishes[counter] == 0)) {
-              finishes[counter] = 3;
-              raceColors[counter] = firstPlaceColor;
-              firstPlace = true;
-            }
-          }
-
-      }
-    else if (secondPlace == false)
-      {
-        for (int counter = 1; counter <= theRace.length-1; counter++)
-        {
-          if ((theRace[counter] >= numRaceSteps) && ( finishes[counter] == 0)) {
-            finishes[counter] = 2;
-            raceColors[counter] = secondPlaceColor;
-            secondPlace = true;
-          }
-        }
-
-      }
-    else if (thirdPlace == false)
-      {
-        for (int counter = 1; counter <= theRace.length-1; counter++)
-        {
-          if ((theRace[counter] >= numRaceSteps) && ( finishes[counter] == 0)) {
-            finishes[counter] = 1;
-            raceColors[counter] = thirdPlaceColor;
-
-            thirdPlace = true;
-          }
-        }
-      }
-    else
-      {
-
-      }
-
-  }
+  // checkWinners() {
+  //
+  //   if (firstPlace == false)
+  //     {
+  //       for (int counter = 0; counter <= theRace.length-1; counter++)
+  //         {
+  //           if ((theRace[counter] >= numRaceSteps) && ( finishes[counter] == 0)) {
+  //             finishes[counter] = 3;
+  //             raceColors[counter] = firstPlaceColor;
+  //             firstPlace = true;
+  //           }
+  //         }
+  //
+  //     }
+  //   else if (secondPlace == false)
+  //     {
+  //       for (int counter = 1; counter <= theRace.length-1; counter++)
+  //       {
+  //         if ((theRace[counter] >= numRaceSteps) && ( finishes[counter] == 0)) {
+  //           finishes[counter] = 2;
+  //           raceColors[counter] = secondPlaceColor;
+  //           secondPlace = true;
+  //         }
+  //       }
+  //
+  //     }
+  //   else if (thirdPlace == false)
+  //     {
+  //       for (int counter = 1; counter <= theRace.length-1; counter++)
+  //       {
+  //         if ((theRace[counter] >= numRaceSteps) && ( finishes[counter] == 0)) {
+  //           finishes[counter] = 1;
+  //           raceColors[counter] = thirdPlaceColor;
+  //
+  //           thirdPlace = true;
+  //         }
+  //       }
+  //     }
+  //   else
+  //     {
+  //
+  //     }
+  //
+  // }
 
   advance() {
+    theRacers.moveRacers(dice1, dice2, dice3);
     // score first dice
-    theRace[dice1+1] = theRace[dice1+1] + 1;
+  //  theRace[dice1+1] = theRace[dice1+1] + 1;
 
     //score second dice
-    theRace[dice2+1] = theRace[dice2+1] + 1;
+  //  theRace[dice2+1] = theRace[dice2+1] + 1;
 
     //score third dice
-    theRace[dice3+1] = theRace[dice3+1] + 1;
+  //  theRace[dice3+1] = theRace[dice3+1] + 1;
   }
 
 
@@ -226,10 +245,9 @@ class RaceGameInProgress {
     dice3 = rollADice();
 
     advance();
-    checkWinners();
+  //  checkWinners();
     checkAllFinished();
-
-
+    print("race: " + theRace.toString() );
   }
 
 
@@ -281,6 +299,8 @@ class RaceGameInProgress {
     firstPlace = false;
     secondPlace = false;
     thirdPlace = false;
+
+    allFinished = false;
   }
 
 }
