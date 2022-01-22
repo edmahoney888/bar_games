@@ -182,17 +182,17 @@ class _FortunePageState extends State<FortunePage> {
             );
 
             Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winNumber(0));
-            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winNumber(1));
-            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winNumber(2));
-            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winNumber(3));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(1, theGame.winNumber(1));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(2, theGame.winNumber(2));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(3, theGame.winNumber(3));
             Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winBlack(0));
-            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winBlack(1));
-            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winBlack(2));
-            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winBlack(3));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(1, theGame.winBlack(1));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(2, theGame.winBlack(2));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(3, theGame.winBlack(3));
             Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winRed(0));
-            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winRed(1));
-            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winRed(2));
-            Provider.of<BarPlayers>(context, listen: false).addRndScore(0, theGame.winRed(3));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(1, theGame.winRed(1));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(2, theGame.winRed(2));
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(3, theGame.winRed(3));
 
             theGame.clearWheel();
           });
@@ -224,26 +224,89 @@ class _FortunePageState extends State<FortunePage> {
     );
   }
 
+
   Widget bettingFieldLS(int numColumns) {
+
     return
-      GridView.count(
-          crossAxisCount: 3,
-          crossAxisSpacing: 0.0,
-          mainAxisSpacing: 0.0,
-          children: [
-            _buildBetFieldWithDropZone(0, Colors.red),
-            _buildBetFieldWithDropZone(1, Colors.black),
-            _buildBetFieldWithDropZone(2, Colors.red),
-            _buildBetFieldWithDropZone(3, Colors.black),
-            _buildBetFieldWithDropZone(4, Colors.red),
-            _buildBetFieldWithDropZone(5, Colors.black),
-            _buildBetFieldWithDropZone(6, Colors.red),
-            _buildBetFieldWithDropZone(7, Colors.black),
-            _buildBetFieldWithDropZone(8, Colors.red),
-            _buildBetFieldWithDropZone(9, Colors.black),
-            _buildBetFieldWithDropZone(10, Colors.red),
-            _buildBetFieldWithDropZone(11, Colors.black),
-          ]);
+      //Expanded(
+    //  flex: 1,
+     // child:
+    Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(0, Colors.red),
+                    _buildBetFieldWithDropZone(1, Colors.black),
+                    _buildBetFieldWithDropZone(2, Colors.red),
+                  ]),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(3, Colors.black),
+                    _buildBetFieldWithDropZone(4, Colors.red),
+                    _buildBetFieldWithDropZone(5, Colors.black),
+                  ]),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(6, Colors.red),
+                    _buildBetFieldWithDropZone(7, Colors.black),
+                    _buildBetFieldWithDropZone(8, Colors.red),
+                  ]),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildBetFieldWithDropZone(9, Colors.black),
+                    _buildBetFieldWithDropZone(10, Colors.red),
+                    _buildBetFieldWithDropZone(11, Colors.black),
+                  ]),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildRedBetFieldWithDropZone(Colors.red),
+                    _buildBlackBetFieldWithDropZone(Colors.black),
+
+                  ]),
+            ),
+          ]
+      );
+ //   );
+
+
+      // GridView.count(
+      //     crossAxisCount: 3,
+      //     crossAxisSpacing: 0.0,
+      //     mainAxisSpacing: 0.0,
+      //     children: [
+      //       _buildBetFieldWithDropZone(0, Colors.red),
+      //       _buildBetFieldWithDropZone(1, Colors.black),
+      //       _buildBetFieldWithDropZone(2, Colors.red),
+      //       _buildBetFieldWithDropZone(3, Colors.black),
+      //       _buildBetFieldWithDropZone(4, Colors.red),
+      //       _buildBetFieldWithDropZone(5, Colors.black),
+      //       _buildBetFieldWithDropZone(6, Colors.red),
+      //       _buildBetFieldWithDropZone(7, Colors.black),
+      //       _buildBetFieldWithDropZone(8, Colors.red),
+      //       _buildBetFieldWithDropZone(9, Colors.black),
+      //       _buildBetFieldWithDropZone(10, Colors.red),
+      //       _buildBetFieldWithDropZone(11, Colors.black),
+      //     ]);
   }
 
   // Widget bettingFieldLS(int numColumns) {
@@ -365,7 +428,7 @@ class _FortunePageState extends State<FortunePage> {
             child: FittedBox(
                 fit: BoxFit.fitHeight,
                 child: Text(
-                  wheelNum.toString(),
+                  fixNum(wheelNum),
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -393,6 +456,18 @@ class _FortunePageState extends State<FortunePage> {
     );
   }
 
+  String fixNum(int numToFix) {
+    String tempString = numToFix.toString();
+
+    if (numToFix < 10)
+      {
+        tempString = '0' + tempString;
+      }
+
+    return tempString;
+  }
+
+
   Widget _buildRedBetFieldWithDropZone(Color fieldColor) {
     Color borderColor1 = Colors.blue;
 
@@ -408,7 +483,7 @@ class _FortunePageState extends State<FortunePage> {
             child: FittedBox(
                 fit: BoxFit.fitHeight,
                 child: Text(
-                  "Red",
+                  "  Red  ",
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -419,7 +494,7 @@ class _FortunePageState extends State<FortunePage> {
           setState(() {
             // need to set bet here
             theGame.placeBetRed(player.uid);
-//            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, 0 );
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(player.uid, -1);
             borderColor1 = Colors.blue;
           });
         },
@@ -451,7 +526,7 @@ class _FortunePageState extends State<FortunePage> {
             child: FittedBox(
                 fit: BoxFit.fitHeight,
                 child: Text(
-                  "Black",
+                  " Black",
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -462,7 +537,7 @@ class _FortunePageState extends State<FortunePage> {
           setState(() {
             // need to set bet here
             theGame.placeBetBlack(player.uid);
-//            Provider.of<BarPlayers>(context, listen: false).setAnswer(player.uid, 0 );
+            Provider.of<BarPlayers>(context, listen: false).addRndScore(player.uid, -1);
             borderColor1 = Colors.blue;
           });
         },

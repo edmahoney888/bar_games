@@ -582,19 +582,26 @@ class _RaceGameState extends State<RaceGame> {
                         break;
                       case 1:
                         {
-                          while (theGame.allFinished == false) {
+                  //        while (theGame.allFinished == false) {
 
                             print("=======roll dice ======");
                             theGame.rollDice();
-                            Timer(Duration(seconds: 1), ()
-                            {
-                              setState(() {
+                            setState(() {
+                            //    theGame.gameState = 1;
 
-                                //           theGame.gameState = 1;
-                              });
-                            });
-                          }
-                          theGame.gameState = 2;
+                               }
+                               );
+                            // Timer(Duration(seconds: 1), ()
+                            // {
+                            //   setState(() {
+                            //     //           theGame.gameState = 1;
+                            //   }
+                            //   );
+                            // }
+                            // );
+                     //     }
+                            if (theGame.allFinished)
+                              theGame.gameState = 2;
                         }
                         break;
                       case 2:

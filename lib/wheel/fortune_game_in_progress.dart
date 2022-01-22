@@ -28,11 +28,13 @@ class FortuneGameInProgress {
   placeBetRed(int playerNum)
   {
     red[playerNum] = red[playerNum] + 1;
+    print(" -- player: " + playerNum.toString() + " red: " );
   }
 
   placeBetBlack(int playerNum)
   {
     black[playerNum] = black[playerNum] + 1;
+    print(" -- player: " + playerNum.toString() + " black: " );
   }
 
   int winRed(int playerNum)
@@ -40,11 +42,12 @@ class FortuneGameInProgress {
     int returnVal = 0;
     int modifier = 0;
 
-    if (_result.isOdd )
+    if (_result.isEven )
       modifier = 2;
 
     returnVal = red[playerNum] * modifier;
     red[playerNum] = 0;
+    print(" -- player: " + playerNum.toString() + " win red: " + returnVal.toString());
 
     return returnVal;
   }
@@ -54,12 +57,13 @@ class FortuneGameInProgress {
     int returnVal = 0;
     int modifier = 0;
 
-    if (_result.isEven )
+    if (_result.isOdd )
       modifier = 2;
 
     returnVal = black[playerNum] * modifier;
     black[playerNum] = 0;
 
+    print(" -- player: " + playerNum.toString() + " win black: " + returnVal.toString());
     return returnVal;
   }
 
