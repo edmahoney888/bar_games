@@ -19,7 +19,7 @@ class RaceGame extends StatefulWidget {
   _RaceGameState createState() => _RaceGameState();
 }
 
-class _RaceGameState extends State<RaceGame> {
+class _RaceGameState extends State<RaceGame> with TickerProviderStateMixin  {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   bool isReady = false;
@@ -30,6 +30,15 @@ class _RaceGameState extends State<RaceGame> {
   final double paddingSize = 1;
   bool horsesChosen = false;
   bool raceFinished = false;
+  int firstGo = 0;
+
+  // Tween<Offset> tween = Tween<Offset>(
+  //   begin: Offset(0.0, 10000.0),
+  //   end: Offset(0.0, 0.0),
+  // );
+  late Animation<Offset> _animation;
+  late AnimationController _animationController;
+
 
   _RaceGameState();  //constructor
 
@@ -38,6 +47,47 @@ class _RaceGameState extends State<RaceGame> {
     super.initState();
     theGame.numColumns = 2;
 //    theGame.resetState();
+
+    _animationController = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
+
+    _animationController.addListener(() {
+      if (_animationController.isCompleted) {
+        print('animate complete');
+        if (theGame.currentRaceStep < theGame.diceTotals.length) {
+          print('currentRaceStep1: ' + theGame.currentRaceStep.toString());
+          theGame.currentRaceStep++;
+        }
+
+        _animationController.forward();
+        setState(() {
+
+        });
+      }
+    });
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        print('animate really complete');
+        if (theGame.currentRaceStep < theGame.diceTotals.length) {
+          print('currentRaceStep2: ' + theGame.currentRaceStep.toString());
+          theGame.currentRaceStep++;
+        }
+        _animationController.forward();
+      } else if (status == AnimationStatus.dismissed) {
+        _animationController.forward();
+      }
+    });
+
+    // _animation = Tween<Offset>(
+    //   begin: const Offset(0.0, 0.0),
+    //   end: const Offset(2.0, 0.0),
+    // ).animate(CurvedAnimation(
+    //   parent: _animationController,
+    //   curve: Curves.easeInCubic,
+    // ));
+
   }
 
 
@@ -264,87 +314,122 @@ class _RaceGameState extends State<RaceGame> {
     );
 
   }
+
   Widget raceHorseLS() {
     Racers theRacers = theGame.theRacers;
-
-    return Row(
-      children: <Widget> [
-        // the number of columns here should match game.raceplaces
-      Column (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:  List.generate(6, (rowIndex) {
-            return
-              //raceImageWidget(rowIndex, 0);
-              raceImageWidget(theRacers.theRacers[rowIndex],0);
-                  }),
-                ),
-        Column (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:  List.generate(6, (rowIndex) {
-            return
-              raceImageWidget(theRacers.theRacers[rowIndex], 1);
-          }),
-        ),
-        Column (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:  List.generate(6, (rowIndex) {
-            return
-              raceImageWidget(theRacers.theRacers[rowIndex], 2);
-          }),
-        ),
-        Column (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:  List.generate(6, (rowIndex) {
-            return
-              raceImageWidget(theRacers.theRacers[rowIndex], 3);
-          }),
-        ),
-        Column (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:  List.generate(6, (rowIndex) {
-            return
-              raceImageWidget(theRacers.theRacers[rowIndex], 4);
-          }),
-        ),
-        Column (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:  List.generate(6, (rowIndex) {
-            return
-              raceImageWidget(theRacers.theRacers[rowIndex], 5);
-          }),
-        ),
-        Column (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:  List.generate(6, (rowIndex) {
-            return
-              raceImageWidget(theRacers.theRacers[rowIndex], 6);
-          }),
-        ),
-      ]
+    return
+      Expanded(
+          flex: 1,
+          child:
+          Column (
+                 mainAxisAlignment: MainAxisAlignment.start,
+                 children:  List.generate(6, (rowIndex) {
+                   return
+                     //raceImageWidget(rowIndex, 0);
+                     raceImageWidget(theRacers.theRacers[rowIndex],0);
+                         }),
+    ),
     );
   }
 
+  // Widget raceHorseLS() {
+  //   Racers theRacers = theGame.theRacers;
+  //
+  //   return Row(
+  //     children: <Widget> [
+  //       // the number of columns here should match game.raceplaces
+  //     Column (
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children:  List.generate(6, (rowIndex) {
+  //           return
+  //             //raceImageWidget(rowIndex, 0);
+  //             raceImageWidget(theRacers.theRacers[rowIndex],0);
+  //                 }),
+  //               ),
+  //       Column (
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children:  List.generate(6, (rowIndex) {
+  //           return
+  //             raceImageWidget(theRacers.theRacers[rowIndex], 1);
+  //         }),
+  //       ),
+  //       Column (
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children:  List.generate(6, (rowIndex) {
+  //           return
+  //             raceImageWidget(theRacers.theRacers[rowIndex], 2);
+  //         }),
+  //       ),
+  //       Column (
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children:  List.generate(6, (rowIndex) {
+  //           return
+  //             raceImageWidget(theRacers.theRacers[rowIndex], 3);
+  //         }),
+  //       ),
+  //       Column (
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children:  List.generate(6, (rowIndex) {
+  //           return
+  //             raceImageWidget(theRacers.theRacers[rowIndex], 4);
+  //         }),
+  //       ),
+  //       Column (
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children:  List.generate(6, (rowIndex) {
+  //           return
+  //             raceImageWidget(theRacers.theRacers[rowIndex], 5);
+  //         }),
+  //       ),
+  //       Column (
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children:  List.generate(6, (rowIndex) {
+  //           return
+  //             raceImageWidget(theRacers.theRacers[rowIndex], 6);
+  //         }),
+  //       ),
+  //     ]
+  //   );
+  // }
+
   Widget raceImageWidget(Racer theRacer, int colIndex) {
-    int racerID;
+    int racerID = theRacer.racerID;
+    double offsetNow = 0;
 
-    return Expanded(
-      flex: 1,
-      child:
-      Container(
-        decoration: BoxDecoration(
-          //ask the racer for these colors
+      offsetNow = theGame.checkRacer(racerID, theGame.currentRaceStep);
+      print('offset now: ' + offsetNow.toString());
 
-          border:  Border(top: BorderSide(color: theRacer.color, width: 5),
-            bottom: BorderSide(color: theRacer.color, width: 5),
+     _animation = Tween<Offset>(
+       begin: const Offset(0.0, 0.0),
+       end: Offset(offsetNow, 0.0),
+     ).animate(CurvedAnimation(
+       parent: _animationController,
+       curve: Curves.easeInCubic,
+     ));
+    return
+      Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+          decoration: BoxDecoration(
+            //ask the racer for these colors
+
+            border:  Border(top: BorderSide(color: theRacer.color, width: 5),
+              bottom: BorderSide(color: theRacer.color, width: 5),
+            ),
+
+            //ask the racer for these colors
+            color: theRacer.color,
           ),
 
-          //ask the racer for these colors
-          color: theRacer.color,
+          child:
+            SlideTransition(
+              position: _animation,
+              child:
+                Image.asset(theRacer.getImageInRace(colIndex), fit: BoxFit.contain),
+            ),
         ),
+      );
 
-        child: Image.asset(theRacer.getImageInRace(colIndex), fit: BoxFit.contain),
-      ),
-    );
   }
 
   // Widget raceImageWidget(int rowIndex, int colIndex) {
@@ -575,6 +660,8 @@ class _RaceGameState extends State<RaceGame> {
                     switch (getRoundState()) {
                       case 0:
                         {
+                          theGame.rollOutGame();
+                          theGame.currentRaceStep = 0;
                           setState((){
                             theGame.gameState = 1;
                           });
@@ -582,26 +669,19 @@ class _RaceGameState extends State<RaceGame> {
                         break;
                       case 1:
                         {
-                  //        while (theGame.allFinished == false) {
+                          _animationController.forward();
 
-                            print("=======roll dice ======");
-                            theGame.rollDice();
-                            setState(() {
-                            //    theGame.gameState = 1;
+                          // while (theGame.diceTotals.length >= theGame.currentRaceStep) {
+                          //
+                          //   setState(() {
+                          //     _animationController.forward();
+                          //     theGame.currentRaceStep++;
+                          //      }
+                          //      );
+                          //
+                          // }
 
-                               }
-                               );
-                            // Timer(Duration(seconds: 1), ()
-                            // {
-                            //   setState(() {
-                            //     //           theGame.gameState = 1;
-                            //   }
-                            //   );
-                            // }
-                            // );
-                     //     }
-                            if (theGame.allFinished)
-                              theGame.gameState = 2;
+                //          theGame.gameState = 2;
                         }
                         break;
                       case 2:
@@ -682,6 +762,12 @@ class _RaceGameState extends State<RaceGame> {
 
   int getRoundState() {
     return theGame.gameState;
+  }
+
+  @override
+  void dispose() {
+        _animationController.dispose();
+        super.dispose();
   }
 
 }

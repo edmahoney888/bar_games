@@ -17,9 +17,14 @@ class RaceGameInProgress {
   bool secondPlace = false;
   bool thirdPlace = false;
   int numRaceSteps = 7;
+  int currentRaceStep = 0;    //reset this
   bool allFinished = false;
   List<Color> raceColors = [Colors.white,Colors.white,Colors.white,Colors.white,Colors.white,Colors.white,Colors.white];
-
+  List<int> dice1Rolls = [];
+  List<int> dice2Rolls = [];
+  List<int> dice3Rolls = [];
+  List<int> diceTotals = [0,0,0,0,0,0];
+  final _random = Random();
 
   int horse0 = 0;
   int horse1 = 1;
@@ -59,8 +64,56 @@ class RaceGameInProgress {
 
   }
 
+  double checkRacer(int racerID, int index) {
+    double tempInt = 0;
+    if (racerID == dice1Rolls[index])
+      tempInt = tempInt + 1;
+    if (racerID == dice2Rolls[index])
+      tempInt = tempInt + 1;
+    if (racerID == dice3Rolls[index])
+      tempInt = tempInt + 1;
+    print('checkracer ' + racerID.toString() + ' : ' + index.toString() + ' : ' + tempInt.toString());
+    return tempInt;
+  }
 
 
+  rollOutGame() {
+    bool finished = false;
+    int rollCounter = 0;
+
+    while (!finished) {
+      dice1 = rollADice();
+      dice2 = rollADice();
+      dice3 = rollADice();
+
+      dice1Rolls.add(dice1);
+      dice2Rolls.add(dice2);
+      dice3Rolls.add(dice3);
+
+      diceTotals[dice1] =  diceTotals[dice1] + 1;
+      diceTotals[dice2] =  diceTotals[dice2] + 1;
+      diceTotals[dice3] =  diceTotals[dice3] + 1;
+
+      if (checkTotals())
+        finished = true;
+    }
+
+  }
+
+
+  bool checkTotals() {
+    bool tempFinished = true;
+
+       for (int counter = 1; counter <= diceTotals.length-1; counter++)
+       {
+         if (diceTotals[counter] < numRaceSteps) {
+           tempFinished = false;
+           break;
+        }
+       }
+
+    return tempFinished;
+  }
 
   // int getImageNumber(int rowIndex, int colIndex) {
   //
@@ -252,7 +305,7 @@ class RaceGameInProgress {
 
 
   int rollADice() {
-    final _random = Random();
+//    final _random = Random();
     return _random.nextInt(6);
   }
 

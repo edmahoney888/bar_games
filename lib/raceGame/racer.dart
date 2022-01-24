@@ -194,7 +194,7 @@ class Racer {
   String getImageInRace(int racePosition) {
     String tempStr = Constants.racerBlank;
 
-    if (racePosition == _place)
+//    if (racePosition == _place)
       tempStr = _racerImage;
 
     return tempStr;
