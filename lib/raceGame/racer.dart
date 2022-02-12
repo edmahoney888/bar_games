@@ -55,6 +55,18 @@ class Racers {
       finishState = finishState + 1;
   }
 
+  addPosition(int racerID, double position) {
+    getRacer(racerID).addPosition(position);
+  }
+
+  double getStartPosition(int racerID, int offset) {
+    return getRacer(racerID).getStartPosition(offset);
+  }
+
+  double getEndPosition(int racerID, int offset) {
+    return getRacer(racerID).getEndPosition(offset);
+  }
+
   isRacerFinished(int racerID) {
     Racer tempRacer = getRacer(racerID);
 
@@ -67,6 +79,7 @@ class Racers {
 
   Racer getRacer(int racerID) {
     Racer tempRacer =  Racer(-1,-1,Constants.racerBlank);
+
     for (int counter = 0; counter <= theRacers.length-1; counter++)
     {
       if (theRacers[counter]._racerID == racerID) {
@@ -125,6 +138,7 @@ class Racer {
   final Color firstPlaceColor = Colors.amber;
   final Color secondPlaceColor = Colors.red;
   final Color thirdPlaceColor = Colors.green;
+  List<double> racePosition = [0.0];
 
 
   int _racerID = 0;
@@ -199,6 +213,28 @@ class Racer {
 
     return tempStr;
   }
+
+  addPosition(double position) {
+    racePosition.add(position);
+  }
+
+  double getStartPosition(int offset) {
+    double tempPosition = 0.0;
+
+    if (racePosition.length > offset) {
+      tempPosition  = racePosition[offset];
+    }
+    return tempPosition;
+  }
+
+  double getEndPosition(int offset) {
+    double tempPosition = 0.0;
+    if (racePosition.length > offset+1) {
+      tempPosition  = racePosition[offset];
+    }
+    return tempPosition;
+  }
+
 
   finish(int theFinishPlace) {
     _finishPlace = theFinishPlace;

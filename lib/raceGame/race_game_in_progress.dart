@@ -80,11 +80,88 @@ class RaceGameInProgress {
   rollOutGame() {
     bool finished = false;
     int rollCounter = 0;
+    double move0 = 0.0;
+    double move1 = 0.0;
+    double move2 = 0.0;
+    double move3 = 0.0;
+    double move4 = 0.0;
+    double move5 = 0.0;
 
     while (!finished) {
       dice1 = rollADice();
       dice2 = rollADice();
       dice3 = rollADice();
+
+      switch (dice1) {
+        case 0:
+          move0 = move0 + 1;
+          break;
+        case 1:
+          move1 = move1 + 1;
+          break;
+        case 2:
+          move2 = move2 + 1;
+          break;
+        case 3:
+          move3 = move3 + 1;
+          break;
+        case 4:
+          move4 = move4 + 1;
+          break;
+        case 5:
+          move5 = move5 + 1;
+          break;
+          default:
+      }
+      switch (dice2) {
+        case 0:
+          move0 = move0 + 1;
+          break;
+        case 1:
+          move1 = move1 + 1;
+          break;
+        case 2:
+          move2 = move2 + 1;
+          break;
+        case 3:
+          move3 = move3 + 1;
+          break;
+        case 4:
+          move4 = move4 + 1;
+          break;
+        case 5:
+          move5 = move5 + 1;
+          break;
+        default:
+      }
+      switch (dice3) {
+        case 0:
+          move0 = move0 + 1;
+          break;
+        case 1:
+          move1 = move1 + 1;
+          break;
+        case 2:
+          move2 = move2 + 1;
+          break;
+        case 3:
+          move3 = move3 + 1;
+          break;
+        case 4:
+          move4 = move4 + 1;
+          break;
+        case 5:
+          move5 = move5 + 1;
+          break;
+        default:
+      }
+
+      theRacers.addPosition(0, move0);
+      theRacers.addPosition(1, move1);
+      theRacers.addPosition(2, move2);
+      theRacers.addPosition(3, move3);
+      theRacers.addPosition(4, move4);
+      theRacers.addPosition(5, move5);
 
       dice1Rolls.add(dice1);
       dice2Rolls.add(dice2);
@@ -96,6 +173,7 @@ class RaceGameInProgress {
 
       if (checkTotals())
         finished = true;
+
     }
 
   }
@@ -356,4 +434,9 @@ class RaceGameInProgress {
     allFinished = false;
   }
 
+  incRaceStep() {
+    if (currentRaceStep < theRacers.theRacers[0].racePosition.length) {
+      currentRaceStep++;
+    }
+  }
 }

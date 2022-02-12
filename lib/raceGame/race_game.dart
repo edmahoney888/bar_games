@@ -11,6 +11,23 @@ import '../player/player_in_game.dart';
 import 'package:bar_games/player/player_widget.dart';
 
 
+extension ExtndAController on AnimationController {
+  void repeatEx({required int times, required RaceGameInProgress theGame}) {
+    var count = 0;
+    addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        if (++count < times) {
+          print('animate1 animating');
+          theGame.incRaceStep();
+          forward();
+        }
+      } else if (status == AnimationStatus.dismissed) {
+        forward();
+      }
+    });
+  }
+}
+
 class RaceGame extends StatefulWidget {
 
   RaceGame() : super();
@@ -31,6 +48,7 @@ class _RaceGameState extends State<RaceGame> with TickerProviderStateMixin  {
   bool horsesChosen = false;
   bool raceFinished = false;
   int firstGo = 0;
+  bool firstTime = true;
 
   // Tween<Offset> tween = Tween<Offset>(
   //   begin: Offset(0.0, 10000.0),
@@ -51,34 +69,60 @@ class _RaceGameState extends State<RaceGame> with TickerProviderStateMixin  {
     _animationController = AnimationController(
       duration: const Duration(seconds: 3),
       vsync: this,
-    );
+    )
+    ..repeatEx(times: 15,theGame: theGame )
+    ..forward;
 
     _animationController.addListener(() {
       if (_animationController.isCompleted) {
-        print('animate complete');
-        if (theGame.currentRaceStep < theGame.diceTotals.length) {
-          print('currentRaceStep1: ' + theGame.currentRaceStep.toString());
-          theGame.currentRaceStep++;
-        }
+  //      print('animate1 complete');
+   //     theGame.incRaceStep();
 
-        _animationController.forward();
+  //      _animationController.repeat();
         setState(() {
 
         });
       }
-    });
-    _animationController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        print('animate really complete');
-        if (theGame.currentRaceStep < theGame.diceTotals.length) {
-          print('currentRaceStep2: ' + theGame.currentRaceStep.toString());
-          theGame.currentRaceStep++;
-        }
-        _animationController.forward();
-      } else if (status == AnimationStatus.dismissed) {
-        _animationController.forward();
+      else if (_animationController.isDismissed) {
+   //      print('animate1 dismissed');
+        // theGame.incRaceStep();
+        // _animationController.forward();
+        // setState(() {
+        //
+        // });
+      }
+      else if (_animationController.isAnimating) {
+  //     print('animate1 animating');
+  //       theGame.incRaceStep();
+        // _animationController.forward();
+  //       setState(() {
+        //
+ //        });
+      }
+      else {
+        print('animate1 other status: ' + _animationController.status.toString());
       }
     });
+ //    _animationController.addStatusListener((status) {
+ //      if (status == AnimationStatus.completed) {
+ //        print('animate2 completed');
+ //        theGame.incRaceStep();
+ //        _animationController.repeat();
+ //        setState(() {
+ //
+ //        });
+ //      } else if (status == AnimationStatus.dismissed) {
+ //        print('animate2 dismissed');
+ // //       theGame.incRaceStep();
+ // //       _animationController.forward();
+ //        setState(() {
+ //
+ //        });
+ //      }
+ //      else {
+ //        print('animate2 other status: ' + _animationController.status.toString());
+ //      }
+ //    });
 
     // _animation = Tween<Offset>(
     //   begin: const Offset(0.0, 0.0),
@@ -394,18 +438,22 @@ class _RaceGameState extends State<RaceGame> with TickerProviderStateMixin  {
 
   Widget raceImageWidget(Racer theRacer, int colIndex) {
     int racerID = theRacer.racerID;
-    double offsetNow = 0;
+    double offsetStart = 0;
+    double offsetEnd = 0;
 
-      offsetNow = theGame.checkRacer(racerID, theGame.currentRaceStep);
-      print('offset now: ' + offsetNow.toString());
+    offsetStart = theGame.theRacers.getStartPosition(racerID, theGame.currentRaceStep);
+    offsetEnd = theGame.theRacers.getEndPosition(racerID, theGame.currentRaceStep+1);
+      print('offset start: ' + offsetStart.toString());
+    print('offset end: ' + offsetEnd.toString());
 
      _animation = Tween<Offset>(
-       begin: const Offset(0.0, 0.0),
-       end: Offset(offsetNow, 0.0),
+       begin: Offset(offsetStart, 0.0),
+       end: Offset(offsetEnd, 0.0),
      ).animate(CurvedAnimation(
        parent: _animationController,
        curve: Curves.easeInCubic,
      ));
+
     return
       Align(
         alignment: Alignment.centerLeft,
@@ -581,6 +629,13 @@ class _RaceGameState extends State<RaceGame> with TickerProviderStateMixin  {
                       break;
                     case 1:
                       {
+                        if (!firstTime)
+                          {
+                            print('incrementing racestep');
+                            theGame.incRaceStep();
+                            firstTime = false;
+                          }
+                        print('racestep: ' + theGame.currentRaceStep.toString());
                         setState((){
        //                   theGame.resetState();
                         });
@@ -656,7 +711,7 @@ class _RaceGameState extends State<RaceGame> with TickerProviderStateMixin  {
                 child: ElevatedButton(
                   onPressed: ()
                   {
-
+                    print('roundstate: ' + getRoundState().toString());
                     switch (getRoundState()) {
                       case 0:
                         {
@@ -669,19 +724,18 @@ class _RaceGameState extends State<RaceGame> with TickerProviderStateMixin  {
                         break;
                       case 1:
                         {
+                          if (!firstTime)
+                          {
+                            print('incrementing racestep');
+        //                    theGame.incRaceStep();
+                          }
+                          firstTime = false;
+                          print('racestep: ' + theGame.currentRaceStep.toString());
                           _animationController.forward();
-
-                          // while (theGame.diceTotals.length >= theGame.currentRaceStep) {
-                          //
-                          //   setState(() {
-                          //     _animationController.forward();
-                          //     theGame.currentRaceStep++;
-                          //      }
-                          //      );
-                          //
-                          // }
-
-                //          theGame.gameState = 2;
+                          setState((){
+                            //                   theGame.resetState();
+                          });
+                          theGame.incRaceStep();
                         }
                         break;
                       case 2:
@@ -698,7 +752,9 @@ class _RaceGameState extends State<RaceGame> with TickerProviderStateMixin  {
                         }
                         break;
                       default:
-                        {}
+                        {
+
+                        }
                     }
 
                   }
