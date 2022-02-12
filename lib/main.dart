@@ -3,6 +3,7 @@ import 'package:bar_games/player/player_detail.dart';
 import 'package:bar_games/player/player_in_game.dart';
 import 'package:bar_games/raceGame/race_game.dart';
 import 'package:bar_games/wheel/fortune_wheel.dart';
+import 'package:bar_games/wheel2/money_wheel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -166,7 +167,6 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             child: const Text('Fish-Crab-Prawn Game'),
           ),
-          const SizedBox(height: 30),
           TextButton(
             style: TextButton.styleFrom(
               textStyle: const TextStyle(fontSize: 20),
@@ -184,6 +184,15 @@ class _MyHomePageState extends State<MyHomePage> {
               gotoFortuneWheelActivity(context);
             },
             child: const Text('Wheel Of Luck'),
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: () {
+              gotoMoneyWheelActivity(context);
+            },
+            child: const Text('Money Wheel'),
           ),
         ],
       ),
@@ -215,6 +224,16 @@ class _MyHomePageState extends State<MyHomePage> {
     await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => FortunePage()),
+    );
+    setState(() {
+      //do something
+    });
+  }
+
+  gotoMoneyWheelActivity(BuildContext context) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MoneyPage()),
     );
     setState(() {
       //do something
