@@ -64,17 +64,57 @@ class Constants {
     sixthDiceFace,
   ];
 
-  static const String firstAvatar = 'assets/images/playeravatars/blankPlayer.jpg';
-  static const String secondAvatar = 'assets/images/playeravatars/girl01.PNG';
-  static const String thirdAvatar = 'assets/images/playeravatars/girl02.PNG';
-  static const String fourthAvatar = 'assets/images/playeravatars/girl03.PNG';
-  static const String fifthAvatar = 'assets/images/playeravatars/girl04.jpg';
+  static const String avatar00 = 'assets/images/playeravatars/blankPlayer.jpg';
+  static const String avatar01 = 'assets/images/playeravatars/female01.png';
+  static const String avatar02 = 'assets/images/playeravatars/female02.png';
+  static const String avatar03 = 'assets/images/playeravatars/female03.png';
+  static const String avatar04 = 'assets/images/playeravatars/female04.png';
+  static const String avatar05 = 'assets/images/playeravatars/female05.png';
+  static const String avatar06 = 'assets/images/playeravatars/female06.png';
+  static const String avatar07 = 'assets/images/playeravatars/female07.png';
+  static const String avatar08 = 'assets/images/playeravatars/female08.png';
+  static const String avatar09 = 'assets/images/playeravatars/female09.png';
+  static const String avatar10 = 'assets/images/playeravatars/female10.png';
+  static const String avatar11 = 'assets/images/playeravatars/female11.png';
+  static const String avatar12 = 'assets/images/playeravatars/female12.png';
+  static const String avatar13 = 'assets/images/playeravatars/male01.png';
+  static const String avatar14 = 'assets/images/playeravatars/male02.png';
+  static const String avatar15 = 'assets/images/playeravatars/male03.png';
+  static const String avatar16 = 'assets/images/playeravatars/male04.png';
+  static const String avatar17 = 'assets/images/playeravatars/male05.png';
+  static const String avatar18 = 'assets/images/playeravatars/male06.png';
+  static const String avatar19 = 'assets/images/playeravatars/male07.png';
+  static const String avatar20 = 'assets/images/playeravatars/male08.png';
+  static const String avatar21 = 'assets/images/playeravatars/male09.png';
+  static const String avatar22 = 'assets/images/playeravatars/male10.png';
+  static const String avatar23 = 'assets/images/playeravatars/male11.png';
+  static const String avatar24 = 'assets/images/playeravatars/male12.png';
 
   static const List<String> avatarImages = <String>[
-    firstAvatar,
-    secondAvatar,
-    thirdAvatar,
-    fourthAvatar,
-    fifthAvatar,
+    avatar00,
+    avatar01,
+    avatar02,
+    avatar03,
+    avatar04,
+    avatar05,
+    avatar06,
+    avatar07,
+    avatar08,
+    avatar09,
+    avatar10,
+    avatar11,
+    avatar12,
+    avatar13,
+    avatar14,
+    avatar15,
+    avatar16,
+    avatar17,
+    avatar18,
+    avatar19,
+    avatar20,
+    avatar21,
+    avatar22,
+    avatar23,
+    avatar24,
   ];
 }

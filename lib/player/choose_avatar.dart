@@ -3,13 +3,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../bar_constants.dart';
+
+/*
 class Constants{
 
   static const String firstAvatar = 'assets/images/playeravatars/blankPlayer.jpg';
   static const String secondAvatar = 'assets/images/playeravatars/girl01.PNG';
   static const String thirdAvatar = 'assets/images/playeravatars/girl02.PNG';
   static const String fourthAvatar = 'assets/images/playeravatars/girl03.PNG';
-  static const String fifthAvatar = 'assets/images/playeravatars/girl04.jpg';
+  static const String fifthAvatar = 'assets/images/playeravatars/femaleSexyWhite.png';
 
   static const List<String> avatarImages = <String>[
     firstAvatar,
@@ -19,6 +22,7 @@ class Constants{
     fifthAvatar,
   ];
 }
+*/
 
 
 class ChooseAvatar extends StatefulWidget {
@@ -36,11 +40,11 @@ class _ChooseAvatarState extends State {
   var imagePicker;
   var type;
   int imageNumReturn = 0;
-  Image chosenImage = Image.asset(Constants.thirdAvatar, fit: BoxFit.contain);
-  Image chosenImage1 = Image.asset(Constants.secondAvatar, fit: BoxFit.contain);
-  Image chosenImage2 = Image.asset(Constants.thirdAvatar, fit: BoxFit.contain);
-  Image chosenImage3 = Image.asset(Constants.fourthAvatar, fit: BoxFit.contain);
-  Image chosenImage4 = Image.asset(Constants.fifthAvatar, fit: BoxFit.contain);
+  // Image chosenImage = Image.asset(Constants.avatar00, fit: BoxFit.contain);
+  // Image chosenImage1 = Image.asset(Constants.avatar01, fit: BoxFit.contain);
+  // Image chosenImage2 = Image.asset(Constants.avatar02, fit: BoxFit.contain);
+  // Image chosenImage3 = Image.asset(Constants.avatar03, fit: BoxFit.contain);
+  // Image chosenImage4 = Image.asset(Constants.avatar04, fit: BoxFit.contain);
   Color answerColor = Colors.red;
 
   _ChooseAvatarState(); //constructor
@@ -80,69 +84,99 @@ class _ChooseAvatarState extends State {
 
 
   Widget portrait(BuildContext context) {
-    return Column(children: <Widget>[
-      Expanded(
-        flex: 1,
-        child:
-        playerImageWidget(1),
-      ),
-      Expanded(
-        flex: 1,
-        child:
-        playerImageWidget(2),
-      ),
-      Expanded(
-        flex: 1,
-        child:
-        //    playerWidgetCol(),
-        playerImageWidget(3),
-      ),
-      Expanded(
-        flex: 1,
-        child:
-        playerImageWidget(4),
-      ),
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Expanded(
+            flex: 4,
+            child: Scrollbar(
+              thickness: 20,
+              child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                playerImageWidget(1),
+                playerImageWidget(2),
+                playerImageWidget(3),
+                playerImageWidget(4),
+                playerImageWidget(5),
+                playerImageWidget(6),
+                playerImageWidget(7),
+                playerImageWidget(8),
+                playerImageWidget(9),
+                playerImageWidget(10),
+                playerImageWidget(11),
+                playerImageWidget(12),
+                playerImageWidget(13),
+                playerImageWidget(14),
+                playerImageWidget(15),
+                playerImageWidget(16),
+                playerImageWidget(17),
+                playerImageWidget(18),
+                playerImageWidget(19),
+                playerImageWidget(20),
+                playerImageWidget(21),
+                playerImageWidget(22),
+                playerImageWidget(23),
+                playerImageWidget(24),
+              ],
+            ),
+            ),
 
-      Expanded(
-        flex: 1,
-        child:
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context, imageNumReturn);
-            },
-            child: Text("Finish"),
           ),
-        ),
-      ),
-    ]
+
+          Expanded(
+            flex: 1,
+            child:
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, imageNumReturn);
+              },
+              child: Text("Finish"),
+            ),
+          ),
+
+        ]
     );
   }
 
   Widget landscape(BuildContext context) {
-    return Row(
+    return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          //    playerWidgetRow(),
-          Expanded(
-            flex: 1,
-            child:
-            playerImageWidget(1),
-          ),
-          Expanded(
-            flex: 1,
-            child:
-            playerImageWidget(2),
-          ),
-          Expanded(
-            flex: 1,
-            child:
-            playerImageWidget(3),
-          ),
-          Expanded(
-            flex: 1,
-            child:
-            playerImageWidget(4),
+          new Expanded(
+            flex: 4,
+            child: Scrollbar(
+              thickness: 20,
+              child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                playerImageWidget(1),
+                playerImageWidget(2),
+                playerImageWidget(3),
+                playerImageWidget(4),
+                playerImageWidget(5),
+                playerImageWidget(6),
+                playerImageWidget(7),
+                playerImageWidget(8),
+                playerImageWidget(9),
+                playerImageWidget(10),
+                playerImageWidget(11),
+                playerImageWidget(12),
+                playerImageWidget(13),
+                playerImageWidget(14),
+                playerImageWidget(15),
+                playerImageWidget(16),
+                playerImageWidget(17),
+                playerImageWidget(18),
+                playerImageWidget(19),
+                playerImageWidget(20),
+                playerImageWidget(21),
+                playerImageWidget(22),
+                playerImageWidget(23),
+                playerImageWidget(24),
+              ],
+            ),
+            ),
           ),
 
           Expanded(

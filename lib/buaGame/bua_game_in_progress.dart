@@ -11,7 +11,7 @@ class BuaGameInProgress {
   int dice2 = 0;
   int dice3 = 0;
 
-  final Color colorUnselected = Colors.redAccent;
+  final Color colorUnselected = Colors.blueGrey;
   final Color colorSelected = Colors.blueAccent;
   final Color colorCorrect = Colors.amber;
   final Color colorIncorrect = Colors.deepPurpleAccent;

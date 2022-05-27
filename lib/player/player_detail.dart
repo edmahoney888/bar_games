@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../bar_constants.dart';
 import 'choose_avatar.dart';
 import 'package:provider/provider.dart';
 //import 'image_from_gallery_ex.dart';
@@ -22,7 +23,7 @@ class _PlayerDetailState extends State<PlayerDetail> {
   var imagePicker;
   var type;
   int imageNumReturn = 0;
-  Image chosenImage = Image.asset(Constants.firstAvatar, fit: BoxFit.contain);
+  Image chosenImage = Image.asset(Constants.avatar00, fit: BoxFit.contain);
 
   _PlayerDetailState(); //constructor
   final myController = TextEditingController();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.senselesssoftware.bar_games"
-    android:versionCode="10"
+    android:versionCode="16"
     android:versionName="1.0.0" >
 
     <uses-sdk
@@ -69,6 +69,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/flutter_image_picker_file_paths" />
         </provider>
+
+        <uses-library
+            android:name="androidx.window.extensions"
+            android:required="false" />
+        <uses-library
+            android:name="androidx.window.sidecar"
+            android:required="false" />
     </application>
 
 </manifest>

@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+10
+version: 1.0.0+16
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -77,10 +77,30 @@ flutter:
      - assets/images/common/dice5.png
      - assets/images/common/dice6.png
      - assets/images/playeravatars/blankPlayer.jpg
-     - assets/images/playeravatars/girl01.PNG
-     - assets/images/playeravatars/girl02.PNG
-     - assets/images/playeravatars/girl03.PNG
-     - assets/images/playeravatars/girl04.jpg
+     - assets/images/playeravatars/female01.png
+     - assets/images/playeravatars/female02.png
+     - assets/images/playeravatars/female03.png
+     - assets/images/playeravatars/female04.png
+     - assets/images/playeravatars/female05.png
+     - assets/images/playeravatars/female06.png
+     - assets/images/playeravatars/female07.png
+     - assets/images/playeravatars/female08.png
+     - assets/images/playeravatars/female09.png
+     - assets/images/playeravatars/female10.png
+     - assets/images/playeravatars/female11.png
+     - assets/images/playeravatars/female12.png
+     - assets/images/playeravatars/male01.png
+     - assets/images/playeravatars/male02.png
+     - assets/images/playeravatars/male03.png
+     - assets/images/playeravatars/male04.png
+     - assets/images/playeravatars/male05.png
+     - assets/images/playeravatars/male06.png
+     - assets/images/playeravatars/male07.png
+     - assets/images/playeravatars/male08.png
+     - assets/images/playeravatars/male09.png
+     - assets/images/playeravatars/male10.png
+     - assets/images/playeravatars/male11.png
+     - assets/images/playeravatars/male12.png
      - assets/images/racegame/blankRacer.png
      - assets/images/racegame/horse.gif
      - assets/images/racegame/bull.gif

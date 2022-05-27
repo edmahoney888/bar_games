@@ -1,7 +1,7 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.senselesssoftware.bar_games"
-4    android:versionCode="10"
+4    android:versionCode="16"
 5    android:versionName="1.0.0" >
 6
 7    <uses-sdk
@@ -13,7 +13,7 @@
 11    <application
 11-->C:\Users\edmah\AndroidStudioProjects\bar_games\android\app\src\main\AndroidManifest.xml:3:4-40:19
 12        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-12-->[androidx.core:core:1.1.0] C:\Users\edmah\.gradle\caches\transforms-2\files-2.1\2e94107f30f39be366a17347c2bf100b\core-1.1.0\AndroidManifest.xml:24:18-86
+12-->[androidx.core:core:1.6.0] C:\Users\edmah\.gradle\caches\transforms-2\files-2.1\122df2e57d294d1a53db26bbc3b813c1\core-1.6.0\AndroidManifest.xml:24:18-86
 13        android:icon="@mipmap/ic_launcher"
 13-->C:\Users\edmah\AndroidStudioProjects\bar_games\android\app\src\main\AndroidManifest.xml:5:9-43
 14        android:label="bar_games" >
@@ -98,6 +98,19 @@
 64                android:resource="@xml/flutter_image_picker_file_paths" />
 64-->[:image_picker] C:\Users\edmah\AndroidStudioProjects\bar_games\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:15:17-72
 65        </provider>
-66    </application>
-67
-68</manifest>
+66
+67        <uses-library
+67-->[androidx.window:window:1.0.0-beta04] C:\Users\edmah\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+68            android:name="androidx.window.extensions"
+68-->[androidx.window:window:1.0.0-beta04] C:\Users\edmah\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+69            android:required="false" />
+69-->[androidx.window:window:1.0.0-beta04] C:\Users\edmah\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+70        <uses-library
+70-->[androidx.window:window:1.0.0-beta04] C:\Users\edmah\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+71            android:name="androidx.window.sidecar"
+71-->[androidx.window:window:1.0.0-beta04] C:\Users\edmah\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+72            android:required="false" />
+72-->[androidx.window:window:1.0.0-beta04] C:\Users\edmah\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+73    </application>
+74
+75</manifest>
