@@ -1,6 +1,6 @@
-# bar_games
+# games_with_friends
 
-Social games for the local pub
+Social games for multiple players on one device
 
 ## Getting Started
 

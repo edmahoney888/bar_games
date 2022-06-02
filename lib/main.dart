@@ -1,11 +1,11 @@
 import 'dart:ui';
 
-import 'package:bar_games/buaGame/bua_game.dart';
-import 'package:bar_games/player/player_detail.dart';
-import 'package:bar_games/player/player_in_game.dart';
-import 'package:bar_games/raceGame/race_game.dart';
-import 'package:bar_games/wheel/fortune_wheel.dart';
-import 'package:bar_games/wheel2/money_wheel.dart';
+import 'package:games_with_friends/buaGame/bua_game.dart';
+import 'package:games_with_friends/player/player_detail.dart';
+import 'package:games_with_friends/player/player_in_game.dart';
+import 'package:games_with_friends/raceGame/race_game.dart';
+import 'package:games_with_friends/wheel/fortune_wheel.dart';
+import 'package:games_with_friends/wheel2/money_wheel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           // This is the theme of your application.
           primarySwatch: Colors.blue,
         ),
-        home: const MyHomePage(title: 'Bar Games'),
+        home: const MyHomePage(title: 'Games With Friends'),
       ),
     );
   }

@@ -1,5 +1,5 @@
 
-import 'package:bar_games/player/player_in_game.dart';
+import 'package:games_with_friends/player/player_in_game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

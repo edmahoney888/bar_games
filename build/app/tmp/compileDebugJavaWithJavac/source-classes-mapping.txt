@@ -1,4 +1,4 @@
 io/flutter/plugins/GeneratedPluginRegistrant.java
  io.flutter.plugins.GeneratedPluginRegistrant
-com/senselesssoftware/bar_games/BuildConfig.java
- com.senselesssoftware.bar_games.BuildConfig
+com/senselesssoftware/games_with_friends/BuildConfig.java
+ com.senselesssoftware.games_with_friends.BuildConfig

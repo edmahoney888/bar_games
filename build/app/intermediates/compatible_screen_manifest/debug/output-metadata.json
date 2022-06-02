@@ -4,7 +4,7 @@
     "type": "COMPATIBLE_SCREEN_MANIFEST",
     "kind": "Directory"
   },
-  "applicationId": "com.senselesssoftware.bar_games",
+  "applicationId": "com.senselesssoftware.games_with_friends",
   "variantName": "debug",
   "elements": []
 }

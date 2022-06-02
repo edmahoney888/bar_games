@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../bar_constants.dart';
 import '../player/player_in_game.dart';
 import 'bua_game_in_progress.dart';
-import 'package:bar_games/player/player_widget.dart';
+import 'package:games_with_friends/player/player_widget.dart';
 
 
 

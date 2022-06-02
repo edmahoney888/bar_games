@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bar_games/player/player_in_game.dart';
+import 'package:games_with_friends/player/player_in_game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +41,7 @@ class _PlayerDetailState extends State<PlayerDetail> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: Text('Bar Games: Player Detail'
+        title: Text('Games With Friends: Player Detail'
             ''),
       ),
       body: body(context),

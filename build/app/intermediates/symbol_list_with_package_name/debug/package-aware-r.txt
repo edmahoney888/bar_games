@@ -1,4 +1,4 @@
-com.senselesssoftware.bar_games
+com.senselesssoftware.games_with_friends
 attr activityAction
 attr activityName
 attr alpha
@@ -153,6 +153,8 @@ layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
 mipmap ic_launcher
+mipmap ic_launcher_adaptive_back
+mipmap ic_launcher_adaptive_fore
 string status_bar_notification_info_overflow
 style LaunchTheme
 style NormalTheme

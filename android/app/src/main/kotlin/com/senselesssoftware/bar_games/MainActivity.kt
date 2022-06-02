@@ -1,4 +1,4 @@
-package com.senselesssoftware.bar_games
+package com.senselesssoftware.games_with_friends
 
 import io.flutter.embedding.android.FlutterActivity
 

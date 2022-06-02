@@ -1,5 +1,5 @@
 
-import 'package:bar_games/raceGame/racer.dart';
+import 'package:games_with_friends/raceGame/racer.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import '../bar_constants.dart';

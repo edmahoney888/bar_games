@@ -1,11 +1,11 @@
 {
-    "name": "bar_games",
-    "short_name": "bar_games",
+    "name": "games_with_friends",
+    "short_name": "games_with_friends",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Social games for the local pub",
+    "description": "Social games for multiple players on one device",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

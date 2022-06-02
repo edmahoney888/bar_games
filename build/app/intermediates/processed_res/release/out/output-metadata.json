@@ -4,13 +4,13 @@
     "type": "PROCESSED_RES",
     "kind": "Directory"
   },
-  "applicationId": "com.senselesssoftware.bar_games",
+  "applicationId": "com.senselesssoftware.games_with_friends",
   "variantName": "processReleaseResources",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 16,
+      "versionCode": 18,
       "versionName": "1.0.0",
       "outputFile": "resources-release.ap_"
     }

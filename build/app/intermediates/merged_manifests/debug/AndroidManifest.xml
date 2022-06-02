@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.senselesssoftware.bar_games"
-    android:versionCode="16"
+    package="com.senselesssoftware.games_with_friends"
+    android:versionCode="18"
     android:versionName="1.0.0" >
 
     <uses-sdk
@@ -17,9 +17,9 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="bar_games" >
+        android:label="Games With Friends" >
         <activity
-            android:name="com.senselesssoftware.bar_games.MainActivity"
+            android:name="com.senselesssoftware.games_with_friends.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
@@ -62,7 +62,7 @@
 
         <provider
             android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-            android:authorities="com.senselesssoftware.bar_games.flutter.image_provider"
+            android:authorities="com.senselesssoftware.games_with_friends.flutter.image_provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data

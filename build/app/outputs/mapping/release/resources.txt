@@ -222,7 +222,6 @@ Referenced Strings:
   HAS_ENABLED_STATE
   HAS_IMPLICIT_SCROLLING
   HAS_TOGGLED_STATE
-  HC_PLATFORM_VIEW
   HEAVY_IMPACT
   HINGE
   HORIZONTAL
@@ -365,6 +364,7 @@ Referenced Strings:
   PENTAX
   PHONE
   PLAIN_TEXT
+  PLATFORM_VIEW
   POLL_FAILED
   PORTRAIT_DOWN
   PORTRAIT_UP
@@ -381,6 +381,7 @@ Referenced Strings:
   PlanarConfiguration
   PlatformChannel
   PlatformPlugin
+  PlatformViewWrapper
   PlatformViewsChannel
   PlatformViewsController
   PreviewImageLength
@@ -552,7 +553,6 @@ Referenced Strings:
   UnknownNullness
   UserComment
   V:
-  VD_PLATFORM_VIEW
   VERTICAL
   VISIBLE_PASSWORD
   VP8L
@@ -603,7 +603,6 @@ Referenced Strings:
   activityFilters
   adapter
   addSuppressed
-  addView
   addressCity
   addressCountry
   addressLocality
@@ -664,6 +663,7 @@ Referenced Strings:
   blockingTasksInBuffer
   boolean
   bounds
+  brieflyShowPassword
   buffer
   byte
   cache
@@ -714,6 +714,7 @@ Referenced Strings:
   creditCardSecurityCode
   currentDisplay
   dark
+  dart_entrypoint_args
   data
   decimal
   decorate
@@ -764,6 +765,7 @@ Referenced Strings:
   f.s.j.a.a
   f.t.d.a
   f.t.e.a
+  false
   familyName
   feature
   feature.rect
@@ -853,8 +855,10 @@ Referenced Strings:
   intent
   invokeSuspend
   io.flutter.Entrypoint
+  io.flutter.EntrypointUri
   io.flutter.InitialRoute
   io.flutter.embedding.android.EnableSk...
+  io.flutter.embedding.android.LeakVM
   io.flutter.embedding.android.NormalTheme
   io.flutter.embedding.android.OldGenHe...
   io.flutter.embedding.android.SplashSc...
@@ -1010,6 +1014,7 @@ Referenced Strings:
   oemFeature
   oemFeature.bounds
   off
+  offset
   oldText
   on
   onActivityResult
@@ -1092,8 +1097,6 @@ Referenced Strings:
   read
   rect
   registerWith
-  removeView
-  removeViewImmediate
   repeatCount
   resize
   resizeColumn
@@ -1140,6 +1143,7 @@ Referenced Strings:
   setRemoveOnCancelPolicy
   setSidecarCallback
   short
+  show_password
   sidecarAdapter
   sidecarCompat
   sidecarDeviceState
@@ -1184,19 +1188,19 @@ Referenced Strings:
   tmp
   token
   tooltip
+  top
   touch
   tracker
   transform
   transformer
   transition_animation_scale
   transparent
+  true
   truncated
   type
   uninstallDeferredComponent
   uniqueIdentifier
-  updateViewLayout
   username
-  usesVirtualDisplay
   value
   vendorId
   verticalText
@@ -1479,3 +1483,13 @@ Skipped unused resource res/layout-v21/notification_action.xml: 2231 bytes (repl
 Skipped unused resource res/layout-v21/notification_action_tombstone.xml: 2692 bytes (replaced with small dummy file of size 9 bytes)
 Skipped unused resource res/layout-v21/notification_template_custom_big.xml: 6595 bytes (replaced with small dummy file of size 9 bytes)
 Skipped unused resource res/layout-v21/notification_template_icon_group.xml: 2439 bytes (replaced with small dummy file of size 9 bytes)
+Skipped unused resource res/mipmap-mdpi-v4/ic_launcher_adaptive_back.png: 1957 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-mdpi-v4/ic_launcher_adaptive_fore.png: 9104 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-hdpi-v4/ic_launcher_adaptive_back.png: 3224 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-hdpi-v4/ic_launcher_adaptive_fore.png: 19822 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-xhdpi-v4/ic_launcher_adaptive_back.png: 4496 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-xhdpi-v4/ic_launcher_adaptive_fore.png: 32405 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-xxhdpi-v4/ic_launcher_adaptive_back.png: 7336 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-xxhdpi-v4/ic_launcher_adaptive_fore.png: 59671 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-xxxhdpi-v4/ic_launcher_adaptive_back.png: 9995 bytes (replaced with small dummy file of size 67 bytes)
+Skipped unused resource res/mipmap-xxxhdpi-v4/ic_launcher_adaptive_fore.png: 91774 bytes (replaced with small dummy file of size 67 bytes)

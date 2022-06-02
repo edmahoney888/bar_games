@@ -1,0 +1,4 @@
+flutter_icons:
+  image_path: 'assets/gwfIcon01.png'
+  ios: true
+  android: true

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bar_games/player/player_in_game.dart';
-import 'package:bar_games/player/player_widget.dart';
+import 'package:games_with_friends/player/player_in_game.dart';
+import 'package:games_with_friends/player/player_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
